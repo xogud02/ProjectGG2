@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 18015866ebbb2874297bbe6b041a3a9e
+  m_SerializeEntries:
+  - m_GUID: ccc71dd81063baf4c83132909731553a
+    m_Address: Engineer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: ccc71dd81063baf4c83132909731553a, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: ccc71dd81063baf4c83132909731553a, type: 3}
+  - m_GUID: e6aa48ce36d2c824bbbbcb306cded24a
+    m_Address: Mage
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: e6aa48ce36d2c824bbbbcb306cded24a, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: e6aa48ce36d2c824bbbbcb306cded24a, type: 3}
+  - m_GUID: f5979dad7d6cd964ba56f764ef0995b0
+    m_Address: Paladin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: f5979dad7d6cd964ba56f764ef0995b0, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: f5979dad7d6cd964ba56f764ef0995b0, type: 3}
+  - m_GUID: d401060ca71be294f961090f4dacd741
+    m_Address: Rogue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: d401060ca71be294f961090f4dacd741, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: d401060ca71be294f961090f4dacd741, type: 3}
+  - m_GUID: b63970ef192de0a419ebe0090d1252ee
+    m_Address: Template
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: b63970ef192de0a419ebe0090d1252ee, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: b63970ef192de0a419ebe0090d1252ee, type: 3}
+  - m_GUID: 23ccc1e62182ef9458663d356bd9a5bd
+    m_Address: Warrior
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 23ccc1e62182ef9458663d356bd9a5bd, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 23ccc1e62182ef9458663d356bd9a5bd, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0ab02fbff3c57654abbd591a0896701d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b67f426bd21f15b4283b2b8736cc8dc6, type: 2}
+    - {fileID: 11400000, guid: 5f4257f4d3ef72942b56ba01fb9ec51c, type: 2}
