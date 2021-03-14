@@ -53,6 +53,18 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 2800000, guid: 23ccc1e62182ef9458663d356bd9a5bd, type: 3}
     m_TargetAsset: {fileID: 2800000, guid: 23ccc1e62182ef9458663d356bd9a5bd, type: 3}
+  - m_GUID: 087514808022111488e4526e7894b358
+    m_Address: DawnLike/Objects/Floor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 02b8e2d89701f7343bfe8371eb482d78
+    m_Address: Assets/Engineer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0ab02fbff3c57654abbd591a0896701d, type: 2}
   m_SchemaSet:
