@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Floor {
@@ -21,6 +22,11 @@ public class Floor {
         Brick, Grass, Bush,
         Dirt, Wood, Lock,
         Soil
+    }
+    
+    public static int GetFlooNumber(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
+        var start = 32;
+        return start;
     }
 
 }
