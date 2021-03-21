@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Floor {
 
+    public static readonly string AddressPrefix = "Floor_";
+
     public enum FloorShapeType {
         TopLeft, Top, TopRight, /*          */VirticalTop,/*                    */ Single,
         Left, Center, Right, /*             */VirticalCenter, HorizontalLeft, HorizontalCenter, HorizontalRight,
@@ -24,7 +26,7 @@ public class Floor {
         Soil
     }
 
-    public static int GetFlooNumber(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
+    public static int GetFloorNumber(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
         var start = 32;
         var shapeCount = (int)FloorShapeType.VirticalBottom + 1;
         var skipShapeCount = Mathf.Max((int)floorMaterialType / 3 - 1, 0) * ((int)FloorBrightness.Darker + 1) * shapeCount;
@@ -44,6 +46,10 @@ public class Floor {
 
 
         return start + skipShapeCount + skipLines * 3 + currentLine * (Mathf.Max((int)floorMaterialType % 3 - 1, 0)) + smallSkip;
+    }
+
+    public static string GetFloorPath(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
+        return $"{AddressPrefix}{GetFloorNumber(floorShapeType, floorBrightness, floorMaterialType).ToString()}";
     }
 
 }
