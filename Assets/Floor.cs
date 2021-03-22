@@ -49,7 +49,7 @@ public class Floor {
     }
 
     public static string GetFloorPath(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
-        return $"{AddressPrefix}{GetFloorNumber(floorShapeType, floorBrightness, floorMaterialType).ToString()}";
+        return $"{AddressPrefix}_{GetFloorNumber(floorShapeType, floorBrightness, floorMaterialType).ToString()}";
     }
 
 }
