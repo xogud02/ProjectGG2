@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
+}
+
 public class Unit : MonoBehaviour
 {
     private Animator animator;
