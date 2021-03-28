@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Floor {
 
-    public static readonly string AddressPrefix = "Floor_";
+    public static readonly string AddressPrefix = "Floor";
 
     public enum FloorShapeType {
         TopLeft, Top, TopRight, /*          */VirticalTop,/*                    */ Single,
@@ -49,7 +49,7 @@ public class Floor {
     }
 
     public static string GetFloorPath(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
-        return $"{AddressPrefix}_{GetFloorNumber(floorShapeType, floorBrightness, floorMaterialType).ToString()}";
+        return $"{AddressPrefix}[{AddressPrefix}_{GetFloorNumber(floorShapeType, floorBrightness, floorMaterialType).ToString()}]";
     }
 
 }
