@@ -37,15 +37,15 @@ public class Floor {
         if (floorShapeType > FloorShapeType.HorizontalRight) {
             skipLines = (int)FloorShapeType.HorizontalRight + 1;
             currentLine = FloorShapeType.VirticalBottom - FloorShapeType.HorizontalRight;
-            smallSkip = floorShapeType - FloorShapeType.Left;
+            smallSkip = floorShapeType - FloorShapeType.BottomLeft;
         } else if (floorShapeType > FloorShapeType.Single) {
             skipLines = (int)FloorShapeType.Single + 1;
             currentLine = FloorShapeType.HorizontalRight - FloorShapeType.Single;
-            smallSkip = floorShapeType - FloorShapeType.BottomLeft;
+            smallSkip = floorShapeType - FloorShapeType.Left;
         }
 
 
-        return start + skipShapeCount + skipLines * 3 + currentLine * (Mathf.Max((int)floorMaterialType % 3 - 1, 0)) + smallSkip;
+        return start + skipShapeCount + skipLines * 3 + currentLine * (Mathf.Max((int)floorMaterialType % 3, 0)) + smallSkip;
     }
 
     public static string GetFloorPath(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
