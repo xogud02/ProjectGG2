@@ -30,4 +30,25 @@ public class Tile : MonoBehaviour {
             };
         }
     }
+
+    private GameObject GrassField(int width, int height, float ratio = 0.3f) {
+        var grass = new HashSet<Vector2Int>();
+        for(int x = 0; x < width; ++x) {
+            for(int y = 0; y < height; ++y) {
+                if (Random.Range(0, 1) > ratio) {
+                    grass.Add(new Vector2Int(x, y));
+                }
+            }
+        }
+        var dx = -width / 2f;
+        var dy = -height / 2f;
+        for(int x = 0; x < width; ++x) {
+            for(int y = 0; y < height; ++y) {
+
+            }
+        }
+
+        var ret = new GameObject("grassField");
+        return ret;
+    }
 }
