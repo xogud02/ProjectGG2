@@ -7,28 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class Tile : MonoBehaviour {
     private float size = 0f;
     void Start() {
-        Foo(Floor.FloorShapeType.TopLeft, -1, 1);
-        Foo(Floor.FloorShapeType.Top, 0, 1);
-        Foo(Floor.FloorShapeType.TopRight, 1, 1);
-        Foo(Floor.FloorShapeType.Left, -1, 0);
-        Foo(Floor.FloorShapeType.Center, 0, 0);
-        Foo(Floor.FloorShapeType.Right, 1, 0);
-        Foo(Floor.FloorShapeType.BottomLeft, -1, -1);
-        Foo(Floor.FloorShapeType.Bottom, 0, -1);
-        Foo(Floor.FloorShapeType.BottomRight, 1, -1);
-
-        void Foo(Floor.FloorShapeType shapeType, int x, int y) {
-            var temp = new GameObject("foo");
-            var sr = temp.AddComponent<SpriteRenderer>();
-            var path = Floor.GetFloorPath(shapeType, Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Grass);
-            Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
-                if (handle.Status == AsyncOperationStatus.Succeeded) {
-                    sr.sprite = handle.Result;
-                    size = sr.size.x;
-                    temp.transform.position = new Vector2(x, y) * size;
-                }
-            };
-        }
+        GrassField(10, 10);
     }
 
     private GameObject GrassField(int width, int height, float ratio = 0.3f) {
@@ -40,15 +19,39 @@ public class Tile : MonoBehaviour {
                 }
             }
         }
+        var ret = new GameObject("grassField");
         var dx = -width / 2f;
         var dy = -height / 2f;
         for(int x = 0; x < width; ++x) {
             for(int y = 0; y < height; ++y) {
-
+                var newPos = new Vector2(x + dx, y + dy);
+                var tile = new GameObject("");
+                tile.transform.parent = ret.transform;
+                var sr = tile.AddComponent<SpriteRenderer>();
+                
+                if (grass.Contains(new Vector2Int(x, y)) == false) {
+                    var path = Floor.GetFloorPath(Floor.FloorShapeType.Center, Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Dirt);
+                    Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
+                        if (handle.Status == AsyncOperationStatus.Succeeded) {
+                            sr.sprite = handle.Result;
+                            size = sr.size.x;
+                            tile.transform.position = newPos * size;
+                        }
+                    };
+                    continue;
+                }
+                //TODO grass shape
+                var path2 = Floor.GetFloorPath(Floor.FloorShapeType.Center, Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Grass);
+                Addressables.LoadAssetAsync<Sprite>(path2).Completed += handle => {
+                    if (handle.Status == AsyncOperationStatus.Succeeded) {
+                        sr.sprite = handle.Result;
+                        size = sr.size.x;
+                        tile.transform.position = newPos * size;
+                    }
+                };
             }
         }
 
-        var ret = new GameObject("grassField");
         return ret;
     }
 }
