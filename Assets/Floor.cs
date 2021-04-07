@@ -29,7 +29,7 @@ public class Floor {
     public static int GetFloorNumber(FloorShapeType floorShapeType, FloorBrightness floorBrightness, FloorMaterialType floorMaterialType) {
         var start = 32;
         var shapeCount = (int)FloorShapeType.VirticalBottom + 1;
-        var skipShapeCount = Mathf.Max((int)floorMaterialType / 3 - 1, 0) * ((int)FloorBrightness.Darker + 1) * shapeCount;
+        var skipShapeCount = Mathf.Max((int)floorMaterialType / 3, 0) * ((int)FloorBrightness.Darker + 1) * shapeCount * 3;
         skipShapeCount += Mathf.Max((int)floorBrightness - 1, 0) * 3 * shapeCount;
         var skipLines = 0;
         var currentLine = (int)FloorShapeType.Single + 1;

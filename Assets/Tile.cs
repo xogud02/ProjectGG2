@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour {
         var grass = new HashSet<Vector2Int>();
         for(int x = 0; x < width; ++x) {
             for(int y = 0; y < height; ++y) {
-                if (Random.Range(0, 1) > ratio) {
+                if (Random.Range(0, 1f) > ratio) {
                     grass.Add(new Vector2Int(x, y));
                 }
             }
@@ -41,7 +41,7 @@ public class Tile : MonoBehaviour {
                     continue;
                 }
                 //TODO grass shape
-                var path2 = Floor.GetFloorPath(Floor.FloorShapeType.Center, Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Grass);
+                var path2 = Floor.GetFloorPath(Floor.FloorShapeType.Single, Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Grass);
                 Addressables.LoadAssetAsync<Sprite>(path2).Completed += handle => {
                     if (handle.Status == AsyncOperationStatus.Succeeded) {
                         sr.sprite = handle.Result;
