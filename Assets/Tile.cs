@@ -37,15 +37,35 @@ public class Tile : MonoBehaviour {
             {Vector2Int.left, AdjType.Left},
             {Vector2Int.right, AdjType.Right}
         };
+        var arr = new Floor.FloorShapeType[] {      //rldu
+            Floor.FloorShapeType.Single,            //0000
+            Floor.FloorShapeType.VirticalBottom,    //0001
+            Floor.FloorShapeType.VirticalTop,       //0010
+            Floor.FloorShapeType.VirticalCenter,    //0011
+            Floor.FloorShapeType.HorizontalRight,   //0100
+            Floor.FloorShapeType.BottomRight,       //0101
+            Floor.FloorShapeType.TopRight,          //0110
+            Floor.FloorShapeType.Right,             //0111
+            Floor.FloorShapeType.HorizontalLeft,    //1000
+            Floor.FloorShapeType.BottomLeft,        //1001
+            Floor.FloorShapeType.TopLeft,           //1010
+            Floor.FloorShapeType.Left,              //1011
+            Floor.FloorShapeType.HorizontalCenter,  //1100
+            Floor.FloorShapeType.Bottom,            //1101
+            Floor.FloorShapeType.Top,               //1110
+            Floor.FloorShapeType.Center,            //1111
+
+        };
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
                 var newPos = new Vector2(x + dx, y + dy);
+                var current = new Vector2Int(x, y);
                 var tile = new GameObject("");
                 tile.transform.parent = ret.transform;
                 var sr = tile.AddComponent<SpriteRenderer>();
                 AdjType adj = AdjType.None;
-                foreach(var kvp in dic) {
-                    if (grass.Contains(kvp.Key)) {
+                foreach (var kvp in dic) {
+                    if (grass.Contains(kvp.Key + current)) {
                         adj |= kvp.Value;
                     }
                 }
@@ -62,7 +82,7 @@ public class Tile : MonoBehaviour {
                     continue;
                 }
                 //TODO grass shape
-                var path2 = Floor.GetFloorPath(Floor.FloorShapeType.Single, Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Grass);
+                var path2 = Floor.GetFloorPath(arr[(int)adj], Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Grass);
                 Addressables.LoadAssetAsync<Sprite>(path2).Completed += handle => {
                     if (handle.Status == AsyncOperationStatus.Succeeded) {
                         sr.sprite = handle.Result;
