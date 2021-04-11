@@ -12,9 +12,10 @@ public class Tile : MonoBehaviour {
         Left = 1 << 2,
         Right = 1 << 3
     }
-    private float size = 0f;
+
     void Start() {
-        GrassField(10, 10);
+        var awaiter = Floor.Init().GetAwaiter();
+        awaiter.OnCompleted(() => GrassField(10, 10));
     }
 
     private GameObject GrassField(int width, int height, float ratio = 0.3f) {
@@ -37,25 +38,26 @@ public class Tile : MonoBehaviour {
             {Vector2Int.left, AdjType.Left},
             {Vector2Int.right, AdjType.Right}
         };
-        var arr = new Floor.FloorShapeType[] {      //rldu
-            Floor.FloorShapeType.Single,            //0000
-            Floor.FloorShapeType.VirticalBottom,    //0001
-            Floor.FloorShapeType.VirticalTop,       //0010
-            Floor.FloorShapeType.VirticalCenter,    //0011
-            Floor.FloorShapeType.HorizontalRight,   //0100
-            Floor.FloorShapeType.BottomRight,       //0101
-            Floor.FloorShapeType.TopRight,          //0110
-            Floor.FloorShapeType.Right,             //0111
-            Floor.FloorShapeType.HorizontalLeft,    //1000
-            Floor.FloorShapeType.BottomLeft,        //1001
-            Floor.FloorShapeType.TopLeft,           //1010
-            Floor.FloorShapeType.Left,              //1011
-            Floor.FloorShapeType.HorizontalCenter,  //1100
-            Floor.FloorShapeType.Bottom,            //1101
-            Floor.FloorShapeType.Top,               //1110
-            Floor.FloorShapeType.Center,            //1111
 
+        var arr = new Floor.ShapeType[] {      //rldu
+            Floor.ShapeType.Single,            //0000
+            Floor.ShapeType.VirticalBottom,    //0001
+            Floor.ShapeType.VirticalTop,       //0010
+            Floor.ShapeType.VirticalCenter,    //0011
+            Floor.ShapeType.HorizontalRight,   //0100
+            Floor.ShapeType.BottomRight,       //0101
+            Floor.ShapeType.TopRight,          //0110
+            Floor.ShapeType.Right,             //0111
+            Floor.ShapeType.HorizontalLeft,    //1000
+            Floor.ShapeType.BottomLeft,        //1001
+            Floor.ShapeType.TopLeft,           //1010
+            Floor.ShapeType.Left,              //1011
+            Floor.ShapeType.HorizontalCenter,  //1100
+            Floor.ShapeType.Bottom,            //1101
+            Floor.ShapeType.Top,               //1110
+            Floor.ShapeType.Center,            //1111
         };
+
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
                 var newPos = new Vector2(x + dx, y + dy);
@@ -71,23 +73,21 @@ public class Tile : MonoBehaviour {
                 }
 
                 if (grass.Contains(new Vector2Int(x, y)) == false) {
-                    var path = Floor.GetFloorPath(Floor.FloorShapeType.Center, Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Dirt);
+                    var path = Floor.GetFloorPath(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt);
                     Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
                         if (handle.Status == AsyncOperationStatus.Succeeded) {
                             sr.sprite = handle.Result;
-                            size = sr.size.x;
-                            tile.transform.position = newPos * size;
+                            tile.transform.position = newPos * Floor.Size;
                         }
                     };
                     continue;
                 }
-                //TODO grass shape
-                var path2 = Floor.GetFloorPath(arr[(int)adj], Floor.FloorBrightness.Bright, Floor.FloorMaterialType.Grass);
+
+                var path2 = Floor.GetFloorPath(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass);
                 Addressables.LoadAssetAsync<Sprite>(path2).Completed += handle => {
                     if (handle.Status == AsyncOperationStatus.Succeeded) {
                         sr.sprite = handle.Result;
-                        size = sr.size.x;
-                        tile.transform.position = newPos * size;
+                        tile.transform.position = newPos * Floor.Size;
                     }
                 };
             }
