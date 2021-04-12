@@ -29,5 +29,8 @@ public class Unit : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             animator.SetTrigger("Right");
         }
+        if(Input.touchCount != 0 || Input.GetMouseButton(0)) {
+            Debug.Log("touch");
+        }
     }
 }
