@@ -9,8 +9,12 @@ public enum Direction {
     Right
 }
 
-public class Unit : MonoBehaviour
-{
+public static class Extension {
+    public static void Foo(this Vector2 position) => Debug.Log(position);
+    public static void Foo(this Vector3 position) => Debug.Log(position);
+}
+
+public class Unit : MonoBehaviour {
     private Animator animator;
     public void Start() {
         animator = GetComponent<Animator>();
@@ -29,8 +33,11 @@ public class Unit : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             animator.SetTrigger("Right");
         }
-        if(Input.touchCount != 0 || Input.GetMouseButton(0)) {
-            Debug.Log("touch");
+        if (Input.touchCount != 0) {
+            Input.touches[0].position.Foo();
+        } else if (Input.GetMouseButtonUp(0)) {
+            Input.mousePosition.Foo();
         }
     }
+
 }
