@@ -5,93 +5,18 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class Tile : MonoBehaviour {
-    public enum AdjType {
-        None = 0,
-        Up = 1 << 0,
-        Down = 1 << 1,
-        Left = 1 << 2,
-        Right = 1 << 3
-    }
-
-    void Start() {
-        var awaiter = Floor.Init().GetAwaiter();
-        awaiter.OnCompleted(() => GrassField(10, 10));
-    }
-
-    private GameObject GrassField(int width, int height, float ratio = 0.3f) {
-        var grass = new HashSet<Vector2Int>();
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
-                if (Random.Range(0, 1f) > ratio) {
-                    grass.Add(new Vector2Int(x, y));
-                }
+    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material,Vector3 position, Transform parent) {
+        var tile = new GameObject("tile");
+        tile.transform.parent = parent;
+        var ret = tile.AddComponent<Tile>();
+        var sr = tile.AddComponent<SpriteRenderer>();
+        var path = Floor.GetFloorPath(shape, bright, material);
+        Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
+            if (handle.Status == AsyncOperationStatus.Succeeded) {
+                sr.sprite = handle.Result;
+                tile.transform.position = position;
             }
-        }
-
-        var ret = new GameObject("grassField");
-        var dx = -width / 2f;
-        var dy = -height / 2f;
-
-        var dic = new Dictionary<Vector2Int, AdjType> {
-            {Vector2Int.up, AdjType.Up },
-            {Vector2Int.down, AdjType.Down},
-            {Vector2Int.left, AdjType.Left},
-            {Vector2Int.right, AdjType.Right}
         };
-
-        var arr = new Floor.ShapeType[] {      //rldu
-            Floor.ShapeType.Single,            //0000
-            Floor.ShapeType.VirticalBottom,    //0001
-            Floor.ShapeType.VirticalTop,       //0010
-            Floor.ShapeType.VirticalCenter,    //0011
-            Floor.ShapeType.HorizontalRight,   //0100
-            Floor.ShapeType.BottomRight,       //0101
-            Floor.ShapeType.TopRight,          //0110
-            Floor.ShapeType.Right,             //0111
-            Floor.ShapeType.HorizontalLeft,    //1000
-            Floor.ShapeType.BottomLeft,        //1001
-            Floor.ShapeType.TopLeft,           //1010
-            Floor.ShapeType.Left,              //1011
-            Floor.ShapeType.HorizontalCenter,  //1100
-            Floor.ShapeType.Bottom,            //1101
-            Floor.ShapeType.Top,               //1110
-            Floor.ShapeType.Center,            //1111
-        };
-
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
-                var newPos = new Vector2(x + dx, y + dy);
-                var current = new Vector2Int(x, y);
-                var tile = new GameObject("");
-                tile.transform.parent = ret.transform;
-                var sr = tile.AddComponent<SpriteRenderer>();
-                AdjType adj = AdjType.None;
-                foreach (var kvp in dic) {
-                    if (grass.Contains(kvp.Key + current)) {
-                        adj |= kvp.Value;
-                    }
-                }
-
-                if (grass.Contains(new Vector2Int(x, y)) == false) {
-                    var path = Floor.GetFloorPath(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt);
-                    Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
-                        if (handle.Status == AsyncOperationStatus.Succeeded) {
-                            sr.sprite = handle.Result;
-                            tile.transform.position = newPos * Floor.Size;
-                        }
-                    };
-                    continue;
-                }
-
-                var path2 = Floor.GetFloorPath(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass);
-                Addressables.LoadAssetAsync<Sprite>(path2).Completed += handle => {
-                    if (handle.Status == AsyncOperationStatus.Succeeded) {
-                        sr.sprite = handle.Result;
-                        tile.transform.position = newPos * Floor.Size;
-                    }
-                };
-            }
-        }
 
         return ret;
     }
