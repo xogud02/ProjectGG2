@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour {
         Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
             if (handle.Status == AsyncOperationStatus.Succeeded) {
                 sr.sprite = handle.Result;
+                sr.sortingOrder = -1;
                 tile.transform.position = position;
             }
         };
