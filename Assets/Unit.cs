@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class Unit : MonoBehaviour {
     private Animator animator;
     public void Start() {
         animator = GetComponent<Animator>();
-        Move.OnMove = v => transform.position = v;
+        Move.OnMove = v => DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, 10);
     }
 
     public void Update() {
