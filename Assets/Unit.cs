@@ -32,6 +32,11 @@ public class Unit : MonoBehaviour {
     public void Start() {
         animator = GetComponent<Animator>();
         MoveExtension.OnMove = Move;
+        if (Tiles.Initialized) {
+            transform.localScale *= Tiles.ScaleFactor;
+        } else {
+            Tiles.OnInit += () => transform.localScale *= Tiles.ScaleFactor;
+        }
     }
 
     public void Move(Vector2 v) {

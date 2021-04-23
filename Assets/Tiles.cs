@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Random = UnityEngine.Random;
 
-public class Tiles : MonoBehaviour
-{
+public class Tiles : MonoBehaviour {
+    public static float ScaleFactor { get; private set; }
+    public static bool Initialized { get; private set; }
+    public static Action OnInit;
 
     public enum AdjType {
         None = 0,
@@ -16,8 +20,13 @@ public class Tiles : MonoBehaviour
     }
 
     void Start() {
-        var awaiter = Floor.Init().GetAwaiter();
-        awaiter.OnCompleted(() => GrassField(10, 10));
+        Floor.Init().GetAwaiter().OnCompleted(Init);
+    }
+
+    private void Init() {
+        ScaleFactor = 3;
+        OnInit?.Invoke();
+        GrassField(10, 10);
     }
 
     private GameObject GrassField(int width, int height, float ratio = 0.3f) {
@@ -62,7 +71,7 @@ public class Tiles : MonoBehaviour
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
-                var newPos = new Vector2(x + dx, y + dy);
+                var newPos = new Vector2(x + dx, y + dy) * ScaleFactor;
                 var current = new Vector2Int(x, y);
                 AdjType adj = AdjType.None;
                 foreach (var kvp in dic) {
@@ -79,7 +88,7 @@ public class Tiles : MonoBehaviour
                 Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, newPos * Floor.Size, ret.transform);
             }
         }
-
+        ret.transform.localScale *= ScaleFactor;
         return ret;
     }
 }
