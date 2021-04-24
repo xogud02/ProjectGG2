@@ -12,9 +12,6 @@ public enum Direction {
 }
 
 public static class MoveExtension {
-    public static Action<Vector2> OnMove;
-    public static void Foo(this Vector2 position) => OnMove?.Invoke(position);
-    public static void Foo(this Vector3 position) => OnMove?.Invoke(position);
     public static Vector3 STW(this Vector3 position) => Camera.main.ScreenToWorldPoint(position);
     public static Vector3 STW(this Vector2 position) => Camera.main.ScreenToWorldPoint(position);
     public static Vector2 Convert(this Vector3 v) => v;
@@ -31,12 +28,15 @@ public class Unit : MonoBehaviour {
     private Animator animator;
     public void Start() {
         animator = GetComponent<Animator>();
-        MoveExtension.OnMove = Move;
         if (Tiles.Initialized) {
             transform.localScale *= Tiles.ScaleFactor;
         } else {
             Tiles.OnInit += () => transform.localScale *= Tiles.ScaleFactor;
         }
+
+        Tiles.OnClick = tile => Move(tile.transform.position);
+
+        GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
     }
 
     public void Move(Vector2 v) {
@@ -58,25 +58,4 @@ public class Unit : MonoBehaviour {
         var time = dist / speed;
         DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
     }
-
-    public void Update() {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            animator.SetTrigger("Up");
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            animator.SetTrigger("Down");
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            animator.SetTrigger("Left");
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            animator.SetTrigger("Right");
-        }
-        if (Input.touchCount != 0) {
-            Input.touches[0].position.STW().Foo();
-        } else if (Input.GetMouseButtonUp(0)) {
-            Input.mousePosition.STW().Foo();
-        }
-    }
-
 }

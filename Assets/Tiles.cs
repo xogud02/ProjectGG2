@@ -10,6 +10,13 @@ public class Tiles : MonoBehaviour {
     public static float ScaleFactor { get; private set; }
     public static bool Initialized { get; private set; }
     public static Action OnInit;
+    public static Action<Tile> OnClick;
+
+    private static Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
+
+    public static Tile GetTile(Vector2 worldPosition) {
+        return null;
+    }
 
     public enum AdjType {
         None = 0,
@@ -22,6 +29,7 @@ public class Tiles : MonoBehaviour {
     void Start() {
         Floor.Init().GetAwaiter().OnCompleted(Init);
     }
+
 
     private void Init() {
         ScaleFactor = 3;
@@ -81,14 +89,15 @@ public class Tiles : MonoBehaviour {
                 }
 
                 if (grass.Contains(new Vector2Int(x, y)) == false) {
-                    Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, newPos * Floor.Size, ret.transform);
+                    Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, newPos * Floor.Size, ret.transform).OnClicked = OnClick;
                     continue;
                 }
 
-                Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, newPos * Floor.Size, ret.transform);
+                Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, newPos * Floor.Size, ret.transform).OnClicked = OnClick;
             }
         }
         ret.transform.localScale *= ScaleFactor;
         return ret;
     }
+
 }

@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class Tile : MonoBehaviour {
+    public Action<Tile> OnClicked;
+
     public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material,Vector3 position, Transform parent) {
         var tile = new GameObject("tile");
         tile.transform.parent = parent;
@@ -15,10 +16,14 @@ public class Tile : MonoBehaviour {
             if (handle.Status == AsyncOperationStatus.Succeeded) {
                 sr.sprite = handle.Result;
                 sr.sortingOrder = -1;
+                tile.AddComponent<BoxCollider2D>();
                 tile.transform.position = position;
             }
         };
-
         return ret;
+    }
+
+    private void OnMouseDown() {
+        OnClicked?.Invoke(this);
     }
 }
