@@ -14,10 +14,6 @@ public class Tiles : MonoBehaviour {
 
     private static Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
-    public static Tile GetTile(Vector2 worldPosition) {
-        return null;
-    }
-
     public enum AdjType {
         None = 0,
         Up = 1 << 0,
