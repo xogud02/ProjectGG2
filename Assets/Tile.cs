@@ -5,8 +5,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class Tile : MonoBehaviour {
     public Action<Tile> OnClicked;
+    public Vector2Int Position;
 
-    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material,Vector3 position, Transform parent) {
+    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, Vector2Int position, Transform parent) {
         var tile = new GameObject("tile");
         tile.transform.parent = parent;
         var ret = tile.AddComponent<Tile>();
@@ -17,7 +18,8 @@ public class Tile : MonoBehaviour {
                 sr.sprite = handle.Result;
                 sr.sortingOrder = -1;
                 tile.AddComponent<BoxCollider2D>();
-                tile.transform.position = position;
+                ret.Position = position;
+                tile.transform.position = new Vector3(position.x, position.y) * Floor.Size * Tiles.ScaleFactor;
             }
         };
         return ret;

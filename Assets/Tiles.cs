@@ -83,13 +83,15 @@ public class Tiles : MonoBehaviour {
                         adj |= kvp.Value;
                     }
                 }
-
+                
                 if (grass.Contains(new Vector2Int(x, y)) == false) {
-                    Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, newPos * Floor.Size, ret.transform).OnClicked = OnClick;
+                    var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, current, ret.transform);
+                    dirt.OnClicked = OnClick;
                     continue;
                 }
 
-                Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, newPos * Floor.Size, ret.transform).OnClicked = OnClick;
+                var grassTile = Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, current, ret.transform);
+                grassTile.OnClicked = OnClick;
             }
         }
         ret.transform.localScale *= ScaleFactor;
