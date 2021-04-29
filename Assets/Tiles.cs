@@ -19,6 +19,8 @@ public class Tiles : MonoBehaviour {
         Right = 1 << 3
     }
 
+    public Vector2Int GridPosition;
+
     void Start() {
         Floor.Init().GetAwaiter().OnCompleted(Init);
     }
@@ -80,7 +82,7 @@ public class Tiles : MonoBehaviour {
                         adj |= kvp.Value;
                     }
                 }
-                
+
                 if (grass.Contains(new Vector2Int(x, y)) == false) {
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, current, ret.transform);
                     dirt.OnClicked = OnClick;
