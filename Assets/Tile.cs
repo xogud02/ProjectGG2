@@ -4,6 +4,11 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class Tile : MonoBehaviour {
+    public enum TileType {
+        None,
+        Block
+    }
+
     public Action<Tile> OnClicked;
     public Vector2Int GridPosition { get; private set; }
 
