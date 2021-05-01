@@ -9,10 +9,11 @@ public class Tile : MonoBehaviour {
         Block
     }
 
+    public TileType tileType;
     public Action<Tile> OnClicked;
     public Vector2Int GridPosition { get; private set; }
 
-    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, Vector2Int position, Transform parent) {
+    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, Vector2Int position, Transform parent, TileType tileType = TileType.None) {
         var tile = new GameObject("tile");
         tile.transform.parent = parent;
         var ret = tile.AddComponent<Tile>();
@@ -25,6 +26,7 @@ public class Tile : MonoBehaviour {
                 tile.AddComponent<BoxCollider2D>();
                 ret.GridPosition = position;
                 tile.transform.position = new Vector3(position.x, position.y) * Floor.Size * Tiles.ScaleFactor;
+                ret.tileType = tileType;
             }
         };
         return ret;
