@@ -34,7 +34,12 @@ public class Unit : MonoBehaviour {
             Tiles.OnInit += () => transform.localScale *= Tiles.ScaleFactor;
         }
 
-        Tiles.OnClick = tile => Move(tile.transform.position);
+        Tiles.OnClick = tile => {
+            if (tile.tileType == Tile.TileType.Block) {
+                return;
+            }
+            Move(tile.transform.position);
+        };
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
     }
