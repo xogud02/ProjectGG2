@@ -26,6 +26,8 @@ public class Unit : MonoBehaviour {
     private readonly int Down = Animator.StringToHash("Down");
 
     private Animator animator;
+    private Queue<Vector2Int> currentPath;
+
     public void Start() {
         animator = GetComponent<Animator>();
         if (Tiles.Initialized) {
@@ -42,6 +44,16 @@ public class Unit : MonoBehaviour {
         };
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
+    }
+
+    private Queue<Vector2Int> FindPath(Vector2Int dest) {
+        return null;
+    }
+
+    private void FixedUpdate() {
+        if ((currentPath?.Count ?? 0) != 0) {
+
+        }
     }
 
     public void Move(Vector2 v) {
