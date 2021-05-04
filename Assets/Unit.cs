@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour {
 
     private Animator animator;
     private Queue<Vector2Int> currentPath;
+    private Vector2Int CurrentPosition;
 
     public void Start() {
         animator = GetComponent<Animator>();
