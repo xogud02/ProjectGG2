@@ -41,7 +41,7 @@ public class Unit : MonoBehaviour {
             if (tile.tileType == Tile.TileType.Block) {
                 return;
             }
-            Move(tile.transform.position);
+            currentPath = FindPath(tile.GridPosition);
         };
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
@@ -57,7 +57,7 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public void Move(Vector2 v) {
+    public void Move(Vector2Int v) {
         var direction = v - transform.position.Convert();
         var angle = Vector2.SignedAngle(Vector2.right, direction);
         var absAngle = Mathf.Abs(angle);
@@ -74,6 +74,7 @@ public class Unit : MonoBehaviour {
 
         var dist = direction.magnitude;
         var time = dist / speed;
-        DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
+        var task = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
+        task.onComplete = null;//TODO ???
     }
 }
