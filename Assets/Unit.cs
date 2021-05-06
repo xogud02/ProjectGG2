@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour {
 
     private void FixedUpdate() {
         if ((currentPath?.Count ?? 0) != 0) {
-
+            var next = currentPath.Dequeue();
         }
     }
 
