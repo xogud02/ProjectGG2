@@ -24,6 +24,7 @@ public class Unit : MonoBehaviour {
     private readonly int Left = Animator.StringToHash("Left");
     private readonly int Up = Animator.StringToHash("Up");
     private readonly int Down = Animator.StringToHash("Down");
+    private Tween moving;
 
     private Animator animator;
     private Queue<Vector2Int> currentPath;
@@ -74,7 +75,7 @@ public class Unit : MonoBehaviour {
 
         var dist = direction.magnitude;
         var time = dist / speed;
-        var task = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
-        task.onComplete = null;//TODO ???
+        moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
+        moving.onComplete = null;//TODO ???
     }
 }
