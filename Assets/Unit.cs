@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if ((currentPath?.Count ?? 0) != 0) {
+        if ((currentPath?.Count ?? 0) != 0 && moving == null) {
             var next = currentPath.Dequeue();
         }
     }
@@ -76,6 +76,6 @@ public class Unit : MonoBehaviour {
         var dist = direction.magnitude;
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
-        moving.onComplete = null;//TODO ???
+        moving.onComplete = () => moving = null;
     }
 }
