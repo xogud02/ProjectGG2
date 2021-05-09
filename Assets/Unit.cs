@@ -43,6 +43,9 @@ public class Unit : MonoBehaviour {
                 return;
             }
             currentPath = FindPath(tile.GridPosition);
+            if((currentPath?.Count??0) != 0) {
+                Move(currentPath.Dequeue());
+            }
         };
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
@@ -50,12 +53,6 @@ public class Unit : MonoBehaviour {
 
     private Queue<Vector2Int> FindPath(Vector2Int dest) {
         return null;
-    }
-
-    private void FixedUpdate() {
-        if ((currentPath?.Count ?? 0) != 0 && moving == null) {
-            var next = currentPath.Dequeue();
-        }
     }
 
     public void Move(Vector2Int v) {
@@ -72,10 +69,14 @@ public class Unit : MonoBehaviour {
             animator.SetTrigger(Down);
         }
 
-
         var dist = direction.magnitude;
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
-        moving.onComplete = () => moving = null;
+        moving.onComplete = () => {
+            if ((currentPath?.Count ?? 0) != 0 && moving == null) {
+                var next = currentPath.Dequeue();
+                Move(next);
+            }
+        };
     }
 }
