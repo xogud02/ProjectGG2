@@ -27,7 +27,7 @@ public class Unit : MonoBehaviour {
     private Tween moving;
 
     private Animator animator;
-    private Queue<Vector2Int> currentPath;
+    private Queue<Vector2Int> currentPath = new Queue<Vector2Int>();
     private Vector2Int CurrentPosition;
 
     public void Start() {
@@ -39,11 +39,8 @@ public class Unit : MonoBehaviour {
         }
 
         Tiles.OnClick = tile => {
-            if (tile.tileType == Tile.TileType.Block) {
-                return;
-            }
             currentPath = FindPath(tile.GridPosition);
-            if((currentPath?.Count??0) != 0) {
+            if (currentPath.Count != 0) {
                 Move(currentPath.Dequeue());
             }
         };
@@ -52,7 +49,7 @@ public class Unit : MonoBehaviour {
     }
 
     private Queue<Vector2Int> FindPath(Vector2Int dest) {
-        return null;
+        return new Queue<Vector2Int>();//TODO Find
     }
 
     public void Move(Vector2Int v) {
@@ -73,7 +70,7 @@ public class Unit : MonoBehaviour {
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
         moving.onComplete = () => {
-            if ((currentPath?.Count ?? 0) != 0 && moving == null) {
+            if (currentPath.Count != 0 && moving == null) {
                 var next = currentPath.Dequeue();
                 Move(next);
             }
