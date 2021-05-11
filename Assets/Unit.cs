@@ -52,6 +52,16 @@ public class Unit : MonoBehaviour {
         return new Queue<Vector2Int>();//TODO Find
     }
 
+    public void Stop() {
+        if(currentPath.Count == 0) {
+            return;
+        }
+
+        var lastPath = new Queue<Vector2Int>();
+        lastPath.Enqueue(currentPath.Dequeue());
+        currentPath = lastPath;
+    }
+
     public void Move(Vector2Int v) {
         var direction = v - transform.position.Convert();
         var angle = Vector2.SignedAngle(Vector2.right, direction);
