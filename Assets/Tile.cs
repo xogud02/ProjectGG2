@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour {
                 sr.sortingOrder = -1;
                 tile.AddComponent<BoxCollider2D>();
                 ret.GridPosition = position;
-                tile.transform.position = new Vector3(position.x, position.y) * Floor.Size * Tiles.ScaleFactor;
+                tile.transform.position = new Vector3(position.x, position.y) * Floor.Size * GridObject.ScaleFactor;
                 ret.tileType = tileType;
             }
         };

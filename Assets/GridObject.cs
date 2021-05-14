@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Tiles : MonoBehaviour {
+public class GridObject : MonoBehaviour {
     public static float ScaleFactor { get; private set; }
     public static bool Initialized { get; private set; }
     public static Action OnInit;

@@ -32,13 +32,13 @@ public class Unit : MonoBehaviour {
 
     public void Start() {
         animator = GetComponent<Animator>();
-        if (Tiles.Initialized) {
-            transform.localScale *= Tiles.ScaleFactor;
+        if (GridObject.Initialized) {
+            transform.localScale *= GridObject.ScaleFactor;
         } else {
-            Tiles.OnInit += () => transform.localScale *= Tiles.ScaleFactor;
+            GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
         }
 
-        Tiles.OnClick = tile => {
+        GridObject.OnClick = tile => {
             currentPath = FindPath(tile.GridPosition);
             if (currentPath.Count != 0) {
                 Move(currentPath.Dequeue());
