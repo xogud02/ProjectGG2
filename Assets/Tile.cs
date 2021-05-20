@@ -3,11 +3,12 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
+public enum TileType {
+    None,
+    Block
+}
+
 public class Tile : MonoBehaviour {
-    public enum TileType {
-        None,
-        Block
-    }
 
     public TileType tileType;
     public Action<Tile> OnClicked;

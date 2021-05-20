@@ -7,5 +7,5 @@ public class GridField {
     public static bool IsMovable(Vector2Int _) => false;
     public static int Width => 100;
     public static int Height => 100;
-
+    public static TileType GetTileType(Vector2Int _) => TileType.Block;
 }
