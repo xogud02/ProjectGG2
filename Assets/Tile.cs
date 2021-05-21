@@ -5,7 +5,10 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public enum TileType {
     None,
-    Block
+    Floor,
+    Grass,
+    Block,
+    Water
 }
 
 public class Tile : MonoBehaviour {
