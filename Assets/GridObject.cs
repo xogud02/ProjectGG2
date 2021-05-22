@@ -7,9 +7,9 @@ public class GridObject : MonoBehaviour {
     public static float ScaleFactor { get; private set; }
     public static bool Initialized { get; private set; }
     public static Action OnInit;
-    public static Action<Tile> OnClick;
+    public Action<Tile> OnClick;
 
-    private static Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
+    private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
     public enum AdjType {
         None = 0,
