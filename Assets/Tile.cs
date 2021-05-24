@@ -14,8 +14,8 @@ public enum TileType {
 public class Tile : MonoBehaviour {
 
     public TileType tileType;
-    public Action<Tile> OnClicked;
     public Vector2Int GridPosition { get; private set; }
+    public Action<Tile> OnClick;
 
     public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, Vector2Int position, Transform parent, TileType tileType = TileType.None) {
         var tile = new GameObject("tile");
@@ -37,6 +37,6 @@ public class Tile : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        OnClicked?.Invoke(this);
+        OnClick?.Invoke(this);
     }
 }

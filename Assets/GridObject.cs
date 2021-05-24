@@ -7,7 +7,6 @@ public class GridObject : MonoBehaviour {
     public static float ScaleFactor { get; private set; }
     public static bool Initialized { get; private set; }
     public static Action OnInit;
-    public Action<Tile> OnClick;
 
     private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
@@ -20,6 +19,7 @@ public class GridObject : MonoBehaviour {
     }
 
     public Vector2Int GridPosition;
+    public Action<Vector2Int> OnClick;
 
     void Start() {
         Floor.Init().GetAwaiter().OnCompleted(Init);
@@ -85,16 +85,20 @@ public class GridObject : MonoBehaviour {
 
                 if (grass.Contains(new Vector2Int(x, y)) == false) {
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, current, ret.transform);
-                    dirt.OnClicked = OnClick;
+                    dirt.OnClick = OnTileClicked;
                     continue;
                 }
 
                 var grassTile = Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, current, ret.transform);
-                grassTile.OnClicked = OnClick;
+                grassTile.OnClick = OnTileClicked;
             }
         }
         ret.transform.localScale *= ScaleFactor;
         return ret;
+    }
+
+    public void OnTileClicked(Tile tile) {
+        OnClick?.Invoke(GridPosition + tile.GridPosition);
     }
 
 }
