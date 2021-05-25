@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class GridField {
     private GridField() { }
+    private static GridField _instance;
+    public GridField Instance {
+        get {
+            if(_instance == null) {
+                _instance = new GridField();
+            }
+            return _instance;
+        }
+    }
     private List<GridObject> objects = new List<GridObject>();
     public static Action<Vector2Int> OnClick;
     public static bool IsMovable(Vector2Int _) => false;
