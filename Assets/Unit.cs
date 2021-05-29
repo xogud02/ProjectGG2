@@ -38,12 +38,9 @@ public class Unit : MonoBehaviour {
             GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
         }
 
-        //GridObject.OnClick = tile => {
-        //    currentPath = FindPath(tile.GridPosition);
-        //    if (currentPath.Count != 0) {
-        //        Move(currentPath.Dequeue());
-        //    }
-        //};
+        GridField.OnClick = to => {
+            currentPath = AStar.Find(CurrentPosition, to);
+        };
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
     }
