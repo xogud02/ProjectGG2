@@ -11,8 +11,15 @@ public static class AStar {
         }
     }
 
+
     public static Queue<Vector2Int> Find(Vector2Int from, Vector2Int to) {
         var start = new Node((to - from).magnitude);
-        return new Queue<Vector2Int>();
+        var open = new SortedSet<Node>(Comparer<Node>.Create((node1, node2) => (int)(node1.sum - node2.sum))) { start };
+
+        var ret = new Queue<Vector2Int>();
+        while (open.Count > 0) {
+
+        }
+        return ret;
     }
 }
