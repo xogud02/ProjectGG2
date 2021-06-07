@@ -21,6 +21,8 @@ public static class AStar {
         var open = new SortedSet<Node>(Comparer<Node>.Create((node1, node2) => (int)(node1.sum - node2.sum))) { start };
         var closed = new HashSet<Node>();
         var ret = new Queue<Vector2Int>();
+        var dx = new[] { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
+        var dy = new[] { -1, -1, -1, 0, 0, 0, 1, 1, 1 };
         while (open.Count > 0) {
             var current = open.Min;
             open.Remove(current);
