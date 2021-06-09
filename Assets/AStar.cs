@@ -7,11 +7,13 @@ public static class AStar {
         public readonly float moved;
         public readonly float sum;
         public readonly Vector2Int position;
-        public Node(Vector2Int position, Vector2Int dest, float moved = 0) {
+        public readonly Node? before;
+        public Node(Vector2Int position, Vector2Int dest, Node before = default, float moved = 0) {
             this.position = position;
             distance = (position - dest).magnitude;
             this.moved = moved;
             sum = distance + moved;
+            this.before = before;
         }
     }
 
@@ -26,6 +28,9 @@ public static class AStar {
         while (open.Count > 0) {
             var current = open.Min;
             open.Remove(current);
+            if(current.position == to) {
+                break;
+            }
             for(var i = 0; i < dx.Length; ++i) {
                 var next = new Vector2Int(dx[i], dy[i]) + current.position;
                 if (closed.Contains(next)) {
