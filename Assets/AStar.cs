@@ -27,6 +27,9 @@ public static class AStar {
         var dy = new[] { -1, -1, -1, 0, 0, 0, 1, 1, 1 };
         while (open.Count > 0) {
             var current = open.Min;
+            if(current.position == to) {
+                break;
+            }
             open.Remove(current);
             if(current.position == to) {
                 break;
