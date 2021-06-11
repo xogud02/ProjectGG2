@@ -35,10 +35,11 @@ public static class AStar {
                 break;
             }
             for(var i = 0; i < dx.Length; ++i) {
-                var next = new Vector2Int(dx[i], dy[i]) + current.position;
-                if (closed.Contains(next)) {
+                var nextPosition = new Vector2Int(dx[i], dy[i]) + current.position;
+                if (closed.Contains(nextPosition)) {
                     continue;
                 }
+                var next = new Node(nextPosition, to, current, current.moved + 1);
             }
         }
         return ret;
