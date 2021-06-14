@@ -8,7 +8,7 @@ public class GridField {
     private static GridField _instance;
     public static GridField Instance {
         get {
-            if(_instance == null) {
+            if (_instance == null) {
                 _instance = new GridField();
             }
             return _instance;
@@ -16,6 +16,7 @@ public class GridField {
     }
     private HashSet<GridObject> objects = new HashSet<GridObject>();
     public static Action<Vector2Int> OnClick;
+    public static bool IsInRange(Vector2Int pos) => 0 <= pos.x && pos.x < Width && 0 <= pos.y && pos.y < Height;
     public static bool IsMovable(Vector2Int _) => false;
     public static int Width => 100;
     public static int Height => 100;
