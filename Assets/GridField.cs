@@ -17,7 +17,7 @@ public class GridField {
     private HashSet<GridObject> objects = new HashSet<GridObject>();
     public static Action<Vector2Int> OnClick;
     public static bool IsInRange(Vector2Int pos) => 0 <= pos.x && pos.x < Width && 0 <= pos.y && pos.y < Height;
-    public static bool IsMovable(Vector2Int _) => false;
+    public static bool IsMovable(Vector2Int _) => IsInRange(_) && GetTileType(_) != TileType.Block;
     public static int Width => 100;
     public static int Height => 100;
     public static TileType GetTileType(Vector2Int _) => TileType.Block;
