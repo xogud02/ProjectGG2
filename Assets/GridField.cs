@@ -20,7 +20,13 @@ public class GridField {
     public static bool IsMovable(Vector2Int _) => IsInRange(_) && GetTileType(_) != TileType.Block;
     public static int Width => Instance.width;
     public static int Height => Instance.height;
-    public static TileType GetTileType(Vector2Int _) => TileType.Block;
+    public static TileType GetTileType(Vector2Int _) {
+        foreach(var obj in Instance.objects) {
+            if(_ == obj.GridPosition) {
+            }
+        }
+        return TileType.Block;
+    }
     public static void AddObject(GridObject gridObject) {
         Instance.objects.Add(gridObject);
     }
