@@ -25,6 +25,13 @@ public class GridObject : MonoBehaviour {
         Floor.Init().GetAwaiter().OnCompleted(Init);
     }
 
+    public TileType GetTile(Vector2Int pos) {
+        if (tiles.ContainsKey(pos)) {
+            return tiles[pos].tileType;
+        }
+        return TileType.None;
+    }
+
 
     private void Init() {
         ScaleFactor = 3;
