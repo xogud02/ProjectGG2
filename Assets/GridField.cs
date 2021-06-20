@@ -22,10 +22,12 @@ public class GridField {
     public static int Height => Instance.height;
     public static TileType GetTileType(Vector2Int _) {
         foreach(var obj in Instance.objects) {
-            if(_ == obj.GridPosition) {
+            var tileType = obj.GetTile(_);
+            if (tileType != TileType.None) {
+                return tileType;
             }
         }
-        return TileType.Block;
+        return TileType.None;
     }
     public static void AddObject(GridObject gridObject) {
         Instance.objects.Add(gridObject);

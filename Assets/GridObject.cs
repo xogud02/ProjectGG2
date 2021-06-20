@@ -26,8 +26,9 @@ public class GridObject : MonoBehaviour {
     }
 
     public TileType GetTile(Vector2Int pos) {
-        if (tiles.ContainsKey(pos)) {
-            return tiles[pos].tileType;
+        var relative = pos - GridPosition;
+        if (tiles.ContainsKey(relative)) {
+            return tiles[relative].tileType;
         }
         return TileType.None;
     }
