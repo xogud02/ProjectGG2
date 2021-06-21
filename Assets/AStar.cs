@@ -31,6 +31,7 @@ public static class AStar {
                 break;
             }
             open.Remove(current);
+            closed.Add(current.position);
             if (current.position == to) {
                 break;
             }
@@ -40,6 +41,7 @@ public static class AStar {
                     continue;
                 }
                 var next = new Node(nextPosition, to, current, current.moved + 1);
+                open.Add(next);
             }
         }
         return ret;
