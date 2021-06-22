@@ -29,6 +29,7 @@ public class GridField {
         }
         return TileType.None;
     }
+
     public static void AddObject(GridObject gridObject) {
         Instance.objects.Add(gridObject);
     }
