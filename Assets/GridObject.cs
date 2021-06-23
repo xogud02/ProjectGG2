@@ -33,6 +33,10 @@ public class GridObject : MonoBehaviour {
         return TileType.None;
     }
 
+    public void AddTile(Tile tile, Vector2Int pos) {
+
+    }
+
 
     private void Init() {
         ScaleFactor = 3;
@@ -40,7 +44,7 @@ public class GridObject : MonoBehaviour {
         GrassField(10, 10);
     }
 
-    private GameObject GrassField(int width, int height, float ratio = 0.3f) {
+    private GridObject GrassField(int width, int height, float ratio = 0.3f) {
         var grass = new HashSet<Vector2Int>();
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
@@ -50,7 +54,8 @@ public class GridObject : MonoBehaviour {
             }
         }
 
-        var ret = new GameObject("grassField");
+        var gameObject = new GameObject("grassField");
+        var ret = gameObject.AddComponent<GridObject>();
         var dx = -width / 2f;
         var dy = -height / 2f;
 
@@ -92,16 +97,19 @@ public class GridObject : MonoBehaviour {
                 }
 
                 if (grass.Contains(new Vector2Int(x, y)) == false) {
-                    var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, current, ret.transform);
+                    var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, current, gameObject.transform);
                     dirt.OnClick = OnTileClicked;
+                    AddTile(dirt, current);
                     continue;
                 }
 
-                var grassTile = Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, current, ret.transform);
+                var grassTile = Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, current, gameObject.transform);
+                AddTile(grassTile, current);
+
                 grassTile.OnClick = OnTileClicked;
             }
         }
-        ret.transform.localScale *= ScaleFactor;
+        gameObject.transform.localScale *= ScaleFactor;
         return ret;
     }
 
