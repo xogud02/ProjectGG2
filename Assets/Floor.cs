@@ -1,14 +1,14 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+//using UnityEngine.AddressableAssets;
 
 public class Floor {
     public static readonly string AddressPrefix = "Floor";
 
     public static async Task Init() {
-        var req = Addressables.LoadAssetAsync<Sprite>(GetFloorPath(0, 0, 0));
-        var sprite = await req.Task;
-        Size = sprite.rect.size.x / sprite.pixelsPerUnit;
+        //var req = Addressables.LoadAssetAsync<Sprite>(GetFloorPath(0, 0, 0));
+        //var sprite = await req.Task;
+        //Size = sprite.rect.size.x / sprite.pixelsPerUnit;
     }
 
     public static float Size { get; private set; }

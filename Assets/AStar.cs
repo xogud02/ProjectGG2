@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class AStar {
-    private struct Node {
+    private class Node {
         public readonly float distance;
         public readonly float moved;
         public readonly float sum;
         public readonly Vector2Int position;
-        public readonly Node? before;
+        public readonly Node before;
         public Node(Vector2Int position, Vector2Int dest, Node before = default, float moved = 0) {
             this.position = position;
             distance = (position - dest).magnitude;

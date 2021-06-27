@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+//using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public enum TileType {
@@ -23,16 +23,16 @@ public class Tile : MonoBehaviour {
         var ret = tile.AddComponent<Tile>();
         var sr = tile.AddComponent<SpriteRenderer>();
         var path = Floor.GetFloorPath(shape, bright, material);
-        Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
-            if (handle.Status == AsyncOperationStatus.Succeeded) {
-                sr.sprite = handle.Result;
-                sr.sortingOrder = -1;
-                tile.AddComponent<BoxCollider2D>();
-                ret.GridPosition = position;
-                tile.transform.position = new Vector3(position.x, position.y) * Floor.Size * GridObject.ScaleFactor;
-                ret.tileType = tileType;
-            }
-        };
+        //Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
+        //    if (handle.Status == AsyncOperationStatus.Succeeded) {
+        //        sr.sprite = handle.Result;
+        //        sr.sortingOrder = -1;
+        //        tile.AddComponent<BoxCollider2D>();
+        //        ret.GridPosition = position;
+        //        tile.transform.position = new Vector3(position.x, position.y) * Floor.Size * GridObject.ScaleFactor;
+        //        ret.tileType = tileType;
+        //    }
+        //};
         return ret;
     }
 

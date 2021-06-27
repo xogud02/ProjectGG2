@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour {
         }
 
         GridField.OnClick = to => {
-            currentPath = AStar.Find(CurrentPosition, to);
+            //currentPath = AStar.Find(CurrentPosition, to);
         };
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
