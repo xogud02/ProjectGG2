@@ -41,7 +41,6 @@ public class GridObject : MonoBehaviour {
     private void Init() {
         ScaleFactor = 3;
         OnInit?.Invoke();
-        GrassField(10, 10);
     }
 
     private GridObject GrassField(int width, int height, float ratio = 0.3f) {
