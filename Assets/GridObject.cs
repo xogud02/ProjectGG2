@@ -21,6 +21,25 @@ public class GridObject : MonoBehaviour {
     public Vector2Int GridPosition;
     public Action<Vector2Int> OnClick;
 
+    Floor.ShapeType[] arr = {              //rldu
+        Floor.ShapeType.Single,            //0000
+        Floor.ShapeType.VirticalBottom,    //0001
+        Floor.ShapeType.VirticalTop,       //0010
+        Floor.ShapeType.VirticalCenter,    //0011
+        Floor.ShapeType.HorizontalRight,   //0100
+        Floor.ShapeType.BottomRight,       //0101
+        Floor.ShapeType.TopRight,          //0110
+        Floor.ShapeType.Right,             //0111
+        Floor.ShapeType.HorizontalLeft,    //1000
+        Floor.ShapeType.BottomLeft,        //1001
+        Floor.ShapeType.TopLeft,           //1010
+        Floor.ShapeType.Left,              //1011
+        Floor.ShapeType.HorizontalCenter,  //1100
+        Floor.ShapeType.Bottom,            //1101
+        Floor.ShapeType.Top,               //1110
+        Floor.ShapeType.Center,            //1111
+    };
+
     void Start() {
         Floor.Init().GetAwaiter().OnCompleted(Init);
     }
@@ -65,24 +84,7 @@ public class GridObject : MonoBehaviour {
             {Vector2Int.right, AdjType.Right}
         };
 
-        var arr = new Floor.ShapeType[] {      //rldu
-            Floor.ShapeType.Single,            //0000
-            Floor.ShapeType.VirticalBottom,    //0001
-            Floor.ShapeType.VirticalTop,       //0010
-            Floor.ShapeType.VirticalCenter,    //0011
-            Floor.ShapeType.HorizontalRight,   //0100
-            Floor.ShapeType.BottomRight,       //0101
-            Floor.ShapeType.TopRight,          //0110
-            Floor.ShapeType.Right,             //0111
-            Floor.ShapeType.HorizontalLeft,    //1000
-            Floor.ShapeType.BottomLeft,        //1001
-            Floor.ShapeType.TopLeft,           //1010
-            Floor.ShapeType.Left,              //1011
-            Floor.ShapeType.HorizontalCenter,  //1100
-            Floor.ShapeType.Bottom,            //1101
-            Floor.ShapeType.Top,               //1110
-            Floor.ShapeType.Center,            //1111
-        };
+
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
