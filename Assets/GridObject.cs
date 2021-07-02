@@ -10,6 +10,15 @@ public class GridObject : MonoBehaviour {
 
     private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
+    static GridObject() {
+        Floor.Init().GetAwaiter().OnCompleted(Init);
+    }
+
+    private static void Init() {
+        ScaleFactor = 3;
+        OnInit?.Invoke();
+    }
+
     public enum AdjType {
         None = 0,
         Up = 1 << 0,
@@ -21,7 +30,7 @@ public class GridObject : MonoBehaviour {
     public Vector2Int GridPosition;
     public Action<Vector2Int> OnClick;
 
-    Floor.ShapeType[] arr = {              //rldu
+    public static Floor.ShapeType[] FloorShapeTypes = {              //rldu
         Floor.ShapeType.Single,            //0000
         Floor.ShapeType.VirticalBottom,    //0001
         Floor.ShapeType.VirticalTop,       //0010
@@ -41,7 +50,7 @@ public class GridObject : MonoBehaviour {
     };
 
     void Start() {
-        Floor.Init().GetAwaiter().OnCompleted(Init);
+        ;
     }
 
     public TileType GetTile(Vector2Int pos) {
@@ -57,12 +66,9 @@ public class GridObject : MonoBehaviour {
     }
 
 
-    private void Init() {
-        ScaleFactor = 3;
-        OnInit?.Invoke();
-    }
 
-    private GridObject GrassField(int width, int height, float ratio = 0.3f) {
+
+    public static GridObject GrassField(int width, int height, float ratio = 0.3f) {
         var grass = new HashSet<Vector2Int>();
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
@@ -99,15 +105,15 @@ public class GridObject : MonoBehaviour {
 
                 if (grass.Contains(new Vector2Int(x, y)) == false) {
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, current, gameObject.transform);
-                    dirt.OnClick = OnTileClicked;
-                    AddTile(dirt, current);
+                    dirt.OnClick = ret.OnTileClicked;
+                    ret.AddTile(dirt, current);
                     continue;
                 }
 
-                var grassTile = Tile.Create(arr[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, current, gameObject.transform);
-                AddTile(grassTile, current);
+                var grassTile = Tile.Create(FloorShapeTypes[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, current, gameObject.transform);
+                ret.AddTile(grassTile, current);
 
-                grassTile.OnClick = OnTileClicked;
+                grassTile.OnClick = ret.OnTileClicked;
             }
         }
         gameObject.transform.localScale *= ScaleFactor;
