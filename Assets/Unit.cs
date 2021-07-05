@@ -45,12 +45,8 @@ public class Unit : MonoBehaviour {
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
     }
 
-    private Queue<Vector2Int> FindPath(Vector2Int dest) {
-        return new Queue<Vector2Int>();//TODO Find
-    }
-
     public void Stop() {
-        if(currentPath.Count == 0) {
+        if (currentPath.Count == 0) {
             return;
         }
 
@@ -77,7 +73,8 @@ public class Unit : MonoBehaviour {
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
         moving.onComplete = () => {
-            if (currentPath.Count != 0 && moving == null) {
+            if (currentPath.Count != 0) {
+                moving = null;
                 var next = currentPath.Dequeue();
                 Move(next);
             }
