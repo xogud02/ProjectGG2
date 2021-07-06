@@ -7,7 +7,7 @@ public class Game : MonoBehaviour {
         if (GridObject.Initialized) {
             Init();
         } else {
-            GridObject.OnInit = Init;
+            GridObject.OnInit += Init;
         }
     }
 

@@ -17,6 +17,7 @@ public class GridObject : MonoBehaviour {
     private static void Init() {
         ScaleFactor = 3;
         OnInit?.Invoke();
+        Initialized = true;
     }
 
     public enum AdjType {
@@ -48,10 +49,6 @@ public class GridObject : MonoBehaviour {
         Floor.ShapeType.Top,               //1110
         Floor.ShapeType.Center,            //1111
     };
-
-    void Start() {
-        ;
-    }
 
     public TileType GetTile(Vector2Int pos) {
         var relative = pos - GridPosition;
