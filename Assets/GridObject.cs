@@ -59,7 +59,7 @@ public class GridObject : MonoBehaviour {
     }
 
     public void AddTile(Tile tile, Vector2Int pos) {
-
+        tiles[pos] = tile;
     }
 
 

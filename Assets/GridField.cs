@@ -14,6 +14,7 @@ public class GridField {
             return _instance;
         }
     }
+
     private HashSet<GridObject> objects = new HashSet<GridObject>();
     public static Action<Vector2Int> OnClick;
     public static bool IsInRange(Vector2Int pos) => 0 <= pos.x && pos.x < Width && 0 <= pos.y && pos.y < Height;
@@ -29,6 +30,8 @@ public class GridField {
         }
         return TileType.None;
     }
+
+    public static Vector2 Convert(Vector2Int gridPosition) => Vector2.zero;//TODO implement
 
     public static void AddObject(GridObject gridObject) {
         Instance.objects.Add(gridObject);
