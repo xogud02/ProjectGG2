@@ -71,7 +71,7 @@ public class Unit : MonoBehaviour {
 
         var dist = direction.magnitude;
         var time = dist / speed;
-        moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, v, time).SetEase(Ease.Linear);
+        moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, GridField.Convert(v), time).SetEase(Ease.Linear);
         moving.onComplete = () => {
             if (currentPath.Count != 0) {
                 moving = null;

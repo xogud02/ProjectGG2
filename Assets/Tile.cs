@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour {
                 sr.sortingOrder = -1;
                 tile.AddComponent<BoxCollider2D>();
                 ret.GridPosition = position;
-                tile.transform.position = new Vector3(position.x, position.y) * Floor.Size * GridObject.ScaleFactor;
+                tile.transform.position = GridField.Convert(position);
                 ret.tileType = tileType;
             }
         };
