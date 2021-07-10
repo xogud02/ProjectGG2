@@ -56,7 +56,8 @@ public class Unit : MonoBehaviour {
     }
 
     public void Move(Vector2Int v) {
-        var direction = v - transform.position.Convert();
+        var dest = GridField.Convert(v);
+        var direction = dest - transform.position.Convert();
         var angle = Vector2.SignedAngle(Vector2.right, direction);
         var absAngle = Mathf.Abs(angle);
         if (absAngle < 45f) {
@@ -71,7 +72,7 @@ public class Unit : MonoBehaviour {
 
         var dist = direction.magnitude;
         var time = dist / speed;
-        moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, GridField.Convert(v), time).SetEase(Ease.Linear);
+        moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, dest, time).SetEase(Ease.Linear);
         moving.onComplete = () => {
             if (currentPath.Count != 0) {
                 moving = null;
