@@ -55,6 +55,10 @@ public class Unit : MonoBehaviour {
         currentPath = lastPath;
     }
 
+    public void SetPath(Vector2Int v) {
+
+    }
+
     public void Move(Vector2Int v) {
         var dest = GridField.Convert(v);
         var direction = dest - transform.position.Convert();
