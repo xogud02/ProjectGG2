@@ -46,7 +46,7 @@ public class Unit : MonoBehaviour {
     }
 
     public void Stop() {
-        if (currentPath.Count == 0) {
+        if (IsMoving == false) {
             return;
         }
 
@@ -56,8 +56,10 @@ public class Unit : MonoBehaviour {
     }
 
     public void SetPath(Vector2Int v) {
-
+        
     }
+
+    public bool IsMoving => currentPath.Count > 0 || (moving?.active ?? false);
 
     public void Move(Vector2Int v) {
         var dest = GridField.Convert(v);
