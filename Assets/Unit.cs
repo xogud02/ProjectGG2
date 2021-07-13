@@ -38,9 +38,7 @@ public class Unit : MonoBehaviour {
             GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
         }
 
-        GridField.OnClick = to => {
-            currentPath = AStar.Find(CurrentPosition, to);
-        };
+        GridField.OnClick = SetPath;
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
     }
@@ -50,13 +48,20 @@ public class Unit : MonoBehaviour {
             return;
         }
 
-        var lastPath = new Queue<Vector2Int>();
-        lastPath.Enqueue(currentPath.Dequeue());
-        currentPath = lastPath;
+        EmptyPath();
     }
 
     public void SetPath(Vector2Int v) {
-        
+        EmptyPath();
+        var newPath = AStar.Find(CurrentPosition, v);
+    }
+
+    private void EmptyPath() {
+        var lastPath = new Queue<Vector2Int>();
+        if (currentPath.Count > 0) {
+            lastPath.Enqueue(currentPath.Dequeue());
+        }
+        currentPath = lastPath;
     }
 
     public bool IsMoving => currentPath.Count > 0 || (moving?.active ?? false);
