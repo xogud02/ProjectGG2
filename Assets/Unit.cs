@@ -53,12 +53,15 @@ public class Unit : MonoBehaviour {
 
     public void SetPath(Vector2Int v) {
         EmptyPath();
-        var newPath = AStar.Find(CurrentPosition, v);
+        var newPath = AStar.Find(currentPath.Count > 0 ? currentPath.Peek() : CurrentPosition, v);
+        while(newPath.Count > 0) {
+            currentPath.Enqueue(newPath.Dequeue());
+        }
     }
 
     private void EmptyPath() {
         var lastPath = new Queue<Vector2Int>();
-        if (currentPath.Count > 0) {
+        if (IsMoving && currentPath.Count > 0) {
             lastPath.Enqueue(currentPath.Dequeue());
         }
         currentPath = lastPath;
