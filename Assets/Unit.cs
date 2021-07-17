@@ -54,8 +54,12 @@ public class Unit : MonoBehaviour {
     public void SetPath(Vector2Int v) {
         EmptyPath();
         var newPath = AStar.Find(currentPath.Count > 0 ? currentPath.Peek() : CurrentPosition, v);
-        while(newPath.Count > 0) {
+        while (newPath.Count > 0) {
             currentPath.Enqueue(newPath.Dequeue());
+        }
+
+        if (IsMoving == false) {
+            Move(currentPath.Peek());
         }
     }
 
@@ -87,11 +91,15 @@ public class Unit : MonoBehaviour {
         var dist = direction.magnitude;
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, dest, time).SetEase(Ease.Linear);
+        if (currentPath.Count == 0) {
+            return;
+        }
+
         moving.onComplete = () => {
+            moving = null;
+            currentPath.Dequeue();
             if (currentPath.Count != 0) {
-                moving = null;
-                var next = currentPath.Dequeue();
-                Move(next);
+                Move(currentPath.Peek());
             }
         };
     }
