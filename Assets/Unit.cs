@@ -91,13 +91,17 @@ public class Unit : MonoBehaviour {
         var dist = direction.magnitude;
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, dest, time).SetEase(Ease.Linear);
-        if (currentPath.Count == 0) {
-            return;
-        }
+
 
         moving.onComplete = () => {
             moving = null;
+
+            if (currentPath.Count == 0) {
+                return;
+            }
+
             currentPath.Dequeue();
+
             if (currentPath.Count != 0) {
                 Move(currentPath.Peek());
             }
