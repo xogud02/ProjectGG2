@@ -92,7 +92,6 @@ public class Unit : MonoBehaviour {
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, dest, time).SetEase(Ease.Linear);
 
-
         moving.onComplete = () => {
             moving = null;
 
