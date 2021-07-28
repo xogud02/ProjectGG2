@@ -38,8 +38,6 @@ public class Unit : MonoBehaviour {
             GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
         }
 
-        GridField.OnClick = SetPath;
-
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
     }
 
