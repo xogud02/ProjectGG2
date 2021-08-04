@@ -13,6 +13,7 @@ public class Game : MonoBehaviour {
 
     private void Init() {
         var field = GridObject.GrassField(10, 10);
+        GridField.Instance.Init(10, 10);
         field.OnClick = unit.SetPath;
     }
 }

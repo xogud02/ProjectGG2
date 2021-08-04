@@ -56,7 +56,7 @@ public class Unit : MonoBehaviour {
             currentPath.Enqueue(newPath.Dequeue());
         }
 
-        if (IsMoving == false) {
+        if (IsMoving == false && currentPath.Count > 0) {
             Move(currentPath.Peek());
         }
     }
