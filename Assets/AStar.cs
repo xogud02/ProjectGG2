@@ -28,6 +28,12 @@ public static class AStar {
         while (open.Count > 0) {
             var current = open.Min;
             if (current.position == to) {
+                ret.Enqueue(current.position);
+                var before = current.before;
+                while(before != null) {
+                    ret.Enqueue(before.position);
+                    before = before.before;
+                }
                 break;
             }
             open.Remove(current);
