@@ -52,11 +52,12 @@ public class Unit : MonoBehaviour {
     public void SetPath(Vector2Int v) {
         EmptyPath();
         var newPath = AStar.Find(currentPath.Count > 0 ? currentPath.Peek() : CurrentPosition, v);
+        var wasMoving = IsMoving;
         while (newPath.Count > 0) {
             currentPath.Enqueue(newPath.Dequeue());
         }
 
-        if (IsMoving == false && currentPath.Count > 0) {
+        if (wasMoving == false && currentPath.Count > 0) {
             Move(currentPath.Peek());
         }
     }
