@@ -54,7 +54,7 @@ public class Unit : MonoBehaviour {
         var newPath = AStar.Find(currentPath.Count > 0 ? currentPath.Peek() : CurrentPosition, v);
         var wasMoving = IsMoving;
         while (newPath.Count > 0) {
-            currentPath.Enqueue(newPath.Dequeue());
+            currentPath.Enqueue(newPath.Pop());
         }
 
         if (wasMoving == false && currentPath.Count > 0) {

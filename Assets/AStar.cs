@@ -18,20 +18,21 @@ public static class AStar {
     }
 
 
-    public static Queue<Vector2Int> Find(Vector2Int from, Vector2Int to) {
+    public static Stack<Vector2Int> Find(Vector2Int from, Vector2Int to) {
         var start = new Node(from, to);
         var open = new SortedSet<Node>(Comparer<Node>.Create((node1, node2) => (int)(node1.sum - node2.sum))) { start };
         var closed = new HashSet<Vector2Int>();
-        var ret = new Queue<Vector2Int>();
+        var ret = new Stack<Vector2Int>();
+        var reverse = new Queue<Vector2Int>();
         var dx = new[] { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
         var dy = new[] { -1, -1, -1, 0, 0, 0, 1, 1, 1 };
         while (open.Count > 0) {
             var current = open.Min;
             if (current.position == to) {
-                ret.Enqueue(current.position);
+                reverse.Enqueue(current.position);
                 var before = current.before;
                 while(before != null) {
-                    ret.Enqueue(before.position);
+                    reverse.Enqueue(before.position);
                     before = before.before;
                 }
                 break;
@@ -49,6 +50,9 @@ public static class AStar {
                 var next = new Node(nextPosition, to, current, current.moved + 1);
                 open.Add(next);
             }
+        }
+        while (reverse.Count > 0) {
+            ret.Push(reverse.Dequeue());
         }
         return ret;
     }
