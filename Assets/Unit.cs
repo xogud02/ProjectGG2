@@ -98,7 +98,7 @@ public class Unit : MonoBehaviour {
                 return;
             }
 
-            currentPath.Dequeue();
+            CurrentPosition = currentPath.Dequeue();
 
             if (currentPath.Count != 0) {
                 Move(currentPath.Peek());
