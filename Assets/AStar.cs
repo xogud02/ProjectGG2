@@ -24,14 +24,15 @@ public static class AStar {
         var closed = new HashSet<Vector2Int>();
         var ret = new Stack<Vector2Int>();
         var reverse = new Queue<Vector2Int>();
-        var dx = new[] { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
-        var dy = new[] { -1, -1, -1, 0, 0, 0, 1, 1, 1 };
+        var dx = new[] { -1, 0, 1, -1, 1, -1, 0, 1 };
+        var dy = new[] { -1, -1, -1, 0, 0, 1, 1, 1 };
+        var diagonal = Mathf.Sqrt(2);
         while (open.Count > 0) {
             var current = open.Min;
             if (current.position == to) {
                 reverse.Enqueue(current.position);
                 var before = current.before;
-                while(before != null) {
+                while (before != null) {
                     reverse.Enqueue(before.position);
                     before = before.before;
                 }
@@ -47,7 +48,7 @@ public static class AStar {
                 if (GridField.IsMovable(nextPosition) == false || closed.Contains(nextPosition)) {
                     continue;
                 }
-                var next = new Node(nextPosition, to, current, current.moved + 1);
+                var next = new Node(nextPosition, to, current, current.moved + dx[i] * dy[i] == 0 ? 1 : diagonal);
                 open.Add(next);
             }
         }
