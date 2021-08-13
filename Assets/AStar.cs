@@ -40,9 +40,7 @@ public static class AStar {
             }
             open.Remove(current);
             closed.Add(current.position);
-            if (current.position == to) {
-                break;
-            }
+
             for (var i = 0; i < dx.Length; ++i) {
                 var nextPosition = new Vector2Int(dx[i], dy[i]) + current.position;
                 if (GridField.IsMovable(nextPosition) == false || closed.Contains(nextPosition)) {
