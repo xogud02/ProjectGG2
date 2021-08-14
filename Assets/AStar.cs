@@ -17,10 +17,16 @@ public static class AStar {
         }
     }
 
+    private class NodeComparer : IComparer<Node> {
+        int IComparer<Node>.Compare(Node x, Node y) {
+            return x.sum.CompareTo(y.sum);//TODO implement awesome compare logic
+        }
+    }
+
 
     public static Stack<Vector2Int> Find(Vector2Int from, Vector2Int to) {
         var start = new Node(from, to);
-        var open = new SortedSet<Node>(Comparer<Node>.Create((node1, node2) => (int)(node1.sum - node2.sum))) { start };
+        var open = new SortedSet<Node>(new NodeComparer()) { start };
         var closed = new HashSet<Vector2Int>();
         var ret = new Stack<Vector2Int>();
         var reverse = new Queue<Vector2Int>();
