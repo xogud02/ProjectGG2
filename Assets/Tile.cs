@@ -39,4 +39,9 @@ public class Tile : MonoBehaviour {
     private void OnMouseDown() {
         OnClick?.Invoke(this);
     }
+
+    public void OnDrawGizmos() {
+        Gizmos.color = new Color(0, 1, 0, 0.5f);
+        Gizmos.DrawCube(transform.position, GetComponent<BoxCollider2D>().bounds.size);
+    }
 }
