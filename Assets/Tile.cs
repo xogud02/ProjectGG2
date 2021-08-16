@@ -41,7 +41,17 @@ public class Tile : MonoBehaviour {
     }
 
     public void OnDrawGizmos() {
-        Gizmos.color = new Color(0, 1, 0, 0.5f);
+        switch (tileType) {
+            case TileType.Block:
+                Gizmos.color = new Color(1, 0, 0, 0.5f);
+                break;
+            case TileType.Water:
+                Gizmos.color = new Color(0, 0, 1, 0.5f);
+                break;
+            default:
+                Gizmos.color = new Color(0, 1, 0, 0.5f);
+                break;
+        }
         Gizmos.DrawCube(transform.position, GetComponent<BoxCollider2D>().bounds.size);
     }
 }
