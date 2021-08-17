@@ -62,9 +62,6 @@ public class GridObject : MonoBehaviour {
         tiles[pos] = tile;
     }
 
-
-
-
     public static GridObject GrassField(int width, int height, float ratio = 0.3f) {
         var grass = new HashSet<Vector2Int>();
         for (int x = 0; x < width; ++x) {
