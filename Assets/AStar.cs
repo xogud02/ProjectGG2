@@ -52,7 +52,7 @@ public static class AStar {
                 if (GridField.IsMovable(nextPosition) == false || closed.Contains(nextPosition)) {
                     continue;
                 }
-                var next = new Node(nextPosition, to, current, current.moved + dx[i] * dy[i] == 0 ? 1 : diagonal);
+                var next = new Node(nextPosition, to, current, current.moved + (dx[i] * dy[i] == 0 ? 1 : diagonal));
                 open.Add(next);
             }
         }
