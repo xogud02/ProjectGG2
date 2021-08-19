@@ -24,6 +24,7 @@ public class Unit : MonoBehaviour {
     private readonly int Left = Animator.StringToHash("Left");
     private readonly int Up = Animator.StringToHash("Up");
     private readonly int Down = Animator.StringToHash("Down");
+    private int currentDirection;
     private Tween moving;
 
     private Animator animator;
@@ -32,6 +33,7 @@ public class Unit : MonoBehaviour {
 
     public void Start() {
         animator = GetComponent<Animator>();
+        currentDirection = Down;
         if (GridObject.Initialized) {
             transform.localScale *= GridObject.ScaleFactor;
         } else {
@@ -72,19 +74,26 @@ public class Unit : MonoBehaviour {
 
     public bool IsMoving => currentPath.Count > 0 || (moving?.active ?? false);
 
+    private int GetPreferDirection(float angle) {
+        var absAngle = Mathf.Abs(angle);
+        if (absAngle < 45f) {
+            return Right;
+        } else if (absAngle > 135f) {
+            return Left;
+        } else if (angle > 0) {
+            return Up;
+        } else {
+            return Down;
+        }
+    }
+
     public void Move(Vector2Int v) {
         var dest = GridField.Convert(v);
         var direction = dest - transform.position.Convert();
-        var angle = Vector2.SignedAngle(Vector2.right, direction);
-        var absAngle = Mathf.Abs(angle);
-        if (absAngle < 45f) {
-            animator.SetTrigger(Right);
-        } else if (absAngle > 135f) {
-            animator.SetTrigger(Left);
-        } else if (angle > 0) {
-            animator.SetTrigger(Up);
-        } else {
-            animator.SetTrigger(Down);
+        var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
+        if(preferDirection != currentDirection) {
+            animator.SetTrigger(preferDirection);
+            currentDirection = preferDirection;
         }
 
         var dist = direction.magnitude;
