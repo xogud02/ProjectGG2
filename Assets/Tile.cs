@@ -16,6 +16,7 @@ public class Tile : MonoBehaviour {
     public TileType tileType;
     public Vector2Int GridPosition { get; private set; }
     public Action<Tile> OnClick;
+    private BoxCollider2D boxCollider;
 
     public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, Vector2Int position, Transform parent, TileType tileType = TileType.None) {
         var tile = new GameObject("tile");
@@ -27,7 +28,7 @@ public class Tile : MonoBehaviour {
             if (handle.Status == AsyncOperationStatus.Succeeded) {
                 sr.sprite = handle.Result;
                 sr.sortingOrder = -1;
-                tile.AddComponent<BoxCollider2D>();
+                ret.boxCollider = tile.AddComponent<BoxCollider2D>();
                 ret.GridPosition = position;
                 tile.transform.position = GridField.Convert(position);
                 ret.tileType = tileType;
@@ -52,6 +53,8 @@ public class Tile : MonoBehaviour {
                 Gizmos.color = new Color(0, 1, 0, 0.5f);
                 break;
         }
-        Gizmos.DrawCube(transform.position, GetComponent<BoxCollider2D>().bounds.size);
+        if (boxCollider) {
+            Gizmos.DrawCube(transform.position, boxCollider.bounds.size);
+        }
     }
 }
