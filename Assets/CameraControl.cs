@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour {
     [SerializeField] private Camera _camera;
+    [SerializeField] private Unit _focused;
     private void Awake() {
         if(_camera != null) {
             _camera = Camera.main;
