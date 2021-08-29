@@ -6,16 +6,20 @@ public class CameraControl : MonoBehaviour {
     [SerializeField] private Camera _camera;
     [SerializeField] private Unit _focused;
     private void Awake() {
-        if(_camera != null) {
-            _camera = Camera.main;
+        if (_focused) {
+            Attach();
         }
     }
-    void Start() {
 
+    private void Update() {
+        if(_focused == null) {
+            return;
+        }
     }
+    
 
-    // Update is called once per frame
-    void Update() {
-
+    private void Attach() {
+        transform.parent = _focused.transform;
+        transform.localPosition = Vector3.back * 10;
     }
 }
