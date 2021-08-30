@@ -15,6 +15,12 @@ public class CameraControl : MonoBehaviour {
         if(_focused == null) {
             return;
         }
+
+        var min = 0;
+        var max = Game.tmp;
+        var vMin = GridField.Convert(new Vector2Int(min, min));
+        var vMax = GridField.Convert(new Vector2Int(max, max));
+        var newPos = transform.localPosition;
     }
     
 
