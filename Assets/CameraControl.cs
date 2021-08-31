@@ -5,27 +5,21 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
     [SerializeField] private Camera _camera;
     [SerializeField] private Unit _focused;
+
+    private float z;
     private void Awake() {
-        if (_focused) {
-            Attach();
-        }
+        _camera = Camera.main;
+        z = _camera.transform.position.z;
     }
 
-    private void Update() {
+    private void LateUpdate() {
         if(_focused == null) {
             return;
         }
 
-        var min = 0;
-        var max = Game.tmp;
-        var vMin = GridField.Convert(new Vector2Int(min, min));
-        var vMax = GridField.Convert(new Vector2Int(max, max));
-        var newPos = transform.localPosition;
+        var newPos = _focused.transform.position;
+        newPos.z = z;
+        transform.position = newPos;
     }
     
-
-    private void Attach() {
-        transform.parent = _focused.transform;
-        transform.localPosition = Vector3.back * 10;
-    }
 }
