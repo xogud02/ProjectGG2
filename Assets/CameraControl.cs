@@ -15,6 +15,9 @@ public class CameraControl : MonoBehaviour {
             return;
         }
 
+        var screenMin = _camera.ViewportToWorldPoint(Vector3.zero);
+        var screenMax = _camera.ViewportToWorldPoint(Vector3.one);
+
         var newPos = _focused.transform.position;
         newPos.z = z;
         transform.position = newPos;
