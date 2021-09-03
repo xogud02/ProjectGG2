@@ -18,6 +18,9 @@ public class CameraControl : MonoBehaviour {
         var screenMin = _camera.ViewportToWorldPoint(Vector3.zero);
         var screenMax = _camera.ViewportToWorldPoint(Vector3.one);
 
+        var fieldMin = GridField.Convert(Vector2Int.zero);
+        var fieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp));
+
         var newPos = _focused.transform.position;
         newPos.z = z;
         transform.position = newPos;
