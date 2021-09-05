@@ -15,13 +15,19 @@ public class CameraControl : MonoBehaviour {
             return;
         }
 
+        var focusedPos = _focused.transform.position;
+
         var screenMin = _camera.ViewportToWorldPoint(Vector3.zero);
         var screenMax = _camera.ViewportToWorldPoint(Vector3.one);
+
+        var screenRect = new Rect(screenMin, screenMax - screenMin);
 
         var fieldMin = GridField.Convert(Vector2Int.zero);
         var fieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp));
 
-        var newPos = _focused.transform.position;
+        var fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
+
+        var newPos = focusedPos;
         newPos.z = z;
         transform.position = newPos;
     }
