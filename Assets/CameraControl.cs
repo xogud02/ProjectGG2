@@ -28,6 +28,26 @@ public class CameraControl : MonoBehaviour {
         var fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
 
         var newPos = focusedPos;
+        newPos.x = GetX();
+        newPos.x = GetY();
+
+        float GetX() {
+            if(fieldRect.width < screenRect.width) {
+                return 0;
+            }
+            return 0;
+        }
+
+        float GetY() {
+            if (fieldRect.height < screenRect.height) {
+                return 0;
+            }
+
+
+            return 0;
+        }
+
+
         newPos.z = z;
         transform.position = newPos;
     }
