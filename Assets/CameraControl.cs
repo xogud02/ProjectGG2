@@ -11,7 +11,7 @@ public class CameraControl : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        if(_focused == null) {
+        if (_focused == null) {
             return;
         }
 
@@ -22,20 +22,25 @@ public class CameraControl : MonoBehaviour {
 
         var screenRect = new Rect(screenMin, screenMax - screenMin);
 
-        var fieldMin = GridField.Convert(Vector2Int.zero);
-        var fieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp));
+        var targetFieldMin = GridField.Convert(Vector2Int.zero) + (Vector2)focusedPos;
+        var targetFieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp)) + (Vector2)focusedPos;
 
-        var fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
+        var fieldRect = new Rect(targetFieldMin, targetFieldMax - targetFieldMin);
 
         var newPos = focusedPos;
         newPos.x = GetX();
         newPos.x = GetY();
 
         float GetX() {
-            if(fieldRect.width < screenRect.width) {
+            if (fieldRect.width < screenRect.width) {
                 return 0;
             }
-            return 0;
+
+            if(fieldRect.xMin < screenRect.xMin) {
+
+            }
+
+            return newPos.x;
         }
 
         float GetY() {
@@ -43,13 +48,12 @@ public class CameraControl : MonoBehaviour {
                 return 0;
             }
 
-
-            return 0;
+            return newPos.y;
         }
 
 
         newPos.z = z;
         transform.position = newPos;
     }
-    
+
 }
