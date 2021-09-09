@@ -17,26 +17,28 @@ public class CameraControl : MonoBehaviour {
 
         var focusedPos = _focused.transform.position;
 
-        var screenMin = _camera.ViewportToWorldPoint(Vector3.zero);
-        var screenMax = _camera.ViewportToWorldPoint(Vector3.one);
+        var delta = transform.position - focusedPos;
 
-        var screenRect = new Rect(screenMin, screenMax - screenMin);
+        var targetScreenMin = _camera.ViewportToWorldPoint(Vector3.zero) + delta;
+        var targetScreenMax = _camera.ViewportToWorldPoint(Vector3.one) + delta;
 
-        var targetFieldMin = GridField.Convert(Vector2Int.zero) + (Vector2)focusedPos;
-        var targetFieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp)) + (Vector2)focusedPos;
+        var targetScreenRect = new Rect(targetScreenMin, targetScreenMax - targetScreenMin);
 
-        var fieldRect = new Rect(targetFieldMin, targetFieldMax - targetFieldMin);
+        var fieldMin = GridField.Convert(Vector2Int.zero);
+        var fieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp));
+
+        var fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
 
         var newPos = focusedPos;
         newPos.x = GetX();
         newPos.x = GetY();
 
         float GetX() {
-            if (fieldRect.width < screenRect.width) {
+            if (targetScreenRect.width > fieldRect.width ) {
                 return 0;
             }
 
-            if(fieldRect.xMin < screenRect.xMin) {
+            if(fieldRect.xMin < targetScreenRect.xMin) {
 
             }
 
@@ -44,7 +46,7 @@ public class CameraControl : MonoBehaviour {
         }
 
         float GetY() {
-            if (fieldRect.height < screenRect.height) {
+            if (targetScreenRect.height > fieldRect.height) {
                 return 0;
             }
 
