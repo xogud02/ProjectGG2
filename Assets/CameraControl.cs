@@ -17,10 +17,10 @@ public class CameraControl : MonoBehaviour {
 
         var focusedPos = _focused.transform.position;
 
-        var delta = transform.position - focusedPos;
+        var camToFocus = focusedPos - transform.position;
 
-        var targetScreenMin = _camera.ViewportToWorldPoint(Vector3.zero) + delta;
-        var targetScreenMax = _camera.ViewportToWorldPoint(Vector3.one) + delta;
+        var targetScreenMin = _camera.ViewportToWorldPoint(Vector3.zero) - camToFocus;
+        var targetScreenMax = _camera.ViewportToWorldPoint(Vector3.one) - camToFocus;
 
         var targetScreenRect = new Rect(targetScreenMin, targetScreenMax - targetScreenMin);
 
@@ -38,8 +38,9 @@ public class CameraControl : MonoBehaviour {
                 return 0;
             }
 
-            if(fieldRect.xMin < targetScreenRect.xMin) {
-
+            var screenMinToFieldMin = fieldRect.xMin - targetScreenRect.xMin;
+            if(targetScreenRect.xMin < fieldRect.xMin) {
+                return newPos.x + screenMinToFieldMin;
             }
 
             return newPos.x;
