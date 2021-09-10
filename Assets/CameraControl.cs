@@ -3,6 +3,8 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
     [SerializeField] private Camera _camera;
     [SerializeField] private Unit _focused;
+    private Rect targetScreenRect;
+    private Rect fieldRect;
 
     private float z;
     private void Awake() {
@@ -22,12 +24,12 @@ public class CameraControl : MonoBehaviour {
         var targetScreenMin = _camera.ViewportToWorldPoint(Vector3.zero) - camToFocus;
         var targetScreenMax = _camera.ViewportToWorldPoint(Vector3.one) - camToFocus;
 
-        var targetScreenRect = new Rect(targetScreenMin, targetScreenMax - targetScreenMin);
+        targetScreenRect = new Rect(targetScreenMin, targetScreenMax - targetScreenMin);
 
         var fieldMin = GridField.Convert(Vector2Int.zero);
         var fieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp));
 
-        var fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
+        fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
 
         var newPos = focusedPos;
         newPos.x = GetX();
@@ -57,6 +59,13 @@ public class CameraControl : MonoBehaviour {
 
         newPos.z = z;
         transform.position = newPos;
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(targetScreenRect.center, targetScreenRect.size);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(fieldRect.center, fieldRect.size);
     }
 
 }
