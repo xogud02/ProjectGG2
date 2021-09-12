@@ -21,8 +21,8 @@ public class CameraControl : MonoBehaviour {
 
         var camToFocus = focusedPos - transform.position;
 
-        var targetScreenMin = _camera.ViewportToWorldPoint(Vector3.zero) - camToFocus;
-        var targetScreenMax = _camera.ViewportToWorldPoint(Vector3.one) - camToFocus;
+        var targetScreenMin = _camera.ViewportToWorldPoint(Vector3.zero) + camToFocus;
+        var targetScreenMax = _camera.ViewportToWorldPoint(Vector3.one) + camToFocus;
 
         targetScreenRect = new Rect(targetScreenMin, targetScreenMax - targetScreenMin);
 
