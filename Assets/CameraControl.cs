@@ -31,21 +31,24 @@ public class CameraControl : MonoBehaviour {
 
         fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
 
-        var newPos = focusedPos;
-        newPos.x = GetX();
-        newPos.x = GetY();
+        var newPos = new Vector3(GetX(), GetY(), z);
 
         float GetX() {
             if (targetScreenRect.width > fieldRect.width ) {
-                return 0;
+                return fieldRect.center.x;
             }
 
             var screenMinToFieldMin = fieldRect.xMin - targetScreenRect.xMin;
-            if(targetScreenRect.xMin < fieldRect.xMin) {
-                return newPos.x + screenMinToFieldMin;
+            if(screenMinToFieldMin > 0) {
+                return focusedPos.x + screenMinToFieldMin;
             }
 
-            return newPos.x;
+            var screenMaxToFieldMax = fieldRect.xMax - targetScreenRect.xMax;
+            if(screenMaxToFieldMax < 0) {
+                return focusedPos.x + screenMaxToFieldMax;
+            }
+
+            return focusedPos.x;
         }
 
         float GetY() {
@@ -53,7 +56,7 @@ public class CameraControl : MonoBehaviour {
                 return 0;
             }
 
-            return newPos.y;
+            return focusedPos.y;
         }
 
 
