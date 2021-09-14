@@ -52,8 +52,18 @@ public class CameraControl : MonoBehaviour {
         }
 
         float GetY() {
-            if (targetScreenRect.height > fieldRect.height) {
-                return 0;
+            if (targetScreenRect.height> fieldRect.height) {
+                return fieldRect.center.y;
+            }
+
+            var screenMinToFieldMin = fieldRect.yMin- targetScreenRect.yMin;
+            if (screenMinToFieldMin > 0) {
+                return focusedPos.y + screenMinToFieldMin;
+            }
+
+            var screenMaxToFieldMax = fieldRect.yMax - targetScreenRect.yMax;
+            if (screenMaxToFieldMax < 0) {
+                return focusedPos.y + screenMaxToFieldMax;
             }
 
             return focusedPos.y;
