@@ -30,7 +30,9 @@ public class GridField {
         return TileType.None;
     }
 
-    public static Vector2 Convert(Vector2Int gridPosition) => new Vector2(gridPosition.x, gridPosition.y) * Floor.Size * GridObject.ScaleFactor;
+    public static Vector2 Convert(Vector2Int gridPosition) => new Vector2(gridPosition.x, gridPosition.y) * SingleTileSize;
+
+    public static float SingleTileSize => Floor.Size * GridObject.ScaleFactor;
 
     public static void AddObject(GridObject gridObject) {
         Instance.objects.Add(gridObject);

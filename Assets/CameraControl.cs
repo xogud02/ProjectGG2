@@ -25,9 +25,9 @@ public class CameraControl : MonoBehaviour {
         var targetScreenMax = _camera.ViewportToWorldPoint(Vector3.one) + camToFocus;
 
         targetScreenRect = new Rect(targetScreenMin, targetScreenMax - targetScreenMin);
-
-        var fieldMin = GridField.Convert(Vector2Int.zero);
-        var fieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp));
+        var half = Vector2.one * GridField.SingleTileSize * 0.5f;
+        var fieldMin = GridField.Convert(Vector2Int.zero) - half;
+        var fieldMax = GridField.Convert(new Vector2Int(Game.tmp, Game.tmp)) - half;
 
         fieldRect = new Rect(fieldMin, fieldMax - fieldMin);
 
