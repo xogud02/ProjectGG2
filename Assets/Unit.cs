@@ -87,6 +87,11 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public void MoveImmidiately(Vector2Int v) {
+        transform.position = GridField.Convert(v);
+        CurrentPosition = v;
+    }
+
     public void Move(Vector2Int v) {
         var dest = GridField.Convert(v);
         var direction = dest - transform.position.Convert();

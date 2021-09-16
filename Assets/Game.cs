@@ -17,5 +17,6 @@ public class Game : MonoBehaviour {
         var field = GridObject.GrassField(tmp, tmp);
         GridField.Instance.Init(tmp, tmp);
         field.OnClick = unit.SetPath;
+        unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
     }
 }
