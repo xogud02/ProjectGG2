@@ -19,6 +19,10 @@ public static class MoveExtension {
 }
 
 public class Unit : MonoBehaviour {
+    private int hp;
+    private int maxHp;
+    private int attack;
+
     private float speed = 5;
     private readonly int Right = Animator.StringToHash("Right");
     private readonly int Left = Animator.StringToHash("Left");
