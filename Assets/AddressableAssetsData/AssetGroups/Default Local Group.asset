@@ -21,46 +21,58 @@ MonoBehaviour:
     m_Address: Engineer
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: ccc71dd81063baf4c83132909731553a, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: ccc71dd81063baf4c83132909731553a, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: e6aa48ce36d2c824bbbbcb306cded24a
     m_Address: Mage
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: e6aa48ce36d2c824bbbbcb306cded24a, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: e6aa48ce36d2c824bbbbcb306cded24a, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: f5979dad7d6cd964ba56f764ef0995b0
     m_Address: Paladin
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: f5979dad7d6cd964ba56f764ef0995b0, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: f5979dad7d6cd964ba56f764ef0995b0, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: d401060ca71be294f961090f4dacd741
     m_Address: Rogue
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: d401060ca71be294f961090f4dacd741, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: d401060ca71be294f961090f4dacd741, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: b63970ef192de0a419ebe0090d1252ee
     m_Address: Template
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: b63970ef192de0a419ebe0090d1252ee, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: b63970ef192de0a419ebe0090d1252ee, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 23ccc1e62182ef9458663d356bd9a5bd
     m_Address: Warrior
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 23ccc1e62182ef9458663d356bd9a5bd, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 23ccc1e62182ef9458663d356bd9a5bd, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 087514808022111488e4526e7894b358
     m_Address: Floor
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 087514808022111488e4526e7894b358, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 087514808022111488e4526e7894b358, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 02b8e2d89701f7343bfe8371eb482d78
     m_Address: Assets/Engineer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: e5fd4c83dd5349f4bb8945bd0878fae2
+    m_Address: DawnLike/Characters/Slime0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 3b2762e3dd167ab47ac2a97ae0aa1eb8
+    m_Address: DawnLike/Characters/Slime1
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
