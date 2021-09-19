@@ -33,7 +33,7 @@ public class Unit : MonoBehaviour {
 
     private Animator animator;
     private Queue<Vector2Int> currentPath = new Queue<Vector2Int>();
-    private Vector2Int CurrentPosition;
+    protected Vector2Int CurrentPosition;
 
     public void Start() {
         animator = GetComponent<Animator>();

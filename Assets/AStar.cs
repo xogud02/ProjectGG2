@@ -23,6 +23,8 @@ public static class AStar {
         }
     }
 
+    public static readonly int[] dx = new[] { -1, 0, 1, -1, 1, -1, 0, 1 };
+    public static readonly int[] dy = new[] { -1, -1, -1, 0, 0, 1, 1, 1 };
 
     public static Stack<Vector2Int> Find(Vector2Int from, Vector2Int to) {
         var start = new Node(from, to);
@@ -30,8 +32,6 @@ public static class AStar {
         var closed = new HashSet<Vector2Int>();
         var ret = new Stack<Vector2Int>();
         var reverse = new Queue<Vector2Int>();
-        var dx = new[] { -1, 0, 1, -1, 1, -1, 0, 1 };
-        var dy = new[] { -1, -1, -1, 0, 0, 1, 1, 1 };
         var diagonal = Mathf.Sqrt(2);
         while (open.Count > 0) {
             var current = open.Min;
