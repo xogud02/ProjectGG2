@@ -60,7 +60,7 @@ MonoBehaviour:
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: 02b8e2d89701f7343bfe8371eb482d78
-    m_Address: Assets/Engineer.prefab
+    m_Address: Engineer
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
@@ -73,6 +73,12 @@ MonoBehaviour:
     m_TargetAsset: {fileID: 0}
   - m_GUID: 3b2762e3dd167ab47ac2a97ae0aa1eb8
     m_Address: DawnLike/Characters/Slime1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 2a519c0562c760c4fb4eece07c37fb7d
+    m_Address: Slime_3
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
