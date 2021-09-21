@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Monster : Unit
-{
+public class Monster : Unit {
+    private Unit target;
     private Coroutine waitForMove;
+    private Coroutine findTarget;
 
     public new void Start() {
         base.Start();
@@ -13,12 +14,13 @@ public class Monster : Unit
     private IEnumerator WaitAndMove() {
         while (true) {
             yield return new WaitForSeconds(1);
-            var nextPosition = CurrentPosition;
-            var nextIndex = Random.Range(0, AStar.dx.Length);
-            nextPosition.x += AStar.dx[nextIndex];
-            nextPosition.y += AStar.dy[nextIndex];
+            if (target == null && findTarget == null) {
+                findTarget = StartCoroutine(FindTarget());
+            }
 
-            if (GridField.IsInRange(nextPosition)) {
+            var nextPosition = GetNextPosition();
+
+            if (GridField.IsMovable(nextPosition)) {
                 SetPath(nextPosition);
             }
 
@@ -28,5 +30,32 @@ public class Monster : Unit
         }
     }
 
+    private Vector2Int GetNextPosition() {
+        var nextPosition = CurrentPosition;
+
+        if (target == null) {
+            var nextIndex = Random.Range(0, AStar.dx.Length);
+            nextPosition.x += AStar.dx[nextIndex];
+            nextPosition.y += AStar.dy[nextIndex];
+            return nextPosition;
+        }
+
+        var path = AStar.Find(CurrentPosition, target.CurrentPosition);
+        if(path.Count == 0) {
+            return CurrentPosition;
+        }
+
+        return path.Peek();
+    }
+
+    private IEnumerator FindTarget() {
+        while (true) {
+            if (target != null) {
+                yield return null;
+            }
+
+            //TODO find target
+        }
+    }
 
 }
