@@ -1,27 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridField {
-    private GridField() { }
-    private static GridField _instance;
-    public static GridField Instance {
-        get {
-            if (_instance == null) {
-                _instance = new GridField();
-            }
-            return _instance;
-        }
-    }
+public static class GridField {
 
-    private HashSet<GridObject> objects = new HashSet<GridObject>();
+    private static readonly HashSet<GridObject> objects = new HashSet<GridObject>();
+    private static readonly Dictionary<Vector2Int, Unit> occupied = new Dictionary<Vector2Int, Unit>();
+
     public static bool IsInRange(Vector2Int pos) => 0 <= pos.x && pos.x < Width && 0 <= pos.y && pos.y < Height;
     public static bool IsMovable(Vector2Int _) => IsInRange(_) && GetTileType(_) != TileType.Block;
-    public static int Width => Instance.width;
-    public static int Height => Instance.height;
+    public static int Width { get; private set; }
+    public static int Height { get; private set; }
     public static TileType GetTileType(Vector2Int _) {
-        foreach(var obj in Instance.objects) {
+        foreach(var obj in objects) {
             var tileType = obj.GetTile(_);
             if (tileType != TileType.None) {
                 return tileType;
@@ -35,12 +25,30 @@ public class GridField {
     public static float SingleTileSize => Floor.Size * GridObject.ScaleFactor;
 
     public static void AddObject(GridObject gridObject) {
-        Instance.objects.Add(gridObject);
+        objects.Add(gridObject);
     }
 
-    private int width, height;
-    public void Init(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public static bool Occupy(this Unit unit, Vector2Int position) {
+        if (occupied.ContainsKey(position)) {
+            return false;
+        }
+
+        occupied.Add(position, unit);
+        return true;
+    }
+
+    public static Unit UnOccupy(Vector2Int position) {
+        if (occupied.ContainsKey(position) == false) {
+            return null;
+        }
+
+        var ret = occupied[position];
+        occupied.Remove(position);
+        return ret;
+    }
+
+    public static  void Init(int width, int height) {
+        Width = width;
+        Height = height;
     }
 }
