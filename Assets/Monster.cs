@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Monster : Unit {
-    private Unit target;
+    [SerializeField] private Unit target;
     private Coroutine waitForMove;
     private Coroutine findTarget;
 
@@ -41,7 +42,7 @@ public class Monster : Unit {
         }
 
         var path = AStar.Find(CurrentPosition, target.CurrentPosition);
-        if(path.Count == 0) {
+        if (path.Count == 0) {
             return CurrentPosition;
         }
 
@@ -50,11 +51,11 @@ public class Monster : Unit {
 
     private IEnumerator FindTarget() {
         while (true) {
+            yield return null;
             if (target != null) {
-                yield return null;
+                continue;
             }
-
-            //TODO find target
+            target = GridField.GetOccupied(CurrentPosition, 2).Where(unit => unit != this).FirstOrDefault();
         }
     }
 

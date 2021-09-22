@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class GridField {
@@ -11,7 +12,7 @@ public static class GridField {
     public static int Width { get; private set; }
     public static int Height { get; private set; }
     public static TileType GetTileType(Vector2Int _) {
-        foreach(var obj in objects) {
+        foreach (var obj in objects) {
             var tileType = obj.GetTile(_);
             if (tileType != TileType.None) {
                 return tileType;
@@ -47,7 +48,11 @@ public static class GridField {
         return ret;
     }
 
-    public static  void Init(int width, int height) {
+    public static IEnumerable<Unit> GetOccupied(Vector2Int position, float range = 1f) =>
+        occupied.Where(kvp => (kvp.Key - position).magnitude <= range).Select(kvp => kvp.Value).Distinct();
+
+
+    public static void Init(int width, int height) {
         Width = width;
         Height = height;
     }
