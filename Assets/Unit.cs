@@ -97,6 +97,14 @@ public class Unit : MonoBehaviour {
     }
 
     public void Move(Vector2Int v) {
+        GridField.UnOccupy(CurrentPosition);
+        if (GridField.IsMovable(v)) {
+            this.Occupy(v);
+        } else {
+            EmptyPath();
+            return;
+        }
+
         var dest = GridField.Convert(v);
         var direction = dest - transform.position.Convert();
         var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));

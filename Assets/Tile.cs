@@ -42,19 +42,25 @@ public class Tile : MonoBehaviour {
     }
 
     public void OnDrawGizmos() {
+
+        if (boxCollider) {
+            Gizmos.color = GetTileGizmoColor();
+            Gizmos.DrawCube(transform.position, boxCollider.bounds.size);
+        }
+    }
+
+    private Color GetTileGizmoColor() {
+        if (GridField.IsMovable(GridPosition) == false) {
+            return new Color(1, 0, 0, 0.5f);
+        }
+
         switch (tileType) {
             case TileType.Block:
-                Gizmos.color = new Color(1, 0, 0, 0.5f);
-                break;
+                return new Color(1, 0, 0, 0.5f);
             case TileType.Water:
-                Gizmos.color = new Color(0, 0, 1, 0.5f);
-                break;
+                return new Color(0, 0, 1, 0.5f);
             default:
-                Gizmos.color = new Color(0, 1, 0, 0.5f);
-                break;
-        }
-        if (boxCollider) {
-            Gizmos.DrawCube(transform.position, boxCollider.bounds.size);
+                return new Color(0, 1, 0, 0.5f);
         }
     }
 }
