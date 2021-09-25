@@ -38,6 +38,14 @@ public static class GridField {
         return true;
     }
 
+    public static Unit GetOccupied(Vector2Int position) {
+        if (occupied.ContainsKey(position) == false) {
+            return null;
+        }
+
+        return occupied[position];
+    }
+
     public static Unit UnOccupy(Vector2Int position) {
         if (occupied.ContainsKey(position) == false) {
             return null;

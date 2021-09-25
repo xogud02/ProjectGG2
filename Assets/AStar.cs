@@ -59,7 +59,9 @@ public static class AStar {
         while (reverse.Count > 0) {
             ret.Push(reverse.Dequeue());
         }
-        ret.Pop();// remove 1st(current)
+        if(ret.Count > 0) {
+            ret.Pop();// remove 1st(current)
+        }
         return ret;
     }
 }
