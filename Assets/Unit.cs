@@ -85,7 +85,12 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    private void EmptyPath() {
+    private void EmptyPath(bool leaveFirst = true) {
+        if(leaveFirst == false) {
+            currentPath.Clear();
+            return;
+        }
+
         var lastPath = new Queue<Vector2Int>();
         if (IsMoving && currentPath.Count > 0) {
             lastPath.Enqueue(currentPath.Dequeue());
@@ -114,11 +119,17 @@ public class Unit : MonoBehaviour {
     }
 
     public void Move(Vector2Int v) {
-        GridField.UnOccupy(CurrentPosition);
+        var result = GridField.UnOccupy(CurrentPosition);
+        if(result != null && result != this) {
+            result.Occupy(CurrentPosition);
+            return;
+        }
+
         if (GridField.IsMovable(v)) {
             this.Occupy(v);
         } else {
-            EmptyPath();
+            EmptyPath(false);
+            this.Occupy(CurrentPosition);
             return;
         }
 
