@@ -114,6 +114,7 @@ public class Unit : MonoBehaviour {
     }
 
     public void MoveImmidiately(Vector2Int v) {
+        EmptyPath(false);
         transform.position = GridField.Convert(v);
         CurrentPosition = v;
     }
