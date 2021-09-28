@@ -19,8 +19,8 @@ public static class MoveExtension {
 }
 
 public class Unit : MonoBehaviour {
-    private int hp;
-    private int maxHp;
+    private int maxHp = 10;
+    private int hp = 10;
     private int attack;
 
     private float speed = 5;
@@ -70,6 +70,13 @@ public class Unit : MonoBehaviour {
         }
 
         EmptyPath();
+    }
+
+    public void Hit(Unit by) {
+        --hp;
+        if(hp <= 0) {
+            Destroy(gameObject);
+        }
     }
 
     public void SetPath(Vector2Int v) {
