@@ -72,11 +72,18 @@ public class Unit : MonoBehaviour {
         EmptyPath();
     }
 
-    public void Hit(Unit by) {
+    public bool Hit(Unit by) {
         --hp;
         if(hp <= 0) {
-            Destroy(gameObject);
+            Die();
+            return true;
         }
+        return false;
+    }
+    
+    public void Die() {
+        GridField.UnOccupy(CurrentPosition);
+        Destroy(gameObject);
     }
 
     public void SetPath(Vector2Int v) {

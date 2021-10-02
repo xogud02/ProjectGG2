@@ -25,8 +25,8 @@ public class Monster : Unit {
                 SetPath(nextPosition);
             }
 
-            if (target != null) {
-                target.Hit(this);
+            if (target != null && target.Hit(this)) {
+                target = null;
             }
 
             while (IsMoving) {
