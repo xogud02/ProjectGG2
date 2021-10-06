@@ -726,6 +726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1697197902}
   - component: {fileID: 1697197901}
+  - component: {fileID: 1697197903}
   m_Layer: 0
   m_Name: GUI0_6
   m_TagString: Untagged
@@ -799,6 +800,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1697197903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697197900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f0b07ffbea5dc4d9696c115d1176fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllers:
+  - {fileID: 9100000, guid: 8620829f8fce2904eb19f99e3cc3b6dd, type: 2}
+  - {fileID: 9100000, guid: 3c0abeb6af19d84488ee0273800084e5, type: 2}
+  - {fileID: 9100000, guid: 9de3b3a10a9208b4ca7a1da5333a241b, type: 2}
+  - {fileID: 9100000, guid: dc1aa3db6b0400642bc6269508f3ed8c, type: 2}
 --- !u!1 &1869910553
 GameObject:
   m_ObjectHideFlags: 0
