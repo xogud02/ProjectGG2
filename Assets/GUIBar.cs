@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 public class GUIBar : MonoBehaviour {
+    public Animator bar;
     public RuntimeAnimatorController[] controllers;
 
     protected void Awake() {
