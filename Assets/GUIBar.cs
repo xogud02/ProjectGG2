@@ -9,10 +9,14 @@ public class GUIBar : MonoBehaviour {
     public RuntimeAnimatorController[] controllers;
 
     protected void Awake() {
-        controllers = new RuntimeAnimatorController[5];
+        var gui0 = "GUI0";
+        var greenBarIndex = 41;
+        Addressables.LoadAssetAsync<Sprite>($"{gui0}[{gui0}_{greenBarIndex}]").Completed += _=>longBar.sprite = _.Result;
+
+        controllers = new RuntimeAnimatorController[4];
         for (int i = 0; i < 4; ++i) {
             var capture = i;
-            Addressables.LoadAssetAsync<RuntimeAnimatorController>($"GUI_{41 + i}").Completed += _ => controllers[capture] = _.Result;
+            Addressables.LoadAssetAsync<RuntimeAnimatorController>($"GUI_{greenBarIndex + i}").Completed += _ => controllers[capture] = _.Result;
         }
     }
 }

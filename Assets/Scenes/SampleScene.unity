@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 1697197901}
   - component: {fileID: 1697197903}
   m_Layer: 0
-  m_Name: GUI0_6
+  m_Name: GUIBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
