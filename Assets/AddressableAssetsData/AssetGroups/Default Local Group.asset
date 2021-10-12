@@ -119,6 +119,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 7d70bbbcebbd9dd4782faa4bd135f20d
+    m_Address: GUIBar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0ab02fbff3c57654abbd591a0896701d, type: 2}
   m_SchemaSet:
