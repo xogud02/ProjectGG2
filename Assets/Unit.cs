@@ -23,6 +23,8 @@ public class Unit : MonoBehaviour {
     private int hp = 10;
     private int attack;
 
+    private GUIBar hpBar;
+
     private float speed = 5;
     private readonly int Right = Animator.StringToHash("Right");
     private readonly int Left = Animator.StringToHash("Left");
