@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public enum Direction {
     Up,
@@ -47,6 +48,12 @@ public class Unit : MonoBehaviour {
         }
 
         GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
+        Addressables.LoadAssetAsync<GameObject>("GUIBar").Completed += task => {
+            var barObject = Instantiate(task.Result);
+            barObject.transform.parent = transform;
+            barObject.transform.localPosition = Vector3.back;
+            hpBar = barObject.GetComponent<GUIBar>();
+        };
     }
 
     protected void OnDrawGizmos() {
