@@ -51,8 +51,9 @@ public class Unit : MonoBehaviour {
         Addressables.LoadAssetAsync<GameObject>("GUIBar").Completed += task => {
             var barObject = Instantiate(task.Result);
             barObject.transform.parent = transform;
-            barObject.transform.localPosition = Vector3.back;
+            barObject.transform.localPosition = Vector3.back * 100;
             hpBar = barObject.GetComponent<GUIBar>();
+            hpBar.Init(2);
         };
     }
 
