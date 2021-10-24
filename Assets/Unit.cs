@@ -47,18 +47,19 @@ public class Unit : MonoBehaviour {
             GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
         }
 
-        GetComponent<SpriteRenderer>().sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
+        var sr = GetComponent<SpriteRenderer>();
+        sr.sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
         Addressables.LoadAssetAsync<GameObject>("GUIBar").Completed += task => {
             var barObject = Instantiate(task.Result);
             barObject.transform.parent = transform;
-            barObject.transform.localPosition = Vector3.back * 100;
+            barObject.transform.localPosition = new Vector3(0, sr.bounds.extents.y, -10);
             hpBar = barObject.GetComponent<GUIBar>();
             hpBar.Init(2);
         };
     }
 
     protected void OnDrawGizmos() {
-        if(currentPath.Count == 0) {
+        if (currentPath.Count == 0) {
             return;
         }
 
@@ -66,7 +67,7 @@ public class Unit : MonoBehaviour {
         var current = (Vector3)GridField.Convert(CurrentPosition);
         Gizmos.color = Color.white;
         current.z = z;
-        foreach(var next in currentPath){
+        foreach (var next in currentPath) {
             var nextV3 = (Vector3)GridField.Convert(next);
             nextV3.z = z;
             Gizmos.DrawLine(current, nextV3);
@@ -84,13 +85,13 @@ public class Unit : MonoBehaviour {
 
     public bool Hit(Unit by) {
         --hp;
-        if(hp <= 0) {
+        if (hp <= 0) {
             Die();
             return true;
         }
         return false;
     }
-    
+
     public void Die() {
         GridField.UnOccupy(CurrentPosition);
         Destroy(gameObject);
@@ -110,7 +111,7 @@ public class Unit : MonoBehaviour {
     }
 
     private void EmptyPath(bool leaveFirst = true) {
-        if(leaveFirst == false) {
+        if (leaveFirst == false) {
             currentPath.Clear();
             return;
         }
@@ -145,7 +146,7 @@ public class Unit : MonoBehaviour {
 
     public void Move(Vector2Int v) {
         var result = GridField.UnOccupy(CurrentPosition);
-        if(result != null && result != this) {
+        if (result != null && result != this) {
             result.Occupy(CurrentPosition);
             return;
         }
@@ -161,7 +162,7 @@ public class Unit : MonoBehaviour {
         var dest = GridField.Convert(v);
         var direction = dest - transform.position.Convert();
         var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
-        if(preferDirection != currentDirection) {
+        if (preferDirection != currentDirection) {
             animator.SetTrigger(preferDirection);
             currentDirection = preferDirection;
         }
