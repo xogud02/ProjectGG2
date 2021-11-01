@@ -39,7 +39,7 @@ public class GUIBar : MonoBehaviour {
     }
 
     private void ScaleWidth(SpriteRenderer renderer, int unit) {
-        if (renderer == null || renderer.drawMode != SpriteDrawMode.Sliced) {
+        if (renderer == null || renderer.drawMode == SpriteDrawMode.Simple) {
             return;
         }
         var size = renderer.size;

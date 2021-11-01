@@ -22,6 +22,13 @@ public static class MoveExtension {
 public class Unit : MonoBehaviour {
     private int maxHp = 10;
     private int hp = 10;
+    public int Hp {
+        get => hp;
+        private set {
+            hp = value;
+            //hpBar.Set(hp);
+        }
+    }
     private int attack;
 
     private GUIBar hpBar;
@@ -54,7 +61,7 @@ public class Unit : MonoBehaviour {
             barObject.transform.parent = transform;
             barObject.transform.localPosition = new Vector3(0, sr.bounds.extents.y, -10);
             hpBar = barObject.GetComponent<GUIBar>();
-            hpBar.Init(2);
+            hpBar.Init(Hp);
         };
     }
 
@@ -84,8 +91,8 @@ public class Unit : MonoBehaviour {
     }
 
     public bool Hit(Unit by) {
-        --hp;
-        if (hp <= 0) {
+        --Hp;
+        if (Hp <= 0) {
             Die();
             return true;
         }
