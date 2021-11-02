@@ -26,7 +26,7 @@ public class Unit : MonoBehaviour {
         get => hp;
         private set {
             hp = value;
-            //hpBar.Set(hp);
+            hpBar.SetLength(hp);
         }
     }
     private int attack;

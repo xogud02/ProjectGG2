@@ -8,6 +8,7 @@ public class GUIBar : MonoBehaviour {
     public SpriteRenderer longBar;
     public Animator shortBar;
     public RuntimeAnimatorController[] controllers;
+    public int Length { get; private set; }
 
     protected void Awake() {
         frame = GetComponent<SpriteRenderer>();
@@ -24,6 +25,7 @@ public class GUIBar : MonoBehaviour {
 
     public void Init(int unit = 1) {
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
+        Length = unit;
         ScaleWidth(frame, unit);
         ScaleWidth(longBar, unit - 1);
 
@@ -36,6 +38,11 @@ public class GUIBar : MonoBehaviour {
         var shortBarX = frameBounds.extents.x - frame.size.y / 2;
         var localZ = shortBar.transform.localPosition.z;
         shortBar.transform.localPosition = new Vector3(shortBarX, 0, localZ);
+    }
+
+    public void SetLength(int unit) {
+        unit = Mathf.Clamp(unit, 1, Length);
+
     }
 
     private void ScaleWidth(SpriteRenderer renderer, int unit) {
