@@ -40,9 +40,9 @@ public class GUIBar : MonoBehaviour {
         shortBar.transform.localPosition = new Vector3(shortBarX, 0, localZ);
     }
 
-    public void SetLength(int unit) {
+    public void SetLength(int unit) {//shortBar anim, longbar Position, shortBar Position
         unit = Mathf.Clamp(unit, 1, Length);
-
+        ScaleWidth(longBar, unit);
     }
 
     private void ScaleWidth(SpriteRenderer renderer, int unit) {
