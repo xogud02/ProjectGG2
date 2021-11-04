@@ -15,7 +15,6 @@ public class GUIBar : MonoBehaviour {
         var gui0 = "GUI0";
         var greenBarIndex = 41;
         Addressables.LoadAssetAsync<Sprite>($"{gui0}[{gui0}_{greenBarIndex}]").Completed += _ => longBar.sprite = _.Result;
-
         controllers = new RuntimeAnimatorController[4];
         for (int i = 0; i < 4; ++i) {
             var capture = i;
@@ -30,19 +29,26 @@ public class GUIBar : MonoBehaviour {
         ScaleWidth(longBar, unit - 1);
 
         var frameBounds = frame.bounds;
-        var frameX = frameBounds.min.x;
-        var barX = longBar.bounds.min.x;
-        var deltaBarX = frameX - barX;
-        longBar.transform.localPosition += deltaBarX * Vector3.right;
+        UpdateLongBarPosition();
+
 
         var shortBarX = frameBounds.extents.x - frame.size.y / 2;
         var localZ = shortBar.transform.localPosition.z;
         shortBar.transform.localPosition = new Vector3(shortBarX, 0, localZ);
     }
 
-    public void SetLength(int unit) {//shortBar anim, longbar Position, shortBar Position
+    public void SetLength(int unit) {//shortBar anim, shortBar Position
         unit = Mathf.Clamp(unit, 1, Length);
         ScaleWidth(longBar, unit);
+        UpdateLongBarPosition();
+    }
+
+    private void UpdateLongBarPosition() {
+        var frameBounds = frame.bounds;
+        var frameX = frameBounds.min.x;
+        var barX = longBar.bounds.min.x;
+        var deltaBarX = frameX - barX;
+        longBar.transform.position += deltaBarX * Vector3.right;
     }
 
     private void ScaleWidth(SpriteRenderer renderer, int unit) {
