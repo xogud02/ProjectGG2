@@ -100,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frame: {fileID: 5640193081770017298}
   longBar: {fileID: 5640193083033973182}
-  shortBar: {fileID: 5640193082721620902}
+  shortBar: {fileID: 5640193082721620901}
+  shortBarAnimator: {fileID: 5640193082721620902}
   controllers:
   - {fileID: 9100000, guid: 8620829f8fce2904eb19f99e3cc3b6dd, type: 2}
   - {fileID: 9100000, guid: 3c0abeb6af19d84488ee0273800084e5, type: 2}

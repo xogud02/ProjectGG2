@@ -6,7 +6,8 @@ using UnityEngine.AddressableAssets;
 public class GUIBar : MonoBehaviour {
     public SpriteRenderer frame;
     public SpriteRenderer longBar;
-    public Animator shortBar;
+    public SpriteRenderer shortBar;
+    public Animator shortBarAnimator;
     public RuntimeAnimatorController[] controllers;
     public int Length { get; private set; }
 
@@ -30,17 +31,14 @@ public class GUIBar : MonoBehaviour {
 
         var frameBounds = frame.bounds;
         UpdateLongBarPosition();
-
-
-        var shortBarX = frameBounds.extents.x - frame.size.y / 2;
-        var localZ = shortBar.transform.localPosition.z;
-        shortBar.transform.localPosition = new Vector3(shortBarX, 0, localZ);
+        UpdateShortBarPosition();
     }
 
     public void SetLength(int unit) {//shortBar anim, shortBar Position
         unit = Mathf.Clamp(unit, 1, Length);
         ScaleWidth(longBar, unit);
         UpdateLongBarPosition();
+        UpdateShortBarPosition();
     }
 
     private void UpdateLongBarPosition() {
@@ -49,6 +47,13 @@ public class GUIBar : MonoBehaviour {
         var barX = longBar.bounds.min.x;
         var deltaBarX = frameX - barX;
         longBar.transform.position += deltaBarX * Vector3.right;
+    }
+
+    private void UpdateShortBarPosition() {
+        var longBarBounds = longBar.bounds;
+        var shortBarX = longBarBounds.max.x + shortBar.bounds.extents.x;
+        var z = shortBarAnimator.transform.position.z;
+        shortBarAnimator.transform.position = new Vector3(shortBarX, longBar.transform.position.y, z);
     }
 
     private void ScaleWidth(SpriteRenderer renderer, int unit) {
