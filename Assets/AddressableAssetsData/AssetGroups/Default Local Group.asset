@@ -101,24 +101,6 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: 3c0abeb6af19d84488ee0273800084e5
-    m_Address: GUI_42
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: 9de3b3a10a9208b4ca7a1da5333a241b
-    m_Address: GUI_43
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: dc1aa3db6b0400642bc6269508f3ed8c
-    m_Address: GUI_44
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 7d70bbbcebbd9dd4782faa4bd135f20d
     m_Address: GUIBar
     m_ReadOnly: 0
