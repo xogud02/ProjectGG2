@@ -20,7 +20,7 @@ public class GUIBar : MonoBehaviour {
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
         Length = unit;
         ScaleWidth(frame, unit);
-        ScaleWidth(bar, unit - 1);
+        ScaleWidth(bar, unit);
 
         var frameBounds = frame.bounds;
         UpdateLongBarPosition();
