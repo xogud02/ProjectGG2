@@ -8,6 +8,7 @@ public class GUIBar : MonoBehaviour {
     public SpriteRenderer bar;
     public Animator anim;
     public int Length { get; private set; }
+    public static readonly int BLINK = Animator.StringToHash("Blink");
 
     protected void Awake() {
         frame = GetComponent<SpriteRenderer>();
