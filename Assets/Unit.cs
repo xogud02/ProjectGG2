@@ -145,6 +145,18 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    protected bool IsInRange(Unit unit) {
+        if(unit == null) {
+            return false;
+        }
+
+        if(unit == this) {
+            return true;
+        }
+
+        return false;
+    }
+
     public void MoveImmidiately(Vector2Int v) {
         EmptyPath(false);
         transform.position = GridField.Convert(v);
