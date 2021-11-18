@@ -25,7 +25,7 @@ public class Monster : Unit {
                 SetPath(nextPosition);
             }
 
-            if (target != null && target.Hit(this)) {
+            if (target != null && IsInRange(target) && target.Hit(this)) {
                 target = null;
             }
 
