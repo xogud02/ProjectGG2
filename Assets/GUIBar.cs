@@ -10,6 +10,8 @@ public class GUIBar : MonoBehaviour {
     public int Length { get; private set; }
     public static readonly int BLINK = Animator.StringToHash("Blink");
 
+    private float remainBlinkTime = 0f;
+
     protected void Awake() {
         frame = GetComponent<SpriteRenderer>();
         var gui0 = "GUI0";
@@ -31,6 +33,10 @@ public class GUIBar : MonoBehaviour {
         unit = Mathf.Clamp(unit, 1, Length);
         ScaleWidth(bar, unit);
         UpdateLongBarPosition();
+    }
+
+    public void Blink(float time = 0.5f) {
+        remainBlinkTime = time;
     }
 
     private void UpdateLongBarPosition() {
