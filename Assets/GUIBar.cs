@@ -11,6 +11,7 @@ public class GUIBar : MonoBehaviour {
     public static readonly int BLINK = Animator.StringToHash("Blink");
 
     private float remainBlinkTime = 0f;
+    private Coroutine blinkRoutine = null;
 
     protected void Awake() {
         frame = GetComponent<SpriteRenderer>();
@@ -37,6 +38,13 @@ public class GUIBar : MonoBehaviour {
 
     public void Blink(float time = 0.5f) {
         remainBlinkTime = time;
+        if(blinkRoutine == null) {
+
+        }
+    }
+
+    private IEnumerator BlinkCoroutine() {
+        yield return null;
     }
 
     private void UpdateLongBarPosition() {
