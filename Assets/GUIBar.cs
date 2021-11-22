@@ -39,12 +39,13 @@ public class GUIBar : MonoBehaviour {
     public void Blink(float time = 0.5f) {
         remainBlinkTime = time;
         if(blinkRoutine == null) {
-
+            blinkRoutine = StartCoroutine(BlinkCoroutine());
         }
     }
 
     private IEnumerator BlinkCoroutine() {
         yield return null;
+        blinkRoutine = null;
     }
 
     private void UpdateLongBarPosition() {
