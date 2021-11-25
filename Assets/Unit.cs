@@ -25,7 +25,12 @@ public class Unit : MonoBehaviour {
     public int Hp {
         get => hp;
         private set {
+            var before = hp;
             hp = value;
+            if(hp < before) {
+                hpBar.Blink();
+            }
+
             hpBar.SetLength(hp);
         }
     }

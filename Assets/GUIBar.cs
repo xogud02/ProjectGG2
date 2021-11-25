@@ -44,7 +44,10 @@ public class GUIBar : MonoBehaviour {
     }
 
     private IEnumerator BlinkCoroutine() {
-        yield return null;
+        while(remainBlinkTime > 0) {
+            yield return null;
+            remainBlinkTime -= Time.deltaTime;
+        }
         blinkRoutine = null;
     }
 
