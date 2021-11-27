@@ -44,11 +44,13 @@ public class GUIBar : MonoBehaviour {
     }
 
     private IEnumerator BlinkCoroutine() {
+        anim.SetBool(BLINK, true);
         while(remainBlinkTime > 0) {
             yield return null;
             remainBlinkTime -= Time.deltaTime;
         }
         blinkRoutine = null;
+        anim.SetBool(BLINK, false);
     }
 
     private void UpdateLongBarPosition() {
