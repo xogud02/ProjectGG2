@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -38,14 +37,14 @@ public class GUIBar : MonoBehaviour {
 
     public void Blink(float time = 0.5f) {
         remainBlinkTime = time;
-        if(blinkRoutine == null) {
+        if (blinkRoutine == null) {
             blinkRoutine = StartCoroutine(BlinkCoroutine());
         }
     }
 
     private IEnumerator BlinkCoroutine() {
         anim.SetBool(BLINK, true);
-        while(remainBlinkTime > 0) {
+        while (remainBlinkTime > 0) {
             yield return null;
             remainBlinkTime -= Time.deltaTime;
         }
