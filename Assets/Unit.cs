@@ -159,7 +159,7 @@ public class Unit : MonoBehaviour {
             return true;
         }
 
-        return false;
+        return (unit.CurrentPosition - CurrentPosition).magnitude <= 2;
     }
 
     public void MoveImmidiately(Vector2Int v) {
