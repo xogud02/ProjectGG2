@@ -34,7 +34,9 @@ public class Unit : MonoBehaviour {
             hpBar.SetLength(hp);
         }
     }
+
     private int attack;
+    private int attackRange;
 
     private GUIBar hpBar;
 
