@@ -161,7 +161,7 @@ public class Unit : MonoBehaviour {
             return true;
         }
 
-        return (unit.CurrentPosition - CurrentPosition).magnitude <= 2;
+        return (unit.CurrentPosition - CurrentPosition).magnitude <= attackRange;
     }
 
     public void MoveImmidiately(Vector2Int v) {
