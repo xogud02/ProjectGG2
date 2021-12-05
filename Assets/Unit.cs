@@ -152,7 +152,7 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    protected virtual bool IsInRange(Unit unit) {//TODO range logic
+    protected virtual bool IsInRange(Unit unit) {
         if(unit == null) {
             return false;
         }
