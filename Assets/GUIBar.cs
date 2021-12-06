@@ -60,7 +60,7 @@ public class GUIBar : MonoBehaviour {
         bar.transform.position += deltaBarX * Vector3.right;
     }
 
-    private void ScaleWidth(SpriteRenderer renderer, int unit) {
+    private void ScaleWidth(SpriteRenderer renderer, int unit) {//TODO fix final width
         if (renderer == null || renderer.drawMode == SpriteDrawMode.Simple) {
             return;
         }
