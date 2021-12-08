@@ -29,6 +29,9 @@ public class GUIBar : MonoBehaviour {
         UpdateLongBarPosition();
     }
 
+    public void SetMax(int unit) { }
+    public void SetCurrent(int unit) { }
+
     public void SetLength(int unit) {
         unit = Mathf.Clamp(unit, 1, Length);
         ScaleWidth(bar, unit);
