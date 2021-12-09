@@ -29,6 +29,7 @@ public class GUIBar : MonoBehaviour {
         UpdateLongBarPosition();
     }
 
+    public void SetMaxAndCurrent(int unit) { }
     public void SetMax(int unit) { }
     public void SetCurrent(int unit) { }
 
