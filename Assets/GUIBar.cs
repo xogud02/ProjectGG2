@@ -9,6 +9,8 @@ public class GUIBar : MonoBehaviour {
     public int Length { get; private set; }
     public static readonly int BLINK = Animator.StringToHash("Blink");
 
+    public bool ShowFrame => frame.enabled;
+
     private float remainBlinkTime = 0f;
     private Coroutine blinkRoutine = null;
 
