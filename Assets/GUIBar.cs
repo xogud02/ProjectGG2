@@ -31,7 +31,9 @@ public class GUIBar : MonoBehaviour {
         UpdateLongBarPosition();
     }
 
-    public void SetMaxAndCurrent(int unit) { }
+    public void SetMaxAndCurrent(int unit) {
+        ScaleWidth(frame, unit);
+    }
     public void SetMax(int unit) { }
     public void SetCurrent(int unit) { }
 
@@ -66,7 +68,7 @@ public class GUIBar : MonoBehaviour {
         bar.transform.position += deltaBarX * Vector3.right;
     }
 
-    private void ScaleWidth(SpriteRenderer renderer, int unit) {//TODO fix final width
+    private void ScaleWidth(SpriteRenderer renderer, int unit) {
         if (renderer == null || renderer.drawMode == SpriteDrawMode.Simple) {
             return;
         }
@@ -74,4 +76,6 @@ public class GUIBar : MonoBehaviour {
         size.x = size.y * unit;
         renderer.size = size;
     }
+
+    private void SetRemain() { }
 }
