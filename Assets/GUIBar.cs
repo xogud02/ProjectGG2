@@ -11,6 +11,8 @@ public class GUIBar : MonoBehaviour {
 
     public bool ShowFrame => frame.enabled;
 
+    private int remainUnit;
+
     private float remainBlinkTime = 0f;
     private Coroutine blinkRoutine = null;
 
