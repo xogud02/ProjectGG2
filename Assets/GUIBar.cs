@@ -35,6 +35,7 @@ public class GUIBar : MonoBehaviour {
 
     public void SetMaxAndCurrent(int unit) {
         ScaleWidth(frame, unit);
+        remainUnit = unit;
     }
     public void SetMax(int unit) { }
     public void SetCurrent(int unit) { }
