@@ -37,8 +37,9 @@ public class GUIBar : MonoBehaviour {
         ScaleWidth(frame, unit);
         remainUnit = unit;
     }
+
     public void SetMax(int unit) { }
-    public void SetCurrent(int unit) { }
+    public void SetCurrent(int unit) => remainUnit = unit;
 
     public void SetLength(int unit) {
         unit = Mathf.Clamp(unit, 1, Length);
