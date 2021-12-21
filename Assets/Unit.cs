@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour {
                 hpBar.Blink();
             }
 
-            hpBar.SetLength(hp);
+            hpBar.SetMaxAndCurrent(hp);
         }
     }
 
