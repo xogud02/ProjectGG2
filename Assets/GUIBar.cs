@@ -26,11 +26,8 @@ public class GUIBar : MonoBehaviour {
     public void Init(int unit = 1) {
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
         Length = unit;
-        ScaleWidth(frame, unit);
-        ScaleWidth(bar, unit);
 
-        var frameBounds = frame.bounds;
-        UpdateLongBarPosition();
+        SetMaxAndCurrent(unit);
     }
 
     public void SetMaxAndCurrent(int unit) {
