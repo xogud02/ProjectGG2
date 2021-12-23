@@ -7,6 +7,7 @@ public class GUIBar : MonoBehaviour {
     public SpriteRenderer bar;
     public Animator anim;
     public int Length { get; private set; }
+    public float WidthRatio { get; set; } = 1;
     public static readonly int BLINK = Animator.StringToHash("Blink");
 
     public bool ShowFrame => frame.enabled;
@@ -71,16 +72,12 @@ public class GUIBar : MonoBehaviour {
         bar.transform.position += deltaBarX * Vector3.right;
     }
 
-    private void ScaleWidth(SpriteRenderer renderer, int unit, bool keepRatio = false) {
+    private void ScaleWidth(SpriteRenderer renderer, int unit) {
         if (renderer == null || renderer.drawMode == SpriteDrawMode.Simple) {
             return;
         }
         var size = renderer.size;
         size.x = size.y * unit;
         renderer.size = size;
-
-        if (keepRatio) {
-
-        }
     }
 }
