@@ -12,6 +12,7 @@ public class GUIBar : MonoBehaviour {
 
     public bool ShowFrame => frame.enabled;
 
+    private int maxUnit;
     private int remainUnit;
 
     private float remainBlinkTime = 0f;
@@ -34,9 +35,12 @@ public class GUIBar : MonoBehaviour {
     public void SetMaxAndCurrent(int unit) {
         ScaleWidth(frame, unit);
         remainUnit = unit;
+        maxUnit = unit;
     }
 
-    public void SetMax(int unit) { }
+    public void SetMax(int unit) {
+        maxUnit = unit;
+    }
     public void SetCurrent(int unit) {
         remainUnit = unit;
     }
