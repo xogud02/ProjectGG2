@@ -25,7 +25,8 @@ public class GUIBar : MonoBehaviour {
         Addressables.LoadAssetAsync<Sprite>($"{gui0}[{gui0}_{greenBarIndex}]").Completed += _ => bar.sprite = _.Result;
     }
 
-    public void Init(int unit = 1) {
+    public void Init(int unit = 1, bool showFrame = false) {
+        frame.enabled = showFrame;
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
         Length = unit;
 
