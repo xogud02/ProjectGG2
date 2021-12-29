@@ -25,11 +25,13 @@ public class GUIBar : MonoBehaviour {
         Addressables.LoadAssetAsync<Sprite>($"{gui0}[{gui0}_{greenBarIndex}]").Completed += _ => bar.sprite = _.Result;
     }
 
-    public void Init(int unit = 1, bool showFrame = false) {
+    public void Init() => Init(1);
+    public void Init(int unit) => Init(unit, false);
+    public void Init(int unit, bool showFrame) => Init(unit, showFrame, 1);
+    public void Init(int unit, bool showFrame, int length) {
         frame.enabled = showFrame;
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
-        Length = unit;
-
+        Length = length;
         SetMaxAndCurrent(unit);
     }
 
