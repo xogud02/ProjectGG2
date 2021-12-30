@@ -30,8 +30,6 @@ public class Unit : MonoBehaviour {
             if(hp < before) {
                 hpBar.Blink();
             }
-
-            hpBar.SetCurrent(hp);
         }
     }
 

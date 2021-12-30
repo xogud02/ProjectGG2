@@ -32,26 +32,6 @@ public class GUIBar : MonoBehaviour {
         frame.enabled = showFrame;
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
         Length = length;
-        SetMaxAndCurrent(unit);
-    }
-
-    public void SetMaxAndCurrent(int unit) {
-        ScaleWidth(frame, unit);
-        remainUnit = unit;
-        maxUnit = unit;
-    }
-
-    public void SetMax(int unit) {
-        maxUnit = unit;
-    }
-    public void SetCurrent(int unit) {
-        remainUnit = unit;
-    }
-
-    public void SetLength(int unit) {
-        unit = Mathf.Clamp(unit, 1, Length);
-        ScaleWidth(bar, unit);
-        UpdateLongBarPosition();
     }
 
     public void Blink(float time = 0.5f) {
@@ -77,14 +57,5 @@ public class GUIBar : MonoBehaviour {
         var barX = bar.bounds.min.x;
         var deltaBarX = frameX - barX;
         bar.transform.position += deltaBarX * Vector3.right;
-    }
-
-    private void ScaleWidth(SpriteRenderer renderer, int unit) {
-        if (renderer == null || renderer.drawMode == SpriteDrawMode.Simple) {
-            return;
-        }
-        var size = renderer.size;
-        size.x = size.y * unit;
-        renderer.size = size;
     }
 }
