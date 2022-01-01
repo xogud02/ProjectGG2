@@ -6,7 +6,6 @@ public class GUIBar : MonoBehaviour {
     public SpriteRenderer frame;
     public SpriteRenderer bar;
     public Animator anim;
-    public int Length { get; private set; }
     public float WidthRatio { get; set; } = 1;
     public static readonly int BLINK = Animator.StringToHash("Blink");
 
@@ -28,10 +27,9 @@ public class GUIBar : MonoBehaviour {
     public void Init() => Init(1);
     public void Init(int unit) => Init(unit, false);
     public void Init(int unit, bool showFrame) => Init(unit, showFrame, 1);
-    public void Init(int unit, bool showFrame, int length) {
-        frame.enabled = showFrame;
+    public void Init(int unit, bool showFrame, float length) {
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
-        Length = length;
+        frame.enabled = showFrame;
     }
 
     public void Blink(float time = 0.5f) {
