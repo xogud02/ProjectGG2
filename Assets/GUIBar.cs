@@ -30,6 +30,21 @@ public class GUIBar : MonoBehaviour {
     public void Init(int unit, bool showFrame, float length) {
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
         frame.enabled = showFrame;
+        Foo(frame);
+        Foo(bar);
+        UpdateBarPosition();
+    }
+
+    private void Foo(SpriteRenderer sr) {
+
+    }
+
+    private void UpdateBarPosition() {
+        var frameBounds = frame.bounds;
+        var frameX = frameBounds.min.x;
+        var barX = bar.bounds.min.x;
+        var deltaBarX = frameX - barX;
+        bar.transform.position += deltaBarX * Vector3.right;
     }
 
     public void Blink(float time = 0.5f) {
@@ -47,13 +62,5 @@ public class GUIBar : MonoBehaviour {
         }
         blinkRoutine = null;
         anim.SetBool(BLINK, false);
-    }
-
-    private void UpdateLongBarPosition() {
-        var frameBounds = frame.bounds;
-        var frameX = frameBounds.min.x;
-        var barX = bar.bounds.min.x;
-        var deltaBarX = frameX - barX;
-        bar.transform.position += deltaBarX * Vector3.right;
-    }
+    }    
 }
