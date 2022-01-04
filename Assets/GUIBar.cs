@@ -30,12 +30,12 @@ public class GUIBar : MonoBehaviour {
     public void Init(int unit, bool showFrame, float length) {
         unit = Mathf.Clamp(unit, 1, int.MaxValue);
         frame.enabled = showFrame;
-        Foo(frame, unit, length);
-        Foo(bar, unit, length);
+        SetLengthAndScale(frame, unit, length);
+        SetLengthAndScale(bar, unit, length);
         UpdateBarPosition();
     }
 
-    private void Foo(SpriteRenderer sr, int unit, float scale) {
+    private void SetLengthAndScale(SpriteRenderer sr, int unit, float scale) {
 
     }
 
