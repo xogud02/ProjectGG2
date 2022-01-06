@@ -18,7 +18,6 @@ public class GUIBar : MonoBehaviour {
     private Coroutine blinkRoutine = null;
 
     protected void Awake() {
-        frame = GetComponent<SpriteRenderer>();
         var gui0 = "GUI0";
         var greenBarIndex = 41;
         Addressables.LoadAssetAsync<Sprite>($"{gui0}[{gui0}_{greenBarIndex}]").Completed += _ => bar.sprite = _.Result;
@@ -36,7 +35,12 @@ public class GUIBar : MonoBehaviour {
     }
 
     private void SetLengthAndScale(SpriteRenderer sr, int unit, float scale) {
-
+        var newSize = sr.size;
+        newSize.x = newSize.y * unit;
+        sr.size = newSize;
+        var newScale = sr.transform.localScale;
+        newScale.x = newScale.y * scale / unit;
+        sr.transform.localScale = newScale;
     }
 
     private void UpdateBarPosition() {
