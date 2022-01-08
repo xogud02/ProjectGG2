@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour {
     }
 
     private int attack;
-    private int attackRange;
+    protected int AttackRange { get; set; }
 
     private GUIBar hpBar;
 
@@ -159,7 +159,7 @@ public class Unit : MonoBehaviour {
             return true;
         }
 
-        return (unit.CurrentPosition - CurrentPosition).magnitude <= attackRange;
+        return (unit.CurrentPosition - CurrentPosition).magnitude <= AttackRange;
     }
 
     public void MoveImmidiately(Vector2Int v) {

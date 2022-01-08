@@ -10,6 +10,7 @@ public class Monster : Unit {
     public new void Start() {
         base.Start();
         waitForMove = StartCoroutine(WaitAndMove());
+        AttackRange = 2;
     }
 
     private IEnumerator WaitAndMove() {
