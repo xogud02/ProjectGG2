@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour {
         private set {
             var before = hp;
             hp = value;
+            hpBar.Unit = hp;
             if (hp < before) {
                 hpBar.Blink();
             }
