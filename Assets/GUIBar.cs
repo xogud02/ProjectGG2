@@ -62,6 +62,7 @@ public class GUIBar : MonoBehaviour {
         var newSize = sr.size;
         newSize.x = newSize.y * unit;
         sr.size = newSize;
+        UpdateBarPosition();
     }
 
     private void UpdateBarPosition() {
