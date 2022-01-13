@@ -49,7 +49,7 @@ public static class AStar {
 
             for (var i = 0; i < dx.Length; ++i) {
                 var nextPosition = new Vector2Int(dx[i], dy[i]) + current.position;
-                if (GridField.IsMovable(nextPosition) == false || closed.Contains(nextPosition)) {//TODO IsMovable Ignore Occupy
+                if (GridField.IsMovable(nextPosition, true) == false || closed.Contains(nextPosition)) {//TODO IsMovable Ignore Occupy
                     continue;
                 }
                 var next = new Node(nextPosition, to, current, current.moved + (dx[i] * dy[i] == 0 ? 1 : diagonal));

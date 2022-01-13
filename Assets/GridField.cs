@@ -8,7 +8,7 @@ public static class GridField {
     private static readonly Dictionary<Vector2Int, Unit> occupied = new Dictionary<Vector2Int, Unit>();
 
     public static bool IsInRange(Vector2Int pos) => 0 <= pos.x && pos.x < Width && 0 <= pos.y && pos.y < Height;
-    public static bool IsMovable(Vector2Int _) => IsInRange(_) && GetTileType(_) != TileType.Block && occupied.ContainsKey(_) == false;
+    public static bool IsMovable(Vector2Int _, bool allowOccupied = false) => IsInRange(_) && GetTileType(_) != TileType.Block && (allowOccupied || occupied.ContainsKey(_) == false);
     public static int Width { get; private set; }
     public static int Height { get; private set; }
     public static TileType GetTileType(Vector2Int _) {
