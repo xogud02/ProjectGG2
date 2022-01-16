@@ -113,6 +113,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: d2fa4d33fa541c143a8bb0b854ddc84e
+    m_Address: LongWep
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0ab02fbff3c57654abbd591a0896701d, type: 2}
   m_SchemaSet:
