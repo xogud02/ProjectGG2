@@ -22,6 +22,7 @@ public static class MoveExtension {
 public class Unit : MonoBehaviour {
     private int maxHp = 10;
     private int hp = 10;
+    private Weapon _weapon;
     public int Hp {
         get => hp;
         private set {
@@ -152,11 +153,11 @@ public class Unit : MonoBehaviour {
     }
 
     protected virtual bool IsInRange(Unit unit) {
-        if(unit == null) {
+        if (unit == null) {
             return false;
         }
 
-        if(unit == this) {
+        if (unit == this) {
             return true;
         }
 
