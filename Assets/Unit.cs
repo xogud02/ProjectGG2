@@ -98,6 +98,8 @@ public class Unit : MonoBehaviour {
     }
 
     public bool Hit(Unit by) {
+        by._weapon?.Attack(this);
+
         --Hp;
         if (Hp <= 0) {
             Die();

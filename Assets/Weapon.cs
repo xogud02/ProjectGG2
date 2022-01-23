@@ -5,4 +5,8 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _sprite;
+
+    public void Attack(Unit target) {
+
+    }
 }
