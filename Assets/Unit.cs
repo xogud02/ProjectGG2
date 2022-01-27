@@ -20,9 +20,10 @@ public static class MoveExtension {
 }
 
 public class Unit : MonoBehaviour {
+    [SerializeField] private Weapon _weapon;
+
     private int maxHp = 10;
     private int hp = 10;
-    private Weapon _weapon;
     public int Hp {
         get => hp;
         private set {
