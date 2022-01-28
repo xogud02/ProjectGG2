@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Game : MonoBehaviour {
@@ -26,5 +27,13 @@ public class Game : MonoBehaviour {
             unit.SetPath(v2i);
         };
         unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
+    }
+
+    private IEnumerator FindTarget() {
+        yield break;
+    }
+
+    private IEnumerator AttackTarget() {
+        yield break;
     }
 }
