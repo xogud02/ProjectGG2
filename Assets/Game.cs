@@ -14,6 +14,8 @@ public class Game : MonoBehaviour {
     }
 
     public static int tmp = 30;
+    private Coroutine findTarget;
+    private Coroutine attackTarget;
 
     private void Init() {
         var field = GridObject.GrassField(tmp, tmp);
