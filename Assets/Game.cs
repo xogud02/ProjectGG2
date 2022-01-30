@@ -32,7 +32,13 @@ public class Game : MonoBehaviour {
     }
 
     private IEnumerator FindTarget() {
-        yield break;
+        while (true) {
+            yield return null;
+            if (_target != null) {
+                continue;
+            }
+            //TODO fine in range
+        }
     }
 
     private IEnumerator AttackTarget() {
