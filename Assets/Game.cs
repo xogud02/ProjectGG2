@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Game : MonoBehaviour {
@@ -29,6 +30,8 @@ public class Game : MonoBehaviour {
             unit.SetPath(v2i);
         };
         unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
+        StartCoroutine(FindTarget());
+        StartCoroutine(AttackTarget());
     }
 
     private IEnumerator FindTarget() {
@@ -37,7 +40,8 @@ public class Game : MonoBehaviour {
             if (_target != null) {
                 continue;
             }
-            //TODO fine in range
+
+            _target = GridField.GetOccupied(unit.CurrentPosition, 2).FirstOrDefault(_ => _ != unit);
         }
     }
 
