@@ -155,7 +155,7 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    protected virtual bool IsInRange(Unit unit) {
+    public virtual bool IsInRange(Unit unit) {
         if (unit == null) {
             return false;
         }

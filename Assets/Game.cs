@@ -46,6 +46,15 @@ public class Game : MonoBehaviour {
     }
 
     private IEnumerator AttackTarget() {
-        yield break;
+        while (true) {
+            yield return null;
+            if(_target == null) {
+                continue;
+            }
+
+            if (_target.IsInRange(unit)) {
+                _target.Hit(unit);
+            }
+        }
     }
 }
