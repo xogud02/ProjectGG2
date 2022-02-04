@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -30,13 +31,13 @@ public class Game : MonoBehaviour {
             unit.SetPath(v2i);
         };
         unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
-        StartCoroutine(FindTarget());
-        StartCoroutine(AttackTarget());
+        FindTarget().Forget();
+        AttackTarget().Forget();
     }
 
-    private IEnumerator FindTarget() {
+    private async UniTask FindTarget() {
         while (true) {
-            yield return null;
+            await UniTask.Yield();
             if (_target != null) {
                 continue;
             }
@@ -45,10 +46,10 @@ public class Game : MonoBehaviour {
         }
     }
 
-    private IEnumerator AttackTarget() {
+    private async UniTask AttackTarget() {
         while (true) {
-            yield return null;
-            if(_target == null) {
+            await UniTask.Yield();
+            if (_target == null) {
                 continue;
             }
 
