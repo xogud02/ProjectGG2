@@ -54,7 +54,7 @@ public class Game : MonoBehaviour {
             }
 
             if (_target.IsInRange(unit)) {
-                _target.Hit(unit);
+                await _target.Hit(unit);
             }
         }
     }

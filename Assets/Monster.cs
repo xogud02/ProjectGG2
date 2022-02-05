@@ -1,21 +1,23 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Monster : Unit {
     [SerializeField] private Unit target;
-    private Coroutine waitForMove;
     private Coroutine findTarget;
 
     public new void Start() {
         base.Start();
-        waitForMove = StartCoroutine(WaitAndMove());
+        WaitAndMove().Forget();
         AttackRange = 2;
     }
 
-    private IEnumerator WaitAndMove() {
+    private async UniTask WaitAndMove() {
         while (true) {
-            yield return new WaitForSeconds(1);
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
             if (target == null && findTarget == null) {
                 findTarget = StartCoroutine(FindTarget());
             }
@@ -26,12 +28,12 @@ public class Monster : Unit {
                 SetPath(nextPosition);
             }
 
-            if (target != null && IsInRange(target) && target.Hit(this)) {
+            if (target != null && IsInRange(target) && await target.Hit(this)) {
                 target = null;
             }
 
             while (IsMoving) {
-                yield return null;
+                await UniTask.Yield();
             }
         }
     }

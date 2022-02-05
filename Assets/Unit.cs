@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -98,8 +99,12 @@ public class Unit : MonoBehaviour {
         EmptyPath();
     }
 
-    public bool Hit(Unit by) {
-        by._weapon?.Attack(this);
+    public async UniTask<bool> Hit(Unit by) {
+        if(by._weapon == null) {
+
+        } else {
+            await by._weapon.Attack(this);
+        }
 
         --Hp;
         if (Hp <= 0) {
