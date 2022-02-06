@@ -72,6 +72,11 @@ public class Unit : MonoBehaviour {
             hpBar = barObject.GetComponent<GUIBar>();
             hpBar.Init(Hp);
         };
+
+        if (_weapon) {
+            _weapon = Instantiate(_weapon, transform);
+            _weapon.transform.localPosition = Vector3.back;
+        }
     }
 
     protected void OnDrawGizmos() {
@@ -100,7 +105,7 @@ public class Unit : MonoBehaviour {
     }
 
     public async UniTask<bool> Hit(Unit by) {
-        if(by._weapon == null) {
+        if (by._weapon == null) {
 
         } else {
             await by._weapon.Attack(this);
