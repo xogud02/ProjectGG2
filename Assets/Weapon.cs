@@ -3,12 +3,22 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
-{
+public class Weapon : MonoBehaviour {
     [SerializeField] private SpriteRenderer _sprite;
 
+    private float _attackSpeed;
+    public float AttackSpeed {
+        get => _attackSpeed;
+        set {
+            _attackSpeed = value;
+            _attackCooldown = 1 / _attackSpeed;
+        }
+    }
+
+    private float _attackCooldown = 1f;
+
     public async UniTask Attack(Unit target) {
-        transform.DORotate(new Vector3(0, 0, 360), 1, RotateMode.FastBeyond360);
-        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        transform.DORotate(new Vector3(0, 0, 360), _attackCooldown, RotateMode.FastBeyond360);
+        await UniTask.Delay(TimeSpan.FromSeconds(_attackCooldown));
     }
 }

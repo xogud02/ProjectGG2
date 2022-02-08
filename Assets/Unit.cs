@@ -76,6 +76,7 @@ public class Unit : MonoBehaviour {
         if (_weapon) {
             _weapon = Instantiate(_weapon, transform);
             _weapon.transform.localPosition = Vector3.back;
+            _weapon.AttackSpeed = 2.5f;
         }
     }
 
