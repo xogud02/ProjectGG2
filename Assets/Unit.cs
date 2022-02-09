@@ -1,7 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -22,6 +20,7 @@ public static class MoveExtension {
 
 public class Unit : MonoBehaviour {
     [SerializeField] private Weapon _weapon;
+    [SerializeField] protected Unit target;
 
     private int maxHp = 10;
     private int hp = 10;

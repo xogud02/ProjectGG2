@@ -6,7 +6,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Monster : Unit {
-    [SerializeField] private Unit target;
     private Coroutine findTarget;
 
     public new void Start() {
