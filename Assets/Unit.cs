@@ -119,7 +119,7 @@ public class Unit : MonoBehaviour {
         return false;
     }
 
-    public void Die() {
+    public virtual void Die() {
         GridField.UnOccupy(CurrentPosition);
         Destroy(gameObject);
     }

@@ -6,20 +6,21 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Monster : Unit {
-    private Coroutine findTarget;
 
     public new void Start() {
         base.Start();
         WaitAndMove().Forget();
+        FindTarget().Forget();
         AttackRange = 2;
+    }
+
+    public override void Die() {
+        base.Die();
     }
 
     private async UniTask WaitAndMove() {
         while (true) {
             await UniTask.Delay(TimeSpan.FromSeconds(1));
-            if (target == null && findTarget == null) {
-                findTarget = StartCoroutine(FindTarget());
-            }
 
             var nextPosition = GetNextPosition();
 
@@ -55,9 +56,9 @@ public class Monster : Unit {
         return path.Peek();
     }
 
-    private IEnumerator FindTarget() {
+    private async UniTask FindTarget() {
         while (true) {
-            yield return null;
+            await UniTask.Yield();
             if (target != null) {
                 continue;
             }
