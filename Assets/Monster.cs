@@ -2,11 +2,13 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Monster : Unit {
-
+    private CancellationTokenSource _source = new CancellationTokenSource();
+    
     public new void Start() {
         base.Start();
         WaitAndMove().Forget();
@@ -15,12 +17,16 @@ public class Monster : Unit {
     }
 
     public override void Die() {
+        _source.Cancel();
         base.Die();
     }
 
     private async UniTask WaitAndMove() {
         while (true) {
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _source.Token);
+            if (_source.IsCancellationRequested) {
+                return;
+            }
 
             var nextPosition = GetNextPosition();
 
