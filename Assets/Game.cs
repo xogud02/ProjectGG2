@@ -4,8 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public class Game : MonoBehaviour {
-    public Unit unit;
-    private Unit _target;
+    public PlayableCharacter unit;
 
     void Start() {
         if (GridObject.Initialized) {
@@ -25,37 +24,12 @@ public class Game : MonoBehaviour {
         field.OnClick = v2i => {
             var target = GridField.GetOccupied(v2i);
             if (target) {
-                _target = target;
+                unit.Target = target;
                 return;
             }
             unit.SetPath(v2i);
         };
         unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
-        FindTarget().Forget();
-        AttackTarget().Forget();
-    }
-
-    private async UniTask FindTarget() {
-        while (true) {
-            await UniTask.Yield();
-            if (_target != null) {
-                continue;
-            }
-
-            _target = GridField.GetOccupied(unit.CurrentPosition, 2).FirstOrDefault(_ => _ != unit);
-        }
-    }
-
-    private async UniTask AttackTarget() {
-        while (true) {
-            await UniTask.Yield();
-            if (_target == null) {
-                continue;
-            }
-
-            if (_target.IsInRange(unit)) {
-                await _target.Hit(unit);
-            }
-        }
+        unit.AttackTarget().Forget();
     }
 }

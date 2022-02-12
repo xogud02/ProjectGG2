@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3837300816416871405}
   - component: {fileID: 3837300816416871406}
   - component: {fileID: 3837300816416871407}
-  - component: {fileID: 5492757576093851759}
+  - component: {fileID: 8314873029075576570}
   m_Layer: 0
   m_Name: Engineer
   m_TagString: Untagged
@@ -104,7 +104,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5492757576093851759
+--- !u!114 &8314873029075576570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +113,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3837300816416871408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8baab1e945e225946b755bba20081520, type: 3}
+  m_Script: {fileID: 11500000, guid: 9485c06b4ebac694abc8c349bdd6047b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 8276681081863942741, guid: 6ef3b6e2c4ca6d44a99377d8e4db4ba1, type: 3}
+  target: {fileID: 0}
