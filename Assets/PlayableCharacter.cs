@@ -4,6 +4,7 @@ public class PlayableCharacter : Unit
 {
 
     public async UniTask AttackTarget() {
+        AttackRange = 2;//TODO
         while (true) {
             await UniTask.Yield();
             if (target == null) {
