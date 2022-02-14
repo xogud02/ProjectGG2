@@ -205,7 +205,7 @@ public class Unit : MonoBehaviour {
         var dest = GridField.Convert(v);
         var direction = dest - transform.position.Convert();
         var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
-        if (preferDirection != currentDirection) {
+        if (preferDirection != currentDirection) {//TODO trigger warning
             animator.SetTrigger(preferDirection);
             currentDirection = preferDirection;
         }
