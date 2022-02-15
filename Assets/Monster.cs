@@ -21,6 +21,10 @@ public class Monster : Unit {
         base.Die();
     }
 
+    protected override void OnMoveSingle(Vector2 direction) {
+
+    }
+
     private async UniTask WaitAndMove() {
         while (true) {
             await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _source.Token);

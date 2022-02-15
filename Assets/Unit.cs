@@ -204,11 +204,7 @@ public class Unit : MonoBehaviour {
 
         var dest = GridField.Convert(v);
         var direction = dest - transform.position.Convert();
-        var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
-        if (preferDirection != currentDirection) {//TODO trigger warning
-            animator.SetTrigger(preferDirection);
-            currentDirection = preferDirection;
-        }
+        OnMoveSingle(direction);
 
         var dist = direction.magnitude;
         var time = dist / speed;
@@ -227,5 +223,13 @@ public class Unit : MonoBehaviour {
                 Move(currentPath.Peek());
             }
         };
+    }
+
+    protected virtual void OnMoveSingle(Vector2 direction) {
+        var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
+        if (preferDirection != currentDirection) {
+            animator.SetTrigger(preferDirection);
+            currentDirection = preferDirection;
+        }
     }
 }
