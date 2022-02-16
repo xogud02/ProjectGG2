@@ -8,12 +8,15 @@ using Random = UnityEngine.Random;
 
 public class Monster : Unit {
     private CancellationTokenSource _source = new CancellationTokenSource();
+    private bool _directionRight;
+    private SpriteRenderer spriteRenderer;
     
     public new void Start() {
         base.Start();
         WaitAndMove().Forget();
         FindTarget().Forget();
         AttackRange = 2;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public override void Die() {
@@ -22,7 +25,14 @@ public class Monster : Unit {
     }
 
     protected override void OnMoveSingle(Vector2 direction) {
+        var x = direction.x;
+        var nextDirectionRight = x > 0;
+        if (Mathf.Abs(x) <= float.Epsilon || _directionRight == nextDirectionRight) {
+            return;
+        }
 
+        _directionRight = nextDirectionRight;
+        spriteRenderer.flipX = _directionRight;
     }
 
     private async UniTask WaitAndMove() {
