@@ -225,7 +225,7 @@ public class Unit : MonoBehaviour {
         };
     }
 
-    protected virtual void OnMoveSingle(Vector2 direction) {
+    protected virtual void OnMoveSingle(Vector2 direction) {//TODO weapon Direction
         var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
         if (preferDirection != currentDirection) {
             animator.SetTrigger(preferDirection);
