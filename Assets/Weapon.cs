@@ -6,6 +6,12 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
     [SerializeField] private SpriteRenderer _sprite;
 
+    private void Start() {
+        var collider = gameObject.AddComponent<EdgeCollider2D>();
+        var center = _sprite.sprite.bounds.center;
+        collider.points = new Vector2[] { center, center * 2 };
+    }
+
     private float _attackSpeed;
     public float AttackSpeed {
         get => _attackSpeed;
