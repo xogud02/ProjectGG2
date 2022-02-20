@@ -7,9 +7,10 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private SpriteRenderer _sprite;
 
     private void Start() {
-        var collider = gameObject.AddComponent<EdgeCollider2D>();
+        var collider = gameObject.AddComponent<BoxCollider2D>();
         var center = _sprite.sprite.bounds.center;
-        collider.points = new Vector2[] { center, center * 2 };
+        //collider.points = new Vector2[] { center, center * 2 };
+        collider.isTrigger = true;
     }
 
     private float _attackSpeed;
@@ -26,5 +27,13 @@ public class Weapon : MonoBehaviour {
     public async UniTask Attack(Unit target) {
         transform.DORotate(new Vector3(0, 0, 360), _attackCooldown, RotateMode.FastBeyond360);
         await UniTask.Delay(TimeSpan.FromSeconds(_attackCooldown));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log(collision);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log(collision);
     }
 }

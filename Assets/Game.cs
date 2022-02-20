@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public class Game : MonoBehaviour {
+    public bool DrawTileGizmo;
     public PlayableCharacter unit;
 
     void Start() {
@@ -31,5 +32,9 @@ public class Game : MonoBehaviour {
         };
         unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
         unit.AttackTarget().Forget();
+    }
+
+    private void Update() {
+        Tile.DrawTileGizmos = DrawTileGizmo;
     }
 }

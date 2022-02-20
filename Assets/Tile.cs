@@ -41,13 +41,19 @@ public class Tile : MonoBehaviour {
         OnClick?.Invoke(this);
     }
 
+    public static bool DrawTileGizmos = true;
+
     public void OnDrawGizmos() {
+        if(DrawTileGizmos == false) {
+            return;
+        }
 
         if (boxCollider) {
             Gizmos.color = GetTileGizmoColor();
             Gizmos.DrawCube(transform.position, boxCollider.bounds.size);
         }
     }
+
 
     private Color GetTileGizmoColor() {
         if (GridField.IsMovable(GridPosition) == false) {
