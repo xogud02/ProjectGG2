@@ -17,7 +17,7 @@ public class Monster : Unit {
         FindTarget().Forget();
         AttackRange = 2;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
+        gameObject.AddComponent<BoxCollider2D>();
     }
 
     public override void Die() {

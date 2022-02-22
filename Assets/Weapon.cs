@@ -7,9 +7,10 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private SpriteRenderer _sprite;
 
     private void Start() {
-        var collider = gameObject.AddComponent<BoxCollider2D>();
+        var collider = gameObject.AddComponent<EdgeCollider2D>();
+        gameObject.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         var center = _sprite.sprite.bounds.center;
-        //collider.points = new Vector2[] { center, center * 2 };
+        collider.points = new Vector2[] { center, center * 2 };
         collider.isTrigger = true;
     }
 
@@ -34,6 +35,10 @@ public class Weapon : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision) {
         Debug.Log(collision);
     }
 }
