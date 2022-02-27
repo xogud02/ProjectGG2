@@ -6,6 +6,7 @@ using UnityEngine;
 public class Game : MonoBehaviour {
     public bool DrawTileGizmo;
     public PlayableCharacter unit;
+    public static Unit LastClicked;
 
     void Start() {
         if (GridObject.Initialized) {
@@ -23,9 +24,12 @@ public class Game : MonoBehaviour {
         var field = GridObject.GrassField(tmp, tmp);
         GridField.Init(tmp, tmp);
         field.OnClick = v2i => {
-            var target = GridField.GetOccupied(v2i);
-            if (target) {
-                unit.Target = target;
+            if(LastClicked == null) {
+                LastClicked = GridField.GetOccupied(v2i);
+            }
+
+            if (LastClicked) {
+                unit.Target = LastClicked;
                 return;
             }
             unit.SetPath(v2i);

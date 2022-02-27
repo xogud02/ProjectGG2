@@ -31,14 +31,14 @@ public class Weapon : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log(collision);
+        //Debug.Log(collision);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        Debug.Log(collision);
+        //Debug.Log(collision);
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
-        Debug.Log(collision);
+        //Debug.Log(collision);
     }
 }

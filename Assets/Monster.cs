@@ -20,6 +20,11 @@ public class Monster : Unit {
         gameObject.AddComponent<BoxCollider2D>();
     }
 
+    private void OnMouseDown() {
+        Debug.Log($"{this} ckicked");
+        Game.LastClicked = this;
+    }
+
     public override void Die() {
         _source.Cancel();
         base.Die();
