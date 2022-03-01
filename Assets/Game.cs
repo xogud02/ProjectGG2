@@ -30,7 +30,6 @@ public class Game : MonoBehaviour {
 
             if (LastClicked) {
                 unit.Target = LastClicked;
-                return;
             }
             unit.SetPath(v2i);
         };
