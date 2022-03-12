@@ -112,7 +112,7 @@ public class Unit : MonoBehaviour {
         if (by._weapon == null) {
 
         } else {
-            await by._weapon.Attack(this);
+            await by._weapon.Attack(this);// TODO
         }
 
         --Hp;
