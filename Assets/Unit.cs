@@ -19,7 +19,7 @@ public static class MoveExtension {
 }
 
 public class Unit : MonoBehaviour {
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] protected Weapon _weapon;
     [SerializeField] protected Unit target;
     public Unit Target {
         get => target;
@@ -108,13 +108,7 @@ public class Unit : MonoBehaviour {
         EmptyPath();
     }
 
-    public async UniTask<bool> Hit(Unit by) {
-        if (by._weapon == null) {
-
-        } else {
-            await by._weapon.Attack(this);// TODO
-        }
-
+    public bool Hit(Unit by) {
         --Hp;
         if (Hp <= 0) {
             Die();

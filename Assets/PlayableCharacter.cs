@@ -11,7 +11,8 @@ public class PlayableCharacter : Unit {
             }
 
             if (target != this && IsInRange(target)) {
-                await target.Hit(this);
+                await _weapon.Attack(target);
+                target.Hit(this);
             }
         }
     }
