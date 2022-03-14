@@ -24,21 +24,25 @@ public class Weapon : MonoBehaviour {
     }
 
     private float _attackCooldown = 1f;
+    private Unit _currentTarget;
 
     public async UniTask Attack(Unit target) {
+        _currentTarget = target;
         transform.DORotate(new Vector3(0, 0, 360), _attackCooldown, RotateMode.FastBeyond360);
         await UniTask.Delay(TimeSpan.FromSeconds(_attackCooldown));
+        _currentTarget = null;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        //Debug.Log(collision);
-    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (_currentTarget == null)
+        {
+            return;
+        }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        //Debug.Log(collision);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision) {
-        //Debug.Log(collision);
+        if (collision.gameObject.TryGetComponent<Unit>(out var unit) && unit == _currentTarget)
+        {
+            Debug.Log("target hit");
+        }
     }
 }
