@@ -39,7 +39,6 @@ public class Tile : MonoBehaviour {
 
     private void OnMouseDown() {
         OnClick?.Invoke(this);
-        Debug.Log($"{this} ckicked");
     }
 
     public static bool DrawTileGizmos = true;
