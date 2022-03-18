@@ -32,7 +32,7 @@ public class Unit : MonoBehaviour {
         get => hp;
         private set {
             var before = hp;
-            hp = value;
+            hp = Mathf.Clamp(value, 0 , maxHp);
             hpBar.Unit = hp;
             if (hp < before) {
                 hpBar.Blink();
