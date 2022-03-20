@@ -34,7 +34,7 @@ public class GUIBar : MonoBehaviour {
 
     protected void Awake() {
         var gui0 = "GUI0";
-        var greenBarIndex = 55;
+        var greenBarIndex = 41;
         anim.enabled = false;
         Addressables.LoadAssetAsync<Sprite>($"{gui0}[{gui0}_{greenBarIndex}]").Completed += _ => bar.sprite = _.Result;
     }
