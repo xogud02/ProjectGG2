@@ -40,6 +40,11 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public int Exp;
+    public int MaxExp;
+    public int Level;
+    //TODO
+
     private int attack;
     protected int AttackRange { get; set; }
 
