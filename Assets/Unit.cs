@@ -40,6 +40,7 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public int RewardExp;
     public int Exp;
     public int MaxExp;
     public int Level;
