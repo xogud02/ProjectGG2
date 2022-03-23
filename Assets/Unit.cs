@@ -42,8 +42,8 @@ public class Unit : MonoBehaviour {
 
     public int RewardExp;
     public int Exp;
-    public int MaxExp;
-    public int Level;
+    public int MaxExp => Level * 10;
+    public int Level = 1;
     //TODO
 
     private int attack;
