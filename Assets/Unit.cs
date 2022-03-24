@@ -4,37 +4,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public enum Direction {
+public enum Direction
+{
     Up,
     Down,
     Left,
     Right
 }
 
-public static class MoveExtension {
+public static class MoveExtension
+{
     public static Vector3 STW(this Vector3 position) => Camera.main.ScreenToWorldPoint(position);
     public static Vector3 STW(this Vector2 position) => Camera.main.ScreenToWorldPoint(position);
     public static Vector2 Convert(this Vector3 v) => v;
     public static Vector3 Convert(this Vector2 v) => v;
 }
 
-public class Unit : MonoBehaviour {
+public class Unit : MonoBehaviour
+{
     [SerializeField] protected Weapon _weapon;
     [SerializeField] protected Unit target;
-    public Unit Target {
+    public Unit Target
+    {
         get => target;
         set => target = value;
     }
 
     private int maxHp = 10;
     private int hp = 10;
-    public int Hp {
+    public int Hp
+    {
         get => hp;
-        private set {
+        private set
+        {
             var before = hp;
-            hp = Mathf.Clamp(value, 0 , maxHp);
+            hp = Mathf.Clamp(value, 0, maxHp);
             hpBar.Unit = hp;
-            if (hp < before) {
+            if (hp < before)
+            {
                 hpBar.Blink();
             }
         }
@@ -45,6 +52,16 @@ public class Unit : MonoBehaviour {
     public int MaxExp => Level * 10;
     public int Level = 1;
     //TODO
+
+    private void KillLogic(Unit other)
+    {
+        if (other != this)
+        {
+            return;
+        }
+        Exp += other.RewardExp;
+
+    }
 
     private int attack;
     protected int AttackRange { get; set; }
@@ -63,18 +80,23 @@ public class Unit : MonoBehaviour {
     private Queue<Vector2Int> currentPath = new Queue<Vector2Int>();
     public Vector2Int CurrentPosition { get; protected set; }
 
-    public void Start() {
+    public void Start()
+    {
         animator = GetComponent<Animator>();
         currentDirection = Down;
-        if (GridObject.Initialized) {
+        if (GridObject.Initialized)
+        {
             transform.localScale *= GridObject.ScaleFactor;
-        } else {
+        }
+        else
+        {
             GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
         }
 
         var sr = GetComponent<SpriteRenderer>();
         sr.sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
-        Addressables.LoadAssetAsync<GameObject>("GUIBar").Completed += task => {
+        Addressables.LoadAssetAsync<GameObject>("GUIBar").Completed += task =>
+        {
             var barObject = Instantiate(task.Result);
             barObject.transform.parent = transform;
             barObject.transform.localPosition = new Vector3(0, sr.bounds.extents.y, -10);
@@ -82,15 +104,18 @@ public class Unit : MonoBehaviour {
             hpBar.Init(Hp);
         };
 
-        if (_weapon) {
+        if (_weapon)
+        {
             _weapon = Instantiate(_weapon, transform);
             _weapon.transform.localPosition = Vector3.zero;
             _weapon.AttackSpeed = 2.5f;
         }
     }
 
-    protected void OnDrawGizmos() {
-        if (currentPath.Count == 0) {
+    protected void OnDrawGizmos()
+    {
+        if (currentPath.Count == 0)
+        {
             return;
         }
 
@@ -98,7 +123,8 @@ public class Unit : MonoBehaviour {
         var current = (Vector3)GridField.Convert(CurrentPosition);
         Gizmos.color = Color.white;
         current.z = z;
-        foreach (var next in currentPath) {
+        foreach (var next in currentPath)
+        {
             var nextV3 = (Vector3)GridField.Convert(next);
             nextV3.z = z;
             Gizmos.DrawLine(current, nextV3);
@@ -106,49 +132,60 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public void Stop() {
-        if (IsMoving == false) {
+    public void Stop()
+    {
+        if (IsMoving == false)
+        {
             return;
         }
 
         EmptyPath();
     }
 
-    public bool Hit(Unit by) {
+    public bool Hit(Unit by)
+    {
         --Hp;
-        if (Hp <= 0) {
+        if (Hp <= 0)
+        {
             Die();
             return true;
         }
         return false;
     }
 
-    public virtual void Die() {
+    public virtual void Die()
+    {
         GridField.UnOccupy(CurrentPosition);
         Destroy(gameObject);
     }
 
-    public void SetPath(Vector2Int v) {
+    public void SetPath(Vector2Int v)
+    {
         EmptyPath();
         var newPath = AStar.Find(currentPath.Count > 0 ? currentPath.Peek() : CurrentPosition, v);
         var wasMoving = IsMoving;
-        while (newPath.Count > 0) {
+        while (newPath.Count > 0)
+        {
             currentPath.Enqueue(newPath.Pop());
         }
 
-        if (wasMoving == false && currentPath.Count > 0) {
+        if (wasMoving == false && currentPath.Count > 0)
+        {
             Move(currentPath.Peek());
         }
     }
 
-    private void EmptyPath(bool leaveFirst = true) {
-        if (leaveFirst == false) {
+    private void EmptyPath(bool leaveFirst = true)
+    {
+        if (leaveFirst == false)
+        {
             currentPath.Clear();
             return;
         }
 
         var lastPath = new Queue<Vector2Int>();
-        if (IsMoving && currentPath.Count > 0) {
+        if (IsMoving && currentPath.Count > 0)
+        {
             lastPath.Enqueue(currentPath.Dequeue());
         }
         currentPath = lastPath;
@@ -156,47 +193,64 @@ public class Unit : MonoBehaviour {
 
     public bool IsMoving => currentPath.Count > 0 || (moving?.active ?? false);
 
-    private int GetPreferDirection(float angle) {
+    private int GetPreferDirection(float angle)
+    {
         var absAngle = Mathf.Abs(angle);
-        if (absAngle < 45f) {
+        if (absAngle < 45f)
+        {
             return Right;
-        } else if (absAngle > 135f) {
+        }
+        else if (absAngle > 135f)
+        {
             return Left;
-        } else if (angle > 0) {
+        }
+        else if (angle > 0)
+        {
             return Up;
-        } else {
+        }
+        else
+        {
             return Down;
         }
     }
 
-    public virtual bool IsInRange(Unit unit) {
-        if (unit == null) {
+    public virtual bool IsInRange(Unit unit)
+    {
+        if (unit == null)
+        {
             return false;
         }
 
-        if (unit == this) {
+        if (unit == this)
+        {
             return true;
         }
 
         return (unit.CurrentPosition - CurrentPosition).magnitude <= AttackRange;
     }
 
-    public void MoveImmidiately(Vector2Int v) {
+    public void MoveImmidiately(Vector2Int v)
+    {
         EmptyPath(false);
         transform.position = GridField.Convert(v);
         CurrentPosition = v;
     }
 
-    public void Move(Vector2Int v) {
+    public void Move(Vector2Int v)
+    {
         var result = GridField.UnOccupy(CurrentPosition);
-        if (result != null && result != this) {
+        if (result != null && result != this)
+        {
             result.Occupy(CurrentPosition);
             return;
         }
 
-        if (GridField.IsMovable(v)) {
+        if (GridField.IsMovable(v))
+        {
             this.Occupy(v);
-        } else {
+        }
+        else
+        {
             EmptyPath(false);
             this.Occupy(CurrentPosition);
             return;
@@ -210,24 +264,29 @@ public class Unit : MonoBehaviour {
         var time = dist / speed;
         moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, dest, time).SetEase(Ease.Linear);
 
-        moving.onComplete = () => {
+        moving.onComplete = () =>
+        {
             moving = null;
 
-            if (currentPath.Count == 0) {
+            if (currentPath.Count == 0)
+            {
                 return;
             }
 
             CurrentPosition = currentPath.Dequeue();
 
-            if (currentPath.Count != 0) {
+            if (currentPath.Count != 0)
+            {
                 Move(currentPath.Peek());
             }
         };
     }
 
-    protected virtual void OnMoveSingle(Vector2 direction) {//TODO weapon Direction
+    protected virtual void OnMoveSingle(Vector2 direction)
+    {//TODO weapon Direction
         var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
-        if (preferDirection != currentDirection) {
+        if (preferDirection != currentDirection)
+        {
             animator.SetTrigger(preferDirection);
             currentDirection = preferDirection;
         }
