@@ -1,16 +1,21 @@
 using Cysharp.Threading.Tasks;
 
-public class PlayableCharacter : Unit {
+public class PlayableCharacter : Unit
+{
 
-    public async UniTask AttackTarget() {
+    public async UniTask AttackTarget()
+    {
         AttackRange = 2;//TODO
-        while (true) {
+        while (true)
+        {
             await UniTask.Yield();
-            if (target == null) {
+            if (target == null)
+            {
                 continue;
             }
 
-            if (target != this && IsInRange(target)) {
+            if (target != this && IsInRange(target))
+            {
                 await _weapon.Attack(target, _ => _.Hit(this));
             }
         }

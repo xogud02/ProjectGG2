@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour
     public int Level = 1;
     //TODO
 
-    private void KillLogic(Unit other)
+    protected void KillLogic(Unit other)
     {
         if (other != this)
         {
@@ -148,6 +148,7 @@ public class Unit : MonoBehaviour
         if (Hp <= 0)
         {
             Die();
+            by.KillLogic(this);
             return true;
         }
         return false;
