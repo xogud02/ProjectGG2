@@ -48,7 +48,19 @@ public class Unit : MonoBehaviour
     }
 
     public int RewardExp;
-    public int Exp;
+    private int _exp;
+    public int Exp {
+        get => _exp;
+        set
+        {
+            _exp += value;
+            if(_exp >= MaxExp)
+            {
+                _exp -= MaxExp;
+                ++Level;
+            }
+        }
+    }
     public int MaxExp => Level * 10;
     public int Level = 1;
     //TODO
@@ -60,7 +72,6 @@ public class Unit : MonoBehaviour
             return;
         }
         Exp += other.RewardExp;
-
     }
 
     private int attack;
