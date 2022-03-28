@@ -54,7 +54,7 @@ public class Unit : MonoBehaviour
         set
         {
             _exp += value;
-            if(_exp >= MaxExp)
+            while(_exp >= MaxExp)
             {
                 _exp -= MaxExp;
                 ++Level;
