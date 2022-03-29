@@ -63,7 +63,6 @@ public class Unit : MonoBehaviour
     }
     public int MaxExp => Level * 10;
     public int Level = 1;
-    //TODO
 
     protected void KillLogic(Unit other)
     {
