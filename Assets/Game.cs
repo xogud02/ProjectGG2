@@ -2,11 +2,13 @@ using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Game : MonoBehaviour {
     public bool DrawTileGizmo;
     public PlayableCharacter unit;
     public static Unit LastClicked;
+    public Monster sample;
 
     void Start() {
         if (GridObject.Initialized) {
@@ -39,5 +41,10 @@ public class Game : MonoBehaviour {
 
     private void Update() {
         Tile.DrawTileGizmos = DrawTileGizmo;
+
+        if(sample == null)
+        {
+            sample = Addressables.InstantiateAsync("Slime_3").WaitForCompletion().GetComponent<Monster>();
+        }
     }
 }
