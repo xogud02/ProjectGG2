@@ -47,7 +47,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public int RewardExp;
+    public int RewardExp = 15;
     private int _exp;
     public int Exp {
         get => _exp;
@@ -62,7 +62,21 @@ public class Unit : MonoBehaviour
         }
     }
     public int MaxExp => Level * 10;
-    public int Level = 1;
+    private int _level = 1;
+    public int Level
+    {
+        get => _level;
+        set
+        {
+            var before = _level;
+            _level = value;
+            if(_level > before)
+            {
+                Hp = maxHp;
+                Debug.Log("level up to " + _level);
+            }
+        }
+    }
 
     protected void KillLogic(Unit other)
     {
