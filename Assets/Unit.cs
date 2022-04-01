@@ -80,11 +80,12 @@ public class Unit : MonoBehaviour
 
     protected void KillLogic(Unit other)
     {
-        if (other != this)
+        if (other == this)
         {
             return;
         }
         Exp += other.RewardExp;
+        Debug.Log($"{other} killed by {this}");
     }
 
     private int attack;
@@ -171,8 +172,8 @@ public class Unit : MonoBehaviour
         --Hp;
         if (Hp <= 0)
         {
-            Die();
             by.KillLogic(this);
+            Die();
             return true;
         }
         return false;
