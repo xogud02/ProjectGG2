@@ -47,13 +47,14 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public int RewardExp = 15;
+    public int RewardExp => 15;
     private int _exp;
     public int Exp {
         get => _exp;
         set
         {
             _exp += value;
+            Debug.Log($"exp increased {value} => current : {_exp}/{MaxExp}");
             while(_exp >= MaxExp)
             {
                 _exp -= MaxExp;
@@ -84,8 +85,8 @@ public class Unit : MonoBehaviour
         {
             return;
         }
+        Debug.Log($"{other} killed by {this} , reward : {other.RewardExp}");
         Exp += other.RewardExp;
-        Debug.Log($"{other} killed by {this}");
     }
 
     private int attack;
