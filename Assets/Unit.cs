@@ -30,7 +30,7 @@ public class Unit : MonoBehaviour
         set => target = value;
     }
 
-    private int maxHp = 10;
+    public int MaxHp => Level * 10;
     private int hp = 10;
     public int Hp
     {
@@ -38,7 +38,7 @@ public class Unit : MonoBehaviour
         private set
         {
             var before = hp;
-            hp = Mathf.Clamp(value, 0, maxHp);
+            hp = Mathf.Clamp(value, 0, MaxHp);
             hpBar.Unit = hp;
             if (hp < before)
             {
@@ -73,7 +73,7 @@ public class Unit : MonoBehaviour
             _level = value;
             if(_level > before)
             {
-                Hp = maxHp;
+                Hp = MaxHp;
                 Debug.Log("level up to " + _level);
             }
         }
