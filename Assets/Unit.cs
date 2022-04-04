@@ -74,6 +74,7 @@ public class Unit : MonoBehaviour
             if(_level > before)
             {
                 Hp = MaxHp;
+                hpBar.Init(Hp, hpBar.ShowFrame);
                 Debug.Log("level up to " + _level);
             }
         }
