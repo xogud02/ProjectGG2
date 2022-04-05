@@ -127,6 +127,7 @@ public class Unit : MonoBehaviour
             var barObject = Instantiate(task.Result);
             barObject.transform.parent = transform;
             barObject.transform.localPosition = new Vector3(0, sr.bounds.extents.y, -10);
+            barObject.transform.localScale = Vector3.one;
             hpBar = barObject.GetComponent<GUIBar>();
             hpBar.Init(Hp);
         };
