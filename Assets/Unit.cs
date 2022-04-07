@@ -24,6 +24,7 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] protected Weapon _weapon;
     [SerializeField] protected Unit target;
+    protected UnitStatus _status;
     public Unit Target
     {
         get => target;
@@ -109,6 +110,7 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
+        _status = new UnitStatus(this);
         animator = GetComponent<Animator>();
         currentDirection = Down;
         if (GridObject.Initialized)
