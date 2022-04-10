@@ -31,54 +31,24 @@ public class Unit : MonoBehaviour
         set => target = value;
     }
 
-    public int MaxHp => Level * 10;
-    private int hp = 10;
+    public int MaxHp => _status.MaxHp;
     public int Hp
     {
-        get => hp;
-        private set
-        {
-            var before = hp;
-            hp = Mathf.Clamp(value, 0, MaxHp);
-            hpBar.Unit = hp;
-            if (hp < before)
-            {
-                hpBar.Blink();
-            }
-        }
+        get => _status.Hp;
+        private set => _status.Hp = value;
     }
 
-    public int RewardExp => 15;
+    public int RewardExp => _status.RewardExp;
     private int _exp;
     public int Exp {
-        get => _exp;
-        set
-        {
-            _exp += value;
-            Debug.Log($"exp increased {value} => current : {_exp}/{MaxExp}");
-            while(_exp >= MaxExp)
-            {
-                _exp -= MaxExp;
-                ++Level;
-            }
-        }
+        get => _status.Exp;
+        set => _status.Exp = value;
     }
-    public int MaxExp => Level * 10;
-    private int _level = 1;
+    public int MaxExp => _status.MaxExp;
     public int Level
     {
-        get => _level;
-        set
-        {
-            var before = _level;
-            _level = value;
-            if(_level > before)
-            {
-                Hp = MaxHp;
-                hpBar.Init(Hp, hpBar.ShowFrame);
-                Debug.Log("level up to " + _level);
-            }
-        }
+        get => _status.Level;
+        set => _status.Level = value;
     }
 
     protected void KillLogic(Unit other)

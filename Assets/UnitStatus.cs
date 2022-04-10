@@ -8,7 +8,7 @@ public class UnitStatus
     public int Hp
     {
         get => hp;
-        private set
+        set
         {
             var before = hp;
             hp = Mathf.Clamp(value, 0, MaxHp);
