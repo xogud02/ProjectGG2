@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UnitStatus
@@ -12,13 +13,11 @@ public class UnitStatus
         {
             var before = hp;
             hp = Mathf.Clamp(value, 0, MaxHp);
-            //hpBar.Unit = hp;
-            //if (hp < before)
-            //{
-            //    hpBar.Blink();
-            //}
+            onHpChange?.Invoke(before, hp);
         }
     }
+
+    public Action<int, int> onHpChange;
 
     public int RewardExp => 15;
     private int _exp;

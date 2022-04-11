@@ -81,6 +81,14 @@ public class Unit : MonoBehaviour
     public void Start()
     {
         _status = new UnitStatus(this);
+        _status.onHpChange += (before, hp) =>
+        {
+            hpBar.Unit = hp;
+            if (hp < before)
+            {
+                hpBar.Blink();
+            }
+        };
         animator = GetComponent<Animator>();
         currentDirection = Down;
         if (GridObject.Initialized)
