@@ -40,7 +40,8 @@ public class Unit : MonoBehaviour
 
     public int RewardExp => _status.RewardExp;
     private int _exp;
-    public int Exp {
+    public int Exp
+    {
         get => _status.Exp;
         set => _status.Exp = value;
     }
@@ -87,6 +88,16 @@ public class Unit : MonoBehaviour
             if (hp < before)
             {
                 hpBar.Blink();
+            }
+        };
+
+        _status.onLevelChange += (before, level) =>
+        {
+            if (level > before)
+            {
+                Hp = MaxHp;
+                hpBar.Init(Hp, hpBar.ShowFrame);
+                Debug.Log("level up to " + level);
             }
         };
         animator = GetComponent<Animator>();

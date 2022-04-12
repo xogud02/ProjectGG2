@@ -44,14 +44,11 @@ public class UnitStatus
         {
             var before = _level;
             _level = value;
-            if (_level > before)
-            {
-                Hp = MaxHp;
-                //hpBar.Init(Hp, hpBar.ShowFrame);
-                Debug.Log("level up to " + _level);
-            }
+            onLevelChange?.Invoke(before, _level);
         }
     }
+
+    public Action<int, int> onLevelChange;
 
     protected void KillLogic(Unit other)
     {
