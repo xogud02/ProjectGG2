@@ -50,7 +50,7 @@ public class UnitStatus
 
     public Action<int, int> onLevelChange;
 
-    protected void KillLogic(Unit other)
+    public void KillLogic(Unit other)
     {
         if (other == _owner)
         {

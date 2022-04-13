@@ -39,28 +39,6 @@ public class Unit : MonoBehaviour
     }
 
     public int RewardExp => _status.RewardExp;
-    private int _exp;
-    public int Exp
-    {
-        get => _status.Exp;
-        set => _status.Exp = value;
-    }
-    public int MaxExp => _status.MaxExp;
-    public int Level
-    {
-        get => _status.Level;
-        set => _status.Level = value;
-    }
-
-    protected void KillLogic(Unit other)
-    {
-        if (other == this)
-        {
-            return;
-        }
-        Debug.Log($"{other} killed by {this} , reward : {other.RewardExp}");
-        Exp += other.RewardExp;
-    }
 
     private int attack;
     protected int AttackRange { get; set; }
@@ -166,7 +144,7 @@ public class Unit : MonoBehaviour
         --Hp;
         if (Hp <= 0)
         {
-            by.KillLogic(this);
+            by._status.KillLogic(this);
             Die();
             return true;
         }
