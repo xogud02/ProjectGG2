@@ -31,7 +31,6 @@ public class Unit : MonoBehaviour
         set => target = value;
     }
 
-    public int MaxHp => _status.MaxHp;
     public int Hp
     {
         get => _status.Hp;
@@ -39,8 +38,6 @@ public class Unit : MonoBehaviour
     }
 
     public int RewardExp => _status.RewardExp;
-
-    private int attack;
     protected int AttackRange { get; set; }
 
     private GUIBar hpBar;
@@ -73,7 +70,7 @@ public class Unit : MonoBehaviour
         {
             if (level > before)
             {
-                Hp = MaxHp;
+                _status.Hp = _status.MaxHp;
                 hpBar.Init(Hp, hpBar.ShowFrame);
                 Debug.Log("level up to " + level);
             }
