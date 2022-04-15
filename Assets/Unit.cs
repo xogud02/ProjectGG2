@@ -31,12 +31,6 @@ public class Unit : MonoBehaviour
         set => target = value;
     }
 
-    public int Hp
-    {
-        get => _status.Hp;
-        private set => _status.Hp = value;
-    }
-
     public int RewardExp => _status.RewardExp;
     protected int AttackRange { get; set; }
 
@@ -71,7 +65,7 @@ public class Unit : MonoBehaviour
             if (level > before)
             {
                 _status.Hp = _status.MaxHp;
-                hpBar.Init(Hp, hpBar.ShowFrame);
+                hpBar.Init(_status.Hp, hpBar.ShowFrame);
                 Debug.Log("level up to " + level);
             }
         };
@@ -95,7 +89,7 @@ public class Unit : MonoBehaviour
             barObject.transform.localPosition = new Vector3(0, sr.bounds.extents.y, -10);
             barObject.transform.localScale = Vector3.one;
             hpBar = barObject.GetComponent<GUIBar>();
-            hpBar.Init(Hp);
+            hpBar.Init(_status.Hp);
         };
 
         if (_weapon)
@@ -138,8 +132,8 @@ public class Unit : MonoBehaviour
 
     public bool Hit(Unit by)
     {
-        --Hp;
-        if (Hp <= 0)
+        --_status.Hp;
+        if (_status.Hp <= 0)
         {
             by._status.KillLogic(this);
             Die();
