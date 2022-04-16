@@ -31,7 +31,6 @@ public class Unit : MonoBehaviour
         set => target = value;
     }
 
-    public int RewardExp => _status.RewardExp;
     protected int AttackRange { get; set; }
 
     private GUIBar hpBar;
@@ -135,11 +134,21 @@ public class Unit : MonoBehaviour
         --_status.Hp;
         if (_status.Hp <= 0)
         {
-            by._status.KillLogic(this);
+            by.KillLogic(this);
             Die();
             return true;
         }
         return false;
+    }
+
+    public void KillLogic(Unit other)
+    {
+        if (other == this)
+        {
+            return;
+        }
+        Debug.Log($"{other} killed by {this} , reward : {other._status.RewardExp}");
+        _status.Exp += other._status.RewardExp;
     }
 
     public virtual void Die()

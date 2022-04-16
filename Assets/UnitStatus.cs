@@ -50,16 +50,6 @@ public class UnitStatus
 
     public Action<int, int> onLevelChange;
 
-    public void KillLogic(Unit other)
-    {
-        if (other == _owner)
-        {
-            return;
-        }
-        Debug.Log($"{other} killed by {this} , reward : {other.RewardExp}");
-        Exp += other.RewardExp;
-    }
-
     private int attack;
     protected int AttackRange { get; set; }
 
