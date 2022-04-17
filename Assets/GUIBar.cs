@@ -16,7 +16,7 @@ public class GUIBar : MonoBehaviour {
         get => _unit;
         set {
             _unit = value;
-            SetLength(bar, _unit);
+            SetLength(bar);
         }
     }
 
@@ -43,25 +43,24 @@ public class GUIBar : MonoBehaviour {
     public void Init(int unit) => Init(unit, false);
     public void Init(int unit, bool showFrame) => Init(unit, showFrame, 1);
     public void Init(int unit, bool showFrame, float length) {
-        _unit = unit;
-        MaxUnit = unit;
-        unit = Mathf.Clamp(unit, 1, int.MaxValue);
+        _unit = Mathf.Clamp(unit, 1, int.MaxValue);
+        MaxUnit = _unit;
         frame.enabled = showFrame;
-        SetLengthAndScale(frame, unit, length);
-        SetLengthAndScale(bar, unit, length);
+        SetLengthAndScale(frame, length);
+        SetLengthAndScale(bar, length);
         UpdateBarPosition();
     }
 
-    private void SetLengthAndScale(SpriteRenderer sr, int unit, float scale) {
-        SetLength(sr, unit);
+    private void SetLengthAndScale(SpriteRenderer sr, float scale) {
+        SetLength(sr);
         var newScale = sr.transform.localScale;
-        newScale.x = newScale.y * scale / unit;
+        newScale.x = newScale.y * scale / _unit;
         sr.transform.localScale = newScale;
     }
 
-    private void SetLength(SpriteRenderer sr, int unit) {
+    private void SetLength(SpriteRenderer sr) {
         var newSize = sr.size;
-        newSize.x = newSize.y * unit;
+        newSize.x = newSize.y * _unit;
         sr.size = newSize;
         UpdateBarPosition();
     }
