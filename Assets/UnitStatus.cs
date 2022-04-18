@@ -53,8 +53,6 @@ public class UnitStatus
     private int attack;
     protected int AttackRange { get; set; }
 
-    //private GUIBar hpBar;
-
     private float speed = 5;
 
     public UnitStatus(Unit owner){
