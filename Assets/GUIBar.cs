@@ -54,13 +54,13 @@ public class GUIBar : MonoBehaviour {
     private void SetLengthAndScale(SpriteRenderer sr, float scale) {
         SetLength(sr);
         var newScale = sr.transform.localScale;
-        newScale.x = newScale.y * scale / _unit;
+        newScale.x = newScale.y * scale / _unit * 100;
         sr.transform.localScale = newScale;
     }
 
     private void SetLength(SpriteRenderer sr) {
         var newSize = sr.size;
-        newSize.x = newSize.y * _unit;
+        newSize.x = newSize.y * _unit / 100;
         sr.size = newSize;
         UpdateBarPosition();
     }
