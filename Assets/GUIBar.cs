@@ -31,6 +31,7 @@ public class GUIBar : MonoBehaviour {
 
     private float remainBlinkTime = 0f;
     private Coroutine blinkRoutine = null;
+    private const float barsPerUnit = 10;
 
     protected void Awake() {
         var gui0 = "GUI0";
@@ -54,13 +55,13 @@ public class GUIBar : MonoBehaviour {
     private void SetLengthAndScale(SpriteRenderer sr, float scale) {
         SetLength(sr);
         var newScale = sr.transform.localScale;
-        newScale.x = newScale.y * scale / _unit * 100;
+        newScale.x = newScale.y * scale / _unit * barsPerUnit;
         sr.transform.localScale = newScale;
     }
 
     private void SetLength(SpriteRenderer sr) {
         var newSize = sr.size;
-        newSize.x = newSize.y * _unit / 100;
+        newSize.x = newSize.y * _unit / barsPerUnit;
         sr.size = newSize;
         UpdateBarPosition();
     }
