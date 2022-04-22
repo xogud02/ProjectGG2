@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class UnitStatus
 {
+    public enum Type
+    {
+        Hp,
+        Exp,
+        Attack,
+        AttackRange,
+    }
+
     private readonly Unit _owner;
     public int MaxHp => Level * 10;
     private int hp = 10;
