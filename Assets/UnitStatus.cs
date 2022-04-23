@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class UnitStatus
 {
-    public enum Type
+    public enum ValueType
     {
         Hp,
         Exp,
         Attack,
         AttackRange,
+    }
+
+    public class StatValue
+    {
+        private int _value;
     }
 
     private readonly Unit _owner;
