@@ -3,12 +3,30 @@ using UnityEngine;
 
 public class UnitStatus
 {
+    public enum ColorType
+    {
+        None,
+        Red,
+        Green,
+        Blue,
+    }
+
     public enum ValueType
     {
+        None,
         Hp,
         Exp,
         Attack,
         AttackRange,
+    }
+
+    public enum QuantityType
+    {
+        None,
+        Decreased,
+        Increased,
+        Remain,
+        Max,
     }
 
     public class StatValue
