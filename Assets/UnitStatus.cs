@@ -32,10 +32,13 @@ public class UnitStatus
 
     public class StatValue
     {
+        private readonly ValueType _valueType;
+        private readonly QuantityType _quantityType;
         private int _value;
     }
 
     private readonly Dictionary<(ValueType, QuantityType), int> _statValues = new Dictionary<(ValueType, QuantityType), int>();
+
 
     private readonly Unit _owner;
     public int MaxHp => Level * 10;
