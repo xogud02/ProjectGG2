@@ -30,14 +30,19 @@ public class UnitStatus
         Max,
     }
 
-    public class StatValue
+    public class StatValue : IEquatable<StatValue>
     {
         private readonly ValueType _valueType;
         private readonly QuantityType _quantityType;
         private int _value;
+
+        public bool Equals(StatValue other)
+        {
+            return other != null && _valueType == other._valueType && _quantityType == other._quantityType;
+        }
     }
 
-    private readonly Dictionary<(ValueType, QuantityType), int> _statValues = new Dictionary<(ValueType, QuantityType), int>();
+    private readonly ISet<StatValue> statValues = new HashSet<StatValue>();
 
 
     private readonly Unit _owner;
