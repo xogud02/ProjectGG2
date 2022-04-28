@@ -36,6 +36,13 @@ public class UnitStatus
         private readonly QuantityType _quantityType;
         private int _value;
 
+        public StatValue(ValueType valueType, QuantityType quantityType, int value = 0)
+        {
+            _valueType = valueType;
+            _quantityType = quantityType;
+            _value = value;
+        }
+
         public bool Equals(StatValue other)
         {
             return other != null && _valueType == other._valueType && _quantityType == other._quantityType;
