@@ -48,9 +48,15 @@ public class UnitStatus
     }
 
     private readonly IDictionary<StatType, int> statValues = new Dictionary<StatType, int>();
-    private int GetOrAddValue(ValueType valueType, QuantityType quantityType)
+    private int GetOrInitValue(ValueType valueType, QuantityType quantityType)
     {
-        return 0;
+        var key = new StatType(valueType, quantityType);
+        if (statValues.TryGetValue(key, out var ret))
+        {
+            return ret;
+        }
+
+        return statValues[key] = 0;
     }
 
 
@@ -106,7 +112,8 @@ public class UnitStatus
 
     private float speed = 5;
 
-    public UnitStatus(Unit owner){
+    public UnitStatus(Unit owner)
+    {
         _owner = owner;
     }
 }
