@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 크게 rgb 3개스탯이 존재하며 아이템과 레벨에따라 증가, 오르는데에는 개체값 존재
+/// 각각 3개스탯 수치에 종속된 스탯들 있음
+/// </summary>
 public class UnitStatus
 {
     public enum ColorType
