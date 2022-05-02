@@ -33,36 +33,6 @@ public class UnitStatus
         Max,
     }
 
-    public class StatType : IEquatable<StatType>
-    {
-        private readonly ValueType _valueType;
-        private readonly QuantityType _quantityType;
-
-        public StatType(ValueType valueType, QuantityType quantityType)
-        {
-            _valueType = valueType;
-            _quantityType = quantityType;
-        }
-
-        public bool Equals(StatType other)
-        {
-            return other != null && _valueType == other._valueType && _quantityType == other._quantityType;
-        }
-    }
-
-    private readonly IDictionary<StatType, int> statValues = new Dictionary<StatType, int>();
-    private int GetOrInitValue(ValueType valueType, QuantityType quantityType)
-    {
-        var key = new StatType(valueType, quantityType);
-        if (statValues.TryGetValue(key, out var ret))
-        {
-            return ret;
-        }
-
-        return statValues[key] = 0;
-    }
-
-
     private readonly Unit _owner;
     public int MaxHp => Level * 10;
     private int hp = 10;
@@ -78,6 +48,10 @@ public class UnitStatus
     }
 
     public Action<int, int> onHpChange;
+
+    public int Red => _level;
+    public int Green => _level;
+    public int Blue => _level;
 
     public int RewardExp => 15;
     private int _exp;
