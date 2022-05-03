@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 크게 rgb 3개스탯이 존재하며 아이템과 레벨에따라 증가, 오르는데에는 개체값 존재
@@ -84,10 +83,10 @@ public class UnitStatus
 
     public Action<int, int> onLevelChange;
 
-    private int attack;
+    public int Attack => Red;
     protected int AttackRange { get; set; }
 
-    private float speed = 5;
+    public float Speed => Green;
 
     public UnitStatus(Unit owner)
     {
