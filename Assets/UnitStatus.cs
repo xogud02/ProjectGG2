@@ -32,8 +32,7 @@ public class UnitStatus
         Max,
     }
 
-    private readonly Unit _owner;
-    public int MaxHp => Level * 10;
+    public int MaxHp => Red * 10;
     private int hp = 10;
     public int Hp
     {
@@ -48,9 +47,9 @@ public class UnitStatus
 
     public Action<int, int> onHpChange;
 
-    public int Red => _level;
-    public int Green => _level;
-    public int Blue => _level;
+    public int Red => Level;
+    public int Green => Level;
+    public int Blue => Level;
 
     public int RewardExp => 15;
     private int _exp;
@@ -90,6 +89,5 @@ public class UnitStatus
 
     public UnitStatus(Unit owner)
     {
-        _owner = owner;
     }
 }
