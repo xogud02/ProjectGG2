@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 크게 rgb 3개스탯이 존재하며 아이템과 레벨에따라 증가, 오르는데에는 개체값 존재
@@ -31,6 +32,21 @@ public class UnitStatus
         Remain,
         Max,
     }
+
+    public class StatKeyType : IEquatable<StatKeyType>
+    {
+        private ValueType _valueType;
+
+        public bool Equals(StatKeyType other) => other != null && other._valueType == _valueType;
+    }
+
+    public class StatChangeEvent
+    {
+        public readonly StatKeyType _statKeyType;
+        public StatChangeEvent(StatKeyType statKeyType) => _statKeyType = statKeyType;
+    }
+
+    private Dictionary<StatKeyType, Action<StatChangeEvent>> _statChangeEvents;
 
     public int MaxHp => Red * 10;
     private int hp = 10;
