@@ -37,16 +37,46 @@ public class UnitStatus
     {
         private ValueType _valueType;
 
+        public StatKeyType(ValueType valueType) => _valueType = valueType;
+
         public bool Equals(StatKeyType other) => other != null && other._valueType == _valueType;
     }
 
     public class StatChangeEvent
     {
         public readonly StatKeyType _statKeyType;
-        public StatChangeEvent(StatKeyType statKeyType) => _statKeyType = statKeyType;
+        public readonly int Before;
+        public readonly int After;
+        public StatChangeEvent(StatKeyType statKeyType, int before, int after)
+        {
+            _statKeyType = statKeyType;
+            Before = before;
+            After = after;
+        }
     }
 
-    private Dictionary<StatKeyType, Action<StatChangeEvent>> _statChangeEvents;
+    public delegate void OnStatChange(StatChangeEvent _);
+
+    private Dictionary<StatKeyType, OnStatChange> _statChangeEvents;
+
+    public void AddListener(StatKeyType key, OnStatChange onStatChange)
+    {
+        if (_statChangeEvents.ContainsKey(key))
+        {
+            _statChangeEvents[key] += onStatChange;
+            return;
+        }
+
+        _statChangeEvents[key] = onStatChange;
+    }
+
+    public void RemoveListener(StatKeyType key, OnStatChange onStatChange)
+    {
+        if (_statChangeEvents.ContainsKey(key))
+        {
+            _statChangeEvents[key] -= onStatChange;
+        }
+    }
 
     public int MaxHp => Red * 10;
     private int hp = 10;
@@ -57,11 +87,13 @@ public class UnitStatus
         {
             var before = hp;
             hp = Mathf.Clamp(value, 0, MaxHp);
-            onHpChange?.Invoke(before, hp);
+            var key = new StatKeyType(ValueType.Hp);
+            if (_statChangeEvents.TryGetValue(key, out var onChange))
+            {
+                onChange?.Invoke(new StatChangeEvent(key, before, hp));
+            }
         }
     }
-
-    public Action<int, int> onHpChange;
 
     public int Red => Level;
     public int Green => Level;
@@ -105,5 +137,7 @@ public class UnitStatus
 
     public UnitStatus(Unit owner)
     {
+        UnityEngine.UI.Button btn = null;
+        btn.onClick.AddListener(null);
     }
 }

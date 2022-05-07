@@ -50,14 +50,14 @@ public class Unit : MonoBehaviour
     public void Start()
     {
         _status = new UnitStatus(this);
-        _status.onHpChange += (before, hp) =>
-        {
-            hpBar.Unit = hp;
-            if (hp < before)
-            {
-                hpBar.Blink();
-            }
-        };
+        _status.AddListener(new UnitStatus.StatKeyType(UnitStatus.ValueType.Hp), _ =>
+         {
+             hpBar.Unit = _.After;
+             if (_.After < _.Before)
+             {
+                 hpBar.Blink();
+             }
+         });
 
         _status.onLevelChange += (before, level) =>
         {
