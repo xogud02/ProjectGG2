@@ -40,6 +40,8 @@ public class UnitStatus
         public StatKeyType(ValueType valueType) => _valueType = valueType;
 
         public bool Equals(StatKeyType other) => other != null && other._valueType == _valueType;
+
+        public override int GetHashCode() => ((int)_valueType).GetHashCode();
     }
 
     public class StatChangeEvent
@@ -57,7 +59,7 @@ public class UnitStatus
 
     public delegate void OnStatChange(StatChangeEvent _);
 
-    private Dictionary<StatKeyType, OnStatChange> _statChangeEvents;
+    private Dictionary<StatKeyType, OnStatChange> _statChangeEvents = new Dictionary<StatKeyType, OnStatChange>();
 
     public void AddListener(StatKeyType key, OnStatChange onStatChange)
     {
@@ -137,7 +139,5 @@ public class UnitStatus
 
     public UnitStatus(Unit owner)
     {
-        UnityEngine.UI.Button btn = null;
-        btn.onClick.AddListener(null);
     }
 }
