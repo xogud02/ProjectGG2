@@ -22,6 +22,7 @@ public class UnitStatus
         Exp,
         Attack,
         AttackRange,
+        Level,
     }
 
     public enum QuantityType
@@ -126,11 +127,13 @@ public class UnitStatus
         {
             var before = _level;
             _level = value;
-            onLevelChange?.Invoke(before, _level);
+            var key = new StatKeyType(ValueType.Level);
+            if(_statChangeEvents.TryGetValue(key, out var onStatChange))
+            {
+                onStatChange?.Invoke(new StatChangeEvent(key, before, _level));
+            }
         }
     }
-
-    public Action<int, int> onLevelChange;
 
     public int Attack => Red;
     protected int AttackRange { get; set; }

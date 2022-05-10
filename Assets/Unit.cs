@@ -59,15 +59,16 @@ public class Unit : MonoBehaviour
              }
          });
 
-        _status.onLevelChange += (before, level) =>
-        {
-            if (level > before)
-            {
-                _status.Hp = _status.MaxHp;
-                hpBar.Init(_status.Hp, hpBar.ShowFrame);
-                Debug.Log("level up to " + level);
-            }
-        };
+        _status.AddListener(new UnitStatus.StatKeyType(UnitStatus.ValueType.Level), _ =>
+         {
+             var level = _.After;
+             if (level > _.Before)
+             {
+                 _status.Hp = _status.MaxHp;
+                 hpBar.Init(_status.Hp, hpBar.ShowFrame);
+                 Debug.Log("level up to " + level);
+             }
+         });
         animator = GetComponent<Animator>();
         currentDirection = Down;
         if (GridObject.Initialized)
