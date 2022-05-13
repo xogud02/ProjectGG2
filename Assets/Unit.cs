@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -25,6 +24,7 @@ public class Unit : MonoBehaviour
     [SerializeField] protected Weapon _weapon;
     [SerializeField] protected Unit target;
     protected UnitStatus _status;
+    protected PathFinder _pathFinder;
     public Unit Target
     {
         get => target;
@@ -46,6 +46,11 @@ public class Unit : MonoBehaviour
     private Animator animator;
     private Queue<Vector2Int> currentPath = new Queue<Vector2Int>();
     public Vector2Int CurrentPosition { get; protected set; }
+
+    protected void Awake()
+    {
+        _pathFinder = new PathFinder();
+    }
 
     public void Start()
     {
