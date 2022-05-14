@@ -107,22 +107,7 @@ public class Unit : MonoBehaviour
 
     protected void OnDrawGizmos()
     {
-        if (currentPath.Count == 0)
-        {
-            return;
-        }
-
-        var z = transform.position.z;
-        var current = (Vector3)GridField.Convert(CurrentPosition);
-        Gizmos.color = Color.white;
-        current.z = z;
-        foreach (var next in currentPath)
-        {
-            var nextV3 = (Vector3)GridField.Convert(next);
-            nextV3.z = z;
-            Gizmos.DrawLine(current, nextV3);
-            current = nextV3;
-        }
+        _pathFinder.OnDrawGizmos(GridField.Convert(CurrentPosition), transform.position.z);
     }
 
     public void Stop()
