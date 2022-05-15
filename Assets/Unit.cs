@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -44,8 +43,8 @@ public class Unit : MonoBehaviour
     private Tween moving;
 
     private Animator animator;
-    private Queue<Vector2Int> currentPath = new Queue<Vector2Int>();
     public Vector2Int CurrentPosition { get; protected set; }
+    public Vector2Int CurrentTargetPosition { get; protected set; }
 
     protected void Awake()
     {
@@ -151,36 +150,23 @@ public class Unit : MonoBehaviour
     public void SetPath(Vector2Int v)
     {
         EmptyPath();
-        var newPath = AStar.Find(currentPath.Count > 0 ? currentPath.Peek() : CurrentPosition, v);
-        var wasMoving = IsMoving;
-        while (newPath.Count > 0)
-        {
-            currentPath.Enqueue(newPath.Pop());
-        }
 
-        if (wasMoving == false && currentPath.Count > 0)
+        var wasMoving = IsMoving;
+
+        _pathFinder.SetPath(_pathFinder.IsRemainPath ? CurrentTargetPosition : CurrentPosition, v);
+
+        if (wasMoving == false && _pathFinder.TryGetNextTile(out var next))
         {
-            Move(currentPath.Peek());
+            Move(next);
         }
     }
 
     private void EmptyPath(bool leaveFirst = true)
     {
-        if (leaveFirst == false)
-        {
-            currentPath.Clear();
-            return;
-        }
-
-        var lastPath = new Queue<Vector2Int>();
-        if (IsMoving && currentPath.Count > 0)
-        {
-            lastPath.Enqueue(currentPath.Dequeue());
-        }
-        currentPath = lastPath;
+        _pathFinder.EmptyPath(leaveFirst && IsMoving);
     }
 
-    public bool IsMoving => currentPath.Count > 0 || (moving?.active ?? false);
+    public bool IsMoving => _pathFinder.IsRemainPath || (moving?.active ?? false);
 
     private int GetPreferDirection(float angle)
     {
@@ -227,6 +213,7 @@ public class Unit : MonoBehaviour
 
     public void Move(Vector2Int v)
     {
+        CurrentTargetPosition = v;
         var result = GridField.UnOccupy(CurrentPosition);
         if (result != null && result != this)
         {
@@ -257,16 +244,10 @@ public class Unit : MonoBehaviour
         {
             moving = null;
 
-            if (currentPath.Count == 0)
+            CurrentPosition = CurrentTargetPosition;
+            if(_pathFinder.TryGetNextTile(out var next))
             {
-                return;
-            }
-
-            CurrentPosition = currentPath.Dequeue();
-
-            if (currentPath.Count != 0)
-            {
-                Move(currentPath.Peek());
+                Move(next);
             }
         };
     }
