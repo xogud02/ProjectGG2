@@ -107,7 +107,7 @@ public class Unit : MonoBehaviour
 
     protected void OnDrawGizmos()
     {
-        _pathFinder.OnDrawGizmos(GridField.Convert(CurrentPosition), transform.position.z);
+        _pathFinder?.OnDrawGizmos(GridField.Convert(CurrentPosition), transform.position.z);
     }
 
     public void Stop()
