@@ -104,10 +104,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    protected void OnDrawGizmos()
-    {
-        _pathFinder?.OnDrawGizmos(GridField.Convert(CurrentPosition), transform.position.z);
-    }
+    protected void OnDrawGizmos() => _pathFinder?.OnDrawGizmos(GridField.Convert(CurrentPosition), transform.position.z);
 
     public void Stop()
     {
@@ -155,16 +152,13 @@ public class Unit : MonoBehaviour
 
         _pathFinder.SetPath(_pathFinder.IsRemainPath ? CurrentTargetPosition : CurrentPosition, v);
 
-        if (wasMoving == false && _pathFinder.TryGetNextTile(out var next))
+        if (wasMoving == false)
         {
-            Move(next);
+            TryMoveSingle();
         }
     }
 
-    private void EmptyPath(bool leaveFirst = true)
-    {
-        _pathFinder.EmptyPath(leaveFirst && IsMoving);
-    }
+    private void EmptyPath(bool leaveFirst = true) => _pathFinder.EmptyPath(leaveFirst && IsMoving);
 
     public bool IsMoving => _pathFinder.IsRemainPath || (moving?.active ?? false);
 
@@ -245,11 +239,16 @@ public class Unit : MonoBehaviour
             moving = null;
 
             CurrentPosition = CurrentTargetPosition;
-            if(_pathFinder.TryGetNextTile(out var next))
-            {
-                Move(next);
-            }
+            TryMoveSingle();
         };
+    }
+
+    private void TryMoveSingle()
+    {
+        if (_pathFinder.TryGetNextTile(out var next))
+        {
+            Move(next);
+        }
     }
 
     protected virtual void OnMoveSingle(Vector2 direction)
