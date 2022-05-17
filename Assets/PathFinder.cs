@@ -35,31 +35,16 @@ public class PathFinder
         }
     }
 
-    public void SetPath(Vector2Int current, Vector2Int next)
+    public void ResetPath(Vector2Int current, Vector2Int next)
     {
+        currentPath.Clear();
+
         var newPath = AStar.Find(current, next);
         while (newPath.Count > 0)
         {
             currentPath.Enqueue(newPath.Pop());
         }
     }
-
-    public void EmptyPath(bool remainFirst)
-    {
-        if(IsRemainPath == false)
-        {
-            return;
-        }
-
-        var first = currentPath.Peek();
-        currentPath.Clear();
-
-        if(remainFirst == false)
-        {
-            currentPath.Enqueue(first);
-        }
-    }
-
 
     public bool IsRemainPath => currentPath.Count > 0;
 }

@@ -113,7 +113,6 @@ public class Unit : MonoBehaviour
             return;
         }
 
-        EmptyPath();
     }
 
     public bool Hit(Unit by)
@@ -146,11 +145,10 @@ public class Unit : MonoBehaviour
 
     public void SetPath(Vector2Int v)
     {
-        EmptyPath();
 
         var wasMoving = IsMoving;
 
-        _pathFinder.SetPath(_pathFinder.IsRemainPath ? CurrentTargetPosition : CurrentPosition, v);
+        _pathFinder.ResetPath(_pathFinder.IsRemainPath ? CurrentTargetPosition : CurrentPosition, v);
 
         if (wasMoving == false)
         {
@@ -158,7 +156,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void EmptyPath(bool leaveFirst = true) => _pathFinder.EmptyPath(leaveFirst && IsMoving);
 
     public bool IsMoving => _pathFinder.IsRemainPath || (moving?.active ?? false);
 
@@ -200,7 +197,7 @@ public class Unit : MonoBehaviour
 
     public void MoveImmidiately(Vector2Int v)
     {
-        EmptyPath(false);
+        Stop();
         transform.position = GridField.Convert(v);
         CurrentPosition = v;
     }
@@ -221,7 +218,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            EmptyPath(false);
+            Stop();
             this.Occupy(CurrentPosition);
             return;
         }
