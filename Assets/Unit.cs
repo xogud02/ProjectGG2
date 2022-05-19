@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 public enum Direction
@@ -40,15 +39,16 @@ public class Unit : MonoBehaviour
     private readonly int Up = Animator.StringToHash("Up");
     private readonly int Down = Animator.StringToHash("Down");
     private int currentDirection;
-    private Tween moving;
+    private UnitMovementController _movement;
 
     private Animator animator;
-    public Vector2Int CurrentPosition { get; protected set; }
-    public Vector2Int CurrentTargetPosition { get; protected set; }
+    public Vector2Int CurrentPosition { get => _movement.CurrentPosition; protected set => _movement.CurrentPosition = value; }
+    public Vector2Int CurrentTargetPosition { get => _movement.CurrentTargetPosition; protected set => _movement.CurrentTargetPosition = value; }
 
     protected void Awake()
     {
         _pathFinder = new PathFinder();
+        _movement = new UnitMovementController(transform);
     }
 
     public void Start()
@@ -112,7 +112,6 @@ public class Unit : MonoBehaviour
         {
             return;
         }
-
     }
 
     public bool Hit(Unit by)
@@ -157,7 +156,7 @@ public class Unit : MonoBehaviour
     }
 
 
-    public bool IsMoving => _pathFinder.IsRemainPath || (moving?.active ?? false);
+    public bool IsMoving => _pathFinder.IsRemainPath || _movement.IsMoving;
 
     private int GetPreferDirection(float angle)
     {
@@ -206,7 +205,7 @@ public class Unit : MonoBehaviour
     {
         CurrentTargetPosition = v;
         var result = GridField.UnOccupy(CurrentPosition);
-        if (result != null && result != this)
+        if (result != null && result != this)//todo cleanup Logic
         {
             result.Occupy(CurrentPosition);
             return;
@@ -227,17 +226,7 @@ public class Unit : MonoBehaviour
         var direction = dest - transform.position.Convert();
         OnMoveSingle(direction);
 
-        var dist = direction.magnitude;
-        var time = dist / speed;
-        moving = DOTween.To(() => (Vector2)transform.position, vec => transform.position = vec, dest, time).SetEase(Ease.Linear);
-
-        moving.onComplete = () =>
-        {
-            moving = null;
-
-            CurrentPosition = CurrentTargetPosition;
-            TryMoveSingle();
-        };
+        _movement.StartMoveSingle(direction, speed, dest, TryMoveSingle);
     }
 
     private void TryMoveSingle()
