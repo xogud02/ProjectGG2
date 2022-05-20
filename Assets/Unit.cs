@@ -197,7 +197,6 @@ public class Unit : MonoBehaviour
     public void MoveImmidiately(Vector2Int v)
     {
         Stop();
-        transform.position = GridField.Convert(v);
         CurrentPosition = v;
     }
 
@@ -222,11 +221,9 @@ public class Unit : MonoBehaviour
             return;
         }
 
-        var dest = GridField.Convert(v);
-        var direction = dest - transform.position.Convert();
+        var direction = _movement.GetDirection(v);
         OnMoveSingle(direction);
-
-        _movement.StartMoveSingle(direction, speed, dest, TryMoveSingle);
+        _movement.StartMoveSingle(direction, speed, v, TryMoveSingle);
     }
 
     private void TryMoveSingle()
