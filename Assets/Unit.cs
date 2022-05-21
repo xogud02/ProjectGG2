@@ -41,7 +41,8 @@ public class Unit : MonoBehaviour
     private int currentDirection;
     private UnitMovementController _movement;
 
-    private Animator animator;
+    private UnitAnimationController unitAnimationController;
+
     public Vector2Int CurrentPosition { get => _movement.CurrentPosition; protected set => _movement.CurrentPosition = value; }
     public Vector2Int CurrentTargetPosition { get => _movement.CurrentTargetPosition; protected set => _movement.CurrentTargetPosition = value; }
 
@@ -73,7 +74,7 @@ public class Unit : MonoBehaviour
                  Debug.Log("level up to " + level);
              }
          });
-        animator = GetComponent<Animator>();
+        unitAnimationController = new UnitAnimationController(GetComponent<Animator>());
         currentDirection = Down;
         if (GridObject.Initialized)
         {
@@ -144,7 +145,6 @@ public class Unit : MonoBehaviour
 
     public void SetPath(Vector2Int v)
     {
-
         var wasMoving = IsMoving;
 
         _pathFinder.ResetPath(_pathFinder.IsRemainPath ? CurrentTargetPosition : CurrentPosition, v);
@@ -157,27 +157,6 @@ public class Unit : MonoBehaviour
 
 
     public bool IsMoving => _pathFinder.IsRemainPath || _movement.IsMoving;
-
-    private int GetPreferDirection(float angle)
-    {
-        var absAngle = Mathf.Abs(angle);
-        if (absAngle < 45f)
-        {
-            return Right;
-        }
-        else if (absAngle > 135f)
-        {
-            return Left;
-        }
-        else if (angle > 0)
-        {
-            return Up;
-        }
-        else
-        {
-            return Down;
-        }
-    }
 
     public virtual bool IsInRange(Unit unit)
     {
@@ -236,11 +215,6 @@ public class Unit : MonoBehaviour
 
     protected virtual void OnMoveSingle(Vector2 direction)
     {//TODO weapon Direction
-        var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
-        if (preferDirection != currentDirection)
-        {
-            animator.SetTrigger(preferDirection);
-            currentDirection = preferDirection;
-        }
+        unitAnimationController.RefreshDirection(direction);
     }
 }
