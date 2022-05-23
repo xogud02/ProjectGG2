@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UnitAnimationController
@@ -65,6 +66,26 @@ public class UnitAnimationController
 
     private int GetDirectionHash(MoveDirection direction)
     {
-        return Up;
+        switch (direction)
+        {
+            case MoveDirection.Up:
+                return Up;
+            case MoveDirection.Down:
+                return Down;
+            case MoveDirection.Left:
+                return Left;
+            case MoveDirection.Right:
+                return Right;
+            case MoveDirection.UpRight:
+                return _lastDirectionHash == Up ? Up : Right;
+            case MoveDirection.UpLeft:
+                return _lastDirectionHash == Up ? Up : Left;
+            case MoveDirection.DownLeft:
+                return _lastDirectionHash == Left ? Left : Down;
+            case MoveDirection.DownRight:
+                return _lastDirectionHash == Right ? Right : Down;
+            default:
+                return Down;
+        }
     }
 }
