@@ -77,15 +77,17 @@ public class UnitAnimationController
             case MoveDirection.Right:
                 return Right;
             case MoveDirection.UpRight:
-                return _lastDirectionHash == Up ? Up : Right;
+                return GetHashByPriority(Up, Right);
             case MoveDirection.UpLeft:
-                return _lastDirectionHash == Up ? Up : Left;
+                return GetHashByPriority(Up, Left);
             case MoveDirection.DownLeft:
-                return _lastDirectionHash == Left ? Left : Down;
+                return GetHashByPriority(Left, Down);
             case MoveDirection.DownRight:
-                return _lastDirectionHash == Right ? Right : Down;
+                return GetHashByPriority(Right, Down);
             default:
                 return Down;
         }
+
+        int GetHashByPriority(int first, int second) => _lastDirectionHash == first ? first : second;
     }
 }
