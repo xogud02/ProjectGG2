@@ -28,7 +28,7 @@ public class UnitAnimationController
 
     public void RefreshDirection(Vector2 direction)
     {
-        var preferDirection = GetPreferDirection(Vector2.SignedAngle(Vector2.right, direction));
+        var preferDirection = GetDirectionHash(ToMoveDirection(direction));
         if (preferDirection != _lastDirectionHash)
         {
             _animator.SetTrigger(preferDirection);
@@ -57,7 +57,7 @@ public class UnitAnimationController
         }
     }
 
-    private MoveDirection ToMoveDirection(Vector2 direction)
+    private MoveDirection ToMoveDirection(Vector2 direction)//todo impl
     {
         var signedAngle = Vector2.SignedAngle(Vector2.right, direction);
         var absAngle = Mathf.Abs(signedAngle);
