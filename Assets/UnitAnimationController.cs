@@ -61,6 +61,17 @@ public class UnitAnimationController
     {
         var signedAngle = Vector2.SignedAngle(Vector2.right, direction);
         var absAngle = Mathf.Abs(signedAngle);
+        const float half = 22.5f;
+        if (absAngle < half)
+        {
+            return MoveDirection.Right;
+        }
+
+        if(absAngle > 180 - half)
+        {
+            return MoveDirection.Left;
+        }
+
         return MoveDirection.None;
     }
 
