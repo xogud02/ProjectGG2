@@ -36,27 +36,6 @@ public class UnitAnimationController
         }
     }
 
-    private int GetPreferDirection(float angle)
-    {
-        var absAngle = Mathf.Abs(angle);
-        if (absAngle < 45f)
-        {
-            return Right;
-        }
-        else if (absAngle > 135f)
-        {
-            return Left;
-        }
-        else if (angle > 0)
-        {
-            return Up;
-        }
-        else
-        {
-            return Down;
-        }
-    }
-
     private MoveDirection ToMoveDirection(Vector2 direction)//todo impl
     {
         var signedAngle = Vector2.SignedAngle(Vector2.right, direction);
