@@ -41,17 +41,31 @@ public class UnitAnimationController
         var signedAngle = Vector2.SignedAngle(Vector2.right, direction);
         var absAngle = Mathf.Abs(signedAngle);
         const float half = 22.5f;
+        const float leftAngle = 180;
+        const float verticalAngle = 90;
         if (absAngle < half)
         {
             return MoveDirection.Right;
         }
 
-        if(absAngle > 180 - half)
+        if (absAngle > leftAngle - half)
         {
             return MoveDirection.Left;
         }
 
-        return MoveDirection.None;
+        var isUpSide = signedAngle > 0;
+
+        if (absAngle > verticalAngle + half)
+        {
+            return isUpSide ? MoveDirection.UpLeft : MoveDirection.DownLeft;
+        }
+
+        if (absAngle > verticalAngle - half)
+        {
+            return isUpSide ? MoveDirection.Up : MoveDirection.Down;
+        }
+
+        return isUpSide ? MoveDirection.UpRight : MoveDirection.DownRight;
     }
 
     private int GetDirectionHash(MoveDirection direction)
