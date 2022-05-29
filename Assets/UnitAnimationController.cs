@@ -22,7 +22,6 @@ public class UnitAnimationController
     private readonly int Up = Animator.StringToHash("Up");
     private readonly int Down = Animator.StringToHash("Down");
     private int _lastDirectionHash;
-    private MoveDirection _lastMoveDirection;
 
     public UnitAnimationController(Animator animator) => _animator = animator;
 
@@ -36,7 +35,7 @@ public class UnitAnimationController
         }
     }
 
-    private MoveDirection ToMoveDirection(Vector2 direction)//todo impl
+    private MoveDirection ToMoveDirection(Vector2 direction)
     {
         var signedAngle = Vector2.SignedAngle(Vector2.right, direction);
         var absAngle = Mathf.Abs(signedAngle);
