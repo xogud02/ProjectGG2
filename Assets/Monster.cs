@@ -20,7 +20,7 @@ public class Monster : Unit {
         gameObject.AddComponent<BoxCollider2D>();
     }
 
-    private void OnMouseDown() {
+    private void OnMouseDown() {//TODO cohense click stuffs
         Debug.Log($"{this} ckicked");
         Game.LastClicked = this;
     }

@@ -76,14 +76,7 @@ public class Unit : MonoBehaviour
          });
         unitAnimationController = new UnitAnimationController(GetComponent<Animator>());
         currentDirection = Down;
-        if (GridObject.Initialized)
-        {
-            transform.localScale *= GridObject.ScaleFactor;
-        }
-        else
-        {
-            GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
-        }
+        GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
 
         var sr = GetComponent<SpriteRenderer>();
         sr.sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!

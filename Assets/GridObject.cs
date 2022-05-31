@@ -6,7 +6,26 @@ using Random = UnityEngine.Random;
 public class GridObject : MonoBehaviour {
     public static float ScaleFactor { get; private set; }
     public static bool Initialized { get; private set; }
-    public static Action OnInit;
+    public delegate void InitializeCallback();
+    private static InitializeCallback _onInit;
+    public static event InitializeCallback OnInit
+    {
+        add
+        {
+            if (Initialized)
+            {
+                value.Invoke();
+                return;
+            }
+
+            _onInit += value;
+        }
+
+        remove
+        {
+            _onInit -= value;
+        }
+    }
 
     private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
@@ -16,7 +35,7 @@ public class GridObject : MonoBehaviour {
 
     private static void Init() {
         ScaleFactor = 3;
-        OnInit?.Invoke();
+        _onInit.Invoke();
         Initialized = true;
     }
 
