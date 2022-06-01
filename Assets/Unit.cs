@@ -34,13 +34,7 @@ public class Unit : MonoBehaviour
     private GUIBar hpBar;
 
     private float speed = 5;
-    private readonly int Right = Animator.StringToHash("Right");
-    private readonly int Left = Animator.StringToHash("Left");
-    private readonly int Up = Animator.StringToHash("Up");
-    private readonly int Down = Animator.StringToHash("Down");
-    private int currentDirection;
     private UnitMovementController _movement;
-
     private UnitAnimationController unitAnimationController;
 
     public Vector2Int CurrentPosition { get => _movement.CurrentPosition; protected set => _movement.CurrentPosition = value; }
@@ -75,7 +69,6 @@ public class Unit : MonoBehaviour
              }
          });
         unitAnimationController = new UnitAnimationController(GetComponent<Animator>());
-        currentDirection = Down;
         GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
 
         var sr = GetComponent<SpriteRenderer>();
