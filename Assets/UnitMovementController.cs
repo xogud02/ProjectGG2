@@ -16,16 +16,17 @@ public class UnitMovementController
         }
     }
     public Vector2Int CurrentTargetPosition { get; set; }
+    public float Speed { get; set; } = 5;
     private Tween moving;
     private Vector2Int currentPosition;
 
     public bool IsMoving => (moving?.active ?? false);
 
-    public void StartMoveSingle(Vector2 direction, float speed, Vector2Int v, Action onComplete)
+    public void StartMoveSingle(Vector2 direction, Vector2Int v, Action onComplete)
     {
         var dest = GridField.Convert(v);
         var dist = direction.magnitude;
-        var time = dist / speed;
+        var time = dist / Speed;
         moving = DOTween.To(() => (Vector2)_transform.position, vec => _transform.position = vec, dest, time).SetEase(Ease.Linear);
 
         moving.onComplete = () =>

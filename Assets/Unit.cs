@@ -33,7 +33,6 @@ public class Unit : MonoBehaviour
 
     private GUIBar hpBar;
 
-    private float speed = 5;
     private UnitMovementController _movement;
     private UnitAnimationController unitAnimationController;
 
@@ -188,7 +187,7 @@ public class Unit : MonoBehaviour
 
         var direction = _movement.GetDirection(v);
         OnMoveSingle(direction);
-        _movement.StartMoveSingle(direction, speed, v, TryMoveSingle);
+        _movement.StartMoveSingle(direction, v, TryMoveSingle);
     }
 
     private void TryMoveSingle()
