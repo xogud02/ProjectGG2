@@ -17,12 +17,6 @@ public class Monster : Unit {
         FindTarget().Forget();
         AttackRange = 2;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        gameObject.AddComponent<BoxCollider2D>();
-    }
-
-    private void OnMouseDown() {//TODO cohense click stuffs
-        Debug.Log($"{this} ckicked");
-        Game.LastClicked = this;
     }
 
     public override void Die() {

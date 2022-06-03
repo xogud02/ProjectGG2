@@ -43,6 +43,12 @@ public class Unit : MonoBehaviour
     {
         _pathFinder = new PathFinder();
         _movement = new UnitMovementController(transform);
+        gameObject.AddComponent<BoxCollider2D>();
+    }
+    private void OnMouseDown()
+    {//TODO cohense click stuffs
+        Debug.Log($"{this} ckicked");
+        Game.LastClicked = this;
     }
 
     public void Start()
