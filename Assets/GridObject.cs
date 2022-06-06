@@ -134,7 +134,7 @@ public class GridObject : MonoBehaviour {
     }
 
     public void OnTileClicked(Tile tile) {
-        OnClick?.Invoke(GridPosition + tile.GridPosition);
+        OnClick?.Invoke(GridPosition + tile.LocalPosition);
     }
 
 }

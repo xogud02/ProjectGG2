@@ -14,7 +14,7 @@ public enum TileType {
 public class Tile : MonoBehaviour {
 
     public TileType tileType;
-    public Vector2Int GridPosition { get; private set; }
+    public Vector2Int LocalPosition { get; private set; }
     public Action<Tile> OnClick;
     private BoxCollider2D boxCollider;
 
@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour {
                 sr.sprite = handle.Result;
                 sr.sortingOrder = -1;
                 ret.boxCollider = tile.AddComponent<BoxCollider2D>();
-                ret.GridPosition = position;
+                ret.LocalPosition = position;
                 tile.transform.position = GridField.Convert(position);
                 ret.tileType = tileType;
             }
@@ -56,7 +56,7 @@ public class Tile : MonoBehaviour {
 
 
     private Color GetTileGizmoColor() {
-        if (GridField.IsMovable(GridPosition) == false) {
+        if (GridField.IsMovable(LocalPosition) == false) {//TODO check invalid parameter
             return new Color(1, 0, 0, 0.5f);
         }
 
