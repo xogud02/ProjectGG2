@@ -1,4 +1,4 @@
-public class ClickManager
+public static class ClickManager
 {
 
 }
