@@ -1,3 +1,6 @@
+using System;
+using UnityEngine;
+
 public class ClickManager
 {
     public static ClickManager Instance = new ClickManager();
@@ -6,4 +9,8 @@ public class ClickManager
 
     }
 
+    public void AddListener(Action<Vector2Int> onCLick)
+    {
+
+    }
 }
