@@ -13,4 +13,9 @@ public class ClickManager
     {
 
     }
+
+    public void InvokeClick(Vector2Int position)
+    {
+
+    }
 }
