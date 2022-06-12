@@ -4,18 +4,11 @@ using UnityEngine;
 public class ClickManager
 {
     public static ClickManager Instance = new ClickManager();
+    public delegate void OnClickCallback(Vector2Int position);
     private ClickManager()
     {
 
     }
 
-    public void AddListener(Action<Vector2Int> onCLick)
-    {
-
-    }
-
-    public void InvokeClick(Vector2Int position)
-    {
-
-    }
+    public event OnClickCallback OnClick;
 }
