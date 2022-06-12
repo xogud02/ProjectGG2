@@ -25,18 +25,24 @@ public class Game : MonoBehaviour {
     private void Init() {
         var field = GridObject.GrassField(tmp, tmp);
         GridField.Init(tmp, tmp);
-        field.OnClick = v2i => {
-            if(LastClicked == null) {
-                LastClicked = GridField.GetOccupied(v2i);
-            }
-
-            if (LastClicked) {
-                unit.Target = LastClicked;
-            }
-            unit.SetPath(v2i);
-        };
+        ClickManager.Instance.OnClick -= OnClick;
+        ClickManager.Instance.OnClick += OnClick;
         unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
         unit.AttackTarget().Forget();
+    }
+
+    private void OnClick(Vector2Int v2i)
+    {
+        if (LastClicked == null)
+        {
+            LastClicked = GridField.GetOccupied(v2i);
+        }
+
+        if (LastClicked)
+        {
+            unit.Target = LastClicked;
+        }
+        unit.SetPath(v2i);
     }
 
     private void Update() {

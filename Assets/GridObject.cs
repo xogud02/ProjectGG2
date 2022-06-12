@@ -48,7 +48,6 @@ public class GridObject : MonoBehaviour {
     }
 
     public Vector2Int GridPosition;
-    public Action<Vector2Int> OnClick;
 
     public static Floor.ShapeType[] FloorShapeTypes = {              //rldu
         Floor.ShapeType.Single,            //0000
@@ -133,8 +132,5 @@ public class GridObject : MonoBehaviour {
         return ret;
     }
 
-    public void OnTileClicked(Tile tile) {
-        OnClick?.Invoke(GridPosition + tile.LocalPosition);
-    }
-
+    public void OnTileClicked(Tile tile) => ClickManager.Instance.Click(GridPosition + tile.LocalPosition);
 }

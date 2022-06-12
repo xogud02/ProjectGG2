@@ -46,9 +46,10 @@ public class Unit : MonoBehaviour
         gameObject.AddComponent<BoxCollider2D>();
     }
     private void OnMouseDown()
-    {//TODO cohense click stuffs
+    {
         Debug.Log($"{this} ckicked");
         Game.LastClicked = this;
+        ClickManager.Instance.Click(CurrentPosition);
     }
 
     public void Start()
@@ -98,7 +99,7 @@ public class Unit : MonoBehaviour
 
     protected void OnDrawGizmos() => _pathFinder?.OnDrawGizmos(GridField.Convert(CurrentPosition), transform.position.z);
 
-    public void Stop()
+    public void Stop()//TODO impl?
     {
         if (IsMoving == false)
         {
