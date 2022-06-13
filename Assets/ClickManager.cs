@@ -11,5 +11,5 @@ public class ClickManager
     }
 
     public event OnClickCallback OnClick;
-    public void Click(Vector2Int position) => OnClick?.Invoke(position);
+    public void Click(Vector2Int position) => OnClick?.Invoke(position);//TODO to many v2i?
 }
