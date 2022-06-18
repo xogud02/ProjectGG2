@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GridObject : MonoBehaviour {
+public class GridObject : MonoBehaviour
+{
     public static float ScaleFactor { get; private set; }
     public static bool Initialized { get; private set; }
     public delegate void InitializeCallback();
@@ -29,17 +30,20 @@ public class GridObject : MonoBehaviour {
 
     private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
-    static GridObject() {
+    static GridObject()
+    {
         Floor.Init().GetAwaiter().OnCompleted(Init);
     }
 
-    private static void Init() {
+    private static void Init()
+    {
         ScaleFactor = 3;
         _onInit.Invoke();
         Initialized = true;
     }
 
-    public enum AdjType {
+    public enum AdjType
+    {
         None = 0,
         Up = 1 << 0,
         Down = 1 << 1,
@@ -68,23 +72,30 @@ public class GridObject : MonoBehaviour {
         Floor.ShapeType.Center,            //1111
     };
 
-    public TileType GetTile(Vector2Int pos) {
+    public TileType GetTile(Vector2Int pos)
+    {
         var relative = pos - GridPosition;
-        if (tiles.ContainsKey(relative)) {
+        if (tiles.ContainsKey(relative))
+        {
             return tiles[relative].tileType;
         }
         return TileType.None;
     }
 
-    public void AddTile(Tile tile, Vector2Int pos) {
+    public void AddTile(Tile tile, Vector2Int pos)
+    {
         tiles[pos] = tile;
     }
 
-    public static GridObject GrassField(int width, int height, float ratio = 0.3f) {
+    public static GridObject GrassField(int width, int height, float ratio = 0.3f)
+    {
         var grass = new HashSet<Vector2Int>();
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
-                if (Random.Range(0, 1f) > ratio) {
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
+                if (Random.Range(0, 1f) > ratio)
+                {
                     grass.Add(new Vector2Int(x, y));
                 }
             }
@@ -104,25 +115,30 @@ public class GridObject : MonoBehaviour {
 
 
 
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
                 var newPos = new Vector2(x + dx, y + dy) * ScaleFactor;
                 var current = new Vector2Int(x, y);
                 AdjType adj = AdjType.None;
-                foreach (var kvp in dic) {
-                    if (grass.Contains(kvp.Key + current)) {
+                foreach (var kvp in dic)
+                {
+                    if (grass.Contains(kvp.Key + current))
+                    {
                         adj |= kvp.Value;
                     }
                 }
 
-                if (grass.Contains(new Vector2Int(x, y)) == false) {
-                    var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, current, gameObject.transform);
+                if (grass.Contains(new Vector2Int(x, y)) == false)
+                {
+                    var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                     dirt.OnClick = ret.OnTileClicked;
                     ret.AddTile(dirt, current);
                     continue;
                 }
 
-                var grassTile = Tile.Create(FloorShapeTypes[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, current, gameObject.transform);
+                var grassTile = Tile.Create(FloorShapeTypes[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                 ret.AddTile(grassTile, current);
 
                 grassTile.OnClick = ret.OnTileClicked;
@@ -132,5 +148,5 @@ public class GridObject : MonoBehaviour {
         return ret;
     }
 
-    public void OnTileClicked(Tile tile) => ClickManager.Instance.Click(GridPosition + tile.LocalPosition);
+    public void OnTileClicked(Tile tile) => ClickManager.Instance.Click(tile.Position);
 }

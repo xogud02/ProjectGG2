@@ -14,11 +14,11 @@ public enum TileType {
 public class Tile : MonoBehaviour {
 
     public TileType tileType;
-    public Vector2Int LocalPosition { get; private set; }
+    public GridPositionHandle Position;
     public Action<Tile> OnClick;
     private BoxCollider2D boxCollider;
 
-    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, Vector2Int position, Transform parent, TileType tileType = TileType.None) {
+    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, GridPositionHandle position, Transform parent, TileType tileType = TileType.None) {
         var tile = new GameObject("tile");
         tile.transform.parent = parent;
         var ret = tile.AddComponent<Tile>();
@@ -29,8 +29,8 @@ public class Tile : MonoBehaviour {
                 sr.sprite = handle.Result;
                 sr.sortingOrder = -1;
                 ret.boxCollider = tile.AddComponent<BoxCollider2D>();
-                ret.LocalPosition = position;
-                tile.transform.position = GridField.Convert(position);
+                ret.Position = position;
+                tile.transform.position = GridField.Convert(position.LocalPosition);
                 ret.tileType = tileType;
             }
         };
@@ -56,7 +56,7 @@ public class Tile : MonoBehaviour {
 
 
     private Color GetTileGizmoColor() {
-        if (GridField.IsMovable(LocalPosition) == false) {//TODO check invalid parameter
+        if (GridField.IsMovable(Position.LocalPosition) == false) {//TODO check invalid parameter
             return new Color(1, 0, 0, 0.5f);
         }
 

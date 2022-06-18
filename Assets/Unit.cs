@@ -49,7 +49,7 @@ public class Unit : MonoBehaviour
     {
         Debug.Log($"{this} ckicked");
         Game.LastClicked = this;
-        ClickManager.Instance.Click(CurrentPosition);
+        ClickManager.Instance.Click(new GridPositionHandle(CurrentPosition));
     }
 
     public void Start()

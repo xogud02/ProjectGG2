@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GridPositionHandle : MonoBehaviour
+public class GridPositionHandle
 {
-    // Start is called before the first frame update
-    void Start()
+    public Vector2Int WorldPosition => LocalPosition + Delta;
+    public Vector2Int LocalPosition;
+    public Vector2Int Delta;
+
+    public GridPositionHandle(Vector2Int localPosition, Vector2Int delta = default)
     {
-        
+        LocalPosition = localPosition;
+        Delta = delta;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
