@@ -11,6 +11,4 @@ public class GridPositionHandle
         LocalPosition = localPosition;
         Delta = delta;
     }
-
-
 }

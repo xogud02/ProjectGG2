@@ -119,7 +119,6 @@ public class GridObject : MonoBehaviour
         {
             for (int y = 0; y < height; ++y)
             {
-                var newPos = new Vector2(x + dx, y + dy) * ScaleFactor;
                 var current = new Vector2Int(x, y);
                 AdjType adj = AdjType.None;
                 foreach (var kvp in dic)
@@ -130,7 +129,7 @@ public class GridObject : MonoBehaviour
                     }
                 }
 
-                if (grass.Contains(new Vector2Int(x, y)) == false)
+                if (grass.Contains(current) == false)
                 {
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                     dirt.OnClick = ret.OnTileClicked;
