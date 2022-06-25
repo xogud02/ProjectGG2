@@ -56,7 +56,7 @@ public class Tile : MonoBehaviour {
 
 
     private Color GetTileGizmoColor() {
-        if (GridField.IsMovable(Position.LocalPosition) == false) {//TODO check invalid parameter
+        if (GridField.IsMovable(Position) == false) {
             return new Color(1, 0, 0, 0.5f);
         }
 

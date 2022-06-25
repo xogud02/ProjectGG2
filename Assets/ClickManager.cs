@@ -11,5 +11,5 @@ public class ClickManager
     }
 
     public event OnClickCallback OnClick;
-    public void Click(GridPositionHandle position) => OnClick?.Invoke(position);//TODO to many v2i?
+    public void Click(GridPositionHandle position) => OnClick?.Invoke(position);
 }
