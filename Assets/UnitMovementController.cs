@@ -15,6 +15,9 @@ public class UnitMovementController
             _transform.position = GridField.Convert(value);
         }
     }
+
+    public GridPositionHandle _handle = new GridPositionHandle();
+
     public Vector2Int CurrentTargetPosition { get; set; }
     public float Speed { get; set; } = 5;
     private Tween moving;
