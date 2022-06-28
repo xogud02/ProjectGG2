@@ -57,7 +57,7 @@ public class Monster : Unit {
         }
     }
 
-    private Vector2Int GetNextPosition() {
+    private Vector2Int GetNextPosition() {//TODO use movement object
         var nextPosition = CurrentPosition;
 
         if (target == null) {

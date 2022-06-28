@@ -33,7 +33,7 @@ public class Unit : MonoBehaviour
 
     private GUIBar hpBar;
 
-    private UnitMovementController _movement;
+    protected UnitMovementController _movement;
     private UnitAnimationController unitAnimationController;
 
     public Vector2Int CurrentPosition { get => _movement.CurrentPosition; protected set => _movement.CurrentPosition = value; }
