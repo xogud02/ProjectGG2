@@ -194,7 +194,7 @@ public class Unit : MonoBehaviour
 
         var direction = _movement.GetDirection(v);
         OnMoveSingle(direction);
-        _movement.StartMoveSingle(direction, v, TryMoveSingle);
+        _movement.StartMoveSingle(direction, v).GetAwaiter().OnCompleted(TryMoveSingle);
     }
 
     private void TryMoveSingle()
