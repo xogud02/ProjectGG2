@@ -6,7 +6,13 @@ using UnityEngine;
 public class UnitMovementController
 {
     private readonly Transform _transform;
-    public UnitMovementController(Transform unitTransform) => _transform = unitTransform;
+    private readonly GridPositionHandle _handle;
+
+    public UnitMovementController(Transform unitTransform, GridPositionHandle handle)
+    {
+        _transform = unitTransform;
+        _handle = handle;
+    }
 
     public Vector2Int CurrentPosition
     {
@@ -17,7 +23,6 @@ public class UnitMovementController
         }
     }
 
-    public GridPositionHandle _handle = new GridPositionHandle();
 
     public Vector2Int CurrentTargetPosition { get; set; }
     public float Speed { get; set; } = 5;

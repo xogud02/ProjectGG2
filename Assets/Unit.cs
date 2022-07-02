@@ -37,12 +37,13 @@ public class Unit : MonoBehaviour
     private UnitAnimationController unitAnimationController;
 
     public Vector2Int CurrentPosition { get => _movement.CurrentPosition; protected set => _movement.CurrentPosition = value; }
+    public readonly GridPositionHandle position = new GridPositionHandle();
     public Vector2Int CurrentTargetPosition { get => _movement.CurrentTargetPosition; protected set => _movement.CurrentTargetPosition = value; }
 
     protected void Awake()
     {
         _pathFinder = new PathFinder();
-        _movement = new UnitMovementController(transform);
+        _movement = new UnitMovementController(transform, position);
         gameObject.AddComponent<BoxCollider2D>();
     }
     private void OnMouseDown()
