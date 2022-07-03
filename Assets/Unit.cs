@@ -38,7 +38,7 @@ public class Unit : MonoBehaviour
 
     public Vector2Int CurrentPosition { get => _movement.CurrentPosition; protected set => _movement.CurrentPosition = value; }
     public readonly GridPositionHandle position = new GridPositionHandle();
-    public Vector2Int CurrentTargetPosition { get => _movement.CurrentTargetPosition; protected set => _movement.CurrentTargetPosition = value; }
+    public GridPositionHandle CurrentTargetPosition { get => _movement.CurrentTargetPosition; protected set => _movement.CurrentTargetPosition = value; }
 
     protected void Awake()
     {
@@ -50,7 +50,7 @@ public class Unit : MonoBehaviour
     {
         Debug.Log($"{this} ckicked");
         Game.LastClicked = this;
-        ClickManager.Instance.Click(new GridPositionHandle(CurrentPosition));
+        ClickManager.Instance.Click(new GridPositionHandle(CurrentPosition));//TODO gc
     }
 
     public void Start()
@@ -140,7 +140,7 @@ public class Unit : MonoBehaviour
     {
         var wasMoving = IsMoving;
 
-        _pathFinder.ResetPath(_pathFinder.IsRemainPath ? CurrentTargetPosition : CurrentPosition, v);
+        _pathFinder.ResetPath(_pathFinder.IsRemainPath ? CurrentTargetPosition.WorldPosition : CurrentPosition, v);
 
         if (wasMoving == false)
         {
@@ -174,7 +174,7 @@ public class Unit : MonoBehaviour
 
     public void Move(Vector2Int v)
     {
-        CurrentTargetPosition = v;
+        CurrentTargetPosition.LocalPosition = v;
         var result = GridField.UnOccupy(CurrentPosition);
         if (result != null && result != this)//todo cleanup Logic
         {

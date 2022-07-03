@@ -24,7 +24,7 @@ public class UnitMovementController
     }
 
 
-    public Vector2Int CurrentTargetPosition { get; set; }
+    public GridPositionHandle CurrentTargetPosition { get; set; } = new GridPositionHandle();
     public float Speed { get; set; } = 5;
     private Tween moving;
     private Vector2Int currentPosition;
@@ -41,7 +41,7 @@ public class UnitMovementController
         await moving.AsyncWaitForCompletion();
         
         moving = null;
-        CurrentPosition = CurrentTargetPosition;
+        CurrentPosition = CurrentTargetPosition.WorldPosition;
     }
 
     public Vector2 GetDirection(Vector2Int v)
