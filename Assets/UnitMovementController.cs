@@ -31,10 +31,9 @@ public class UnitMovementController
 
     public bool IsMoving => (moving?.active ?? false);
 
-    public async UniTask StartMoveSingle(Vector2 direction, Vector2Int v)
+    public async UniTask StartMoveSingle(float dist, Vector2Int v)
     {
         var dest = GridField.Convert(v);
-        var dist = direction.magnitude;
         var time = dist / Speed;
         moving = DOTween.To(() => (Vector2)_transform.position, vec => _transform.position = vec, dest, time).SetEase(Ease.Linear);
 
