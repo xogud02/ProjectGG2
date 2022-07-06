@@ -193,9 +193,8 @@ public class Unit : MonoBehaviour
             return;
         }
 
-        var direction = _movement.GetDirection(v);
-        OnMoveSingle(direction);
-        _movement.StartMoveSingle(direction.magnitude, v).GetAwaiter().OnCompleted(TryMoveSingle);
+        _movement.StartMoveSingle(v).GetAwaiter().OnCompleted(TryMoveSingle);
+        OnMoveSingle(_movement.CurrentMovingDirection);
     }
 
     private void TryMoveSingle()

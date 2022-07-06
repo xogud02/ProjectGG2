@@ -4,6 +4,7 @@ using UnityEngine;
 public class PathFinder
 {
     private Queue<Vector2Int> currentPath = new Queue<Vector2Int>();
+    private Queue<GridPositionHandle> currentPath2 = new Queue<GridPositionHandle>();
 
     public bool TryGetNextTile(out Vector2Int ret)
     {

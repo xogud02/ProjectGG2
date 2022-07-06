@@ -1,13 +1,12 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
 using UnityEngine;
 
 public class UnitMovementController
 {
     private readonly Transform _transform;
     private readonly GridPositionHandle _handle;
-
+    public Vector2 CurrentMovingDirection { get; private set; }
     public UnitMovementController(Transform unitTransform, GridPositionHandle handle)
     {
         _transform = unitTransform;
@@ -31,9 +30,11 @@ public class UnitMovementController
 
     public bool IsMoving => (moving?.active ?? false);
 
-    public async UniTask StartMoveSingle(float dist, Vector2Int v)
+    public async UniTask StartMoveSingle(Vector2Int v)
     {
         var dest = GridField.Convert(v);
+        CurrentMovingDirection = dest - _transform.position.Convert();
+        var dist = CurrentMovingDirection.magnitude;
         var time = dist / Speed;
         moving = DOTween.To(() => (Vector2)_transform.position, vec => _transform.position = vec, dest, time).SetEase(Ease.Linear);
 
@@ -41,11 +42,5 @@ public class UnitMovementController
         
         moving = null;
         CurrentPosition = CurrentTargetPosition.WorldPosition;
-    }
-
-    public Vector2 GetDirection(Vector2Int v)
-    {
-        var dest = GridField.Convert(v);
-        return dest - _transform.position.Convert();
     }
 }
