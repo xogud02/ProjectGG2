@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class PathFinder
 {
-    private Queue<Vector2Int> currentPath = new Queue<Vector2Int>();
-    private Queue<GridPositionHandle> currentPath2 = new Queue<GridPositionHandle>();
+    private Queue<GridPositionHandle> currentPath = new Queue<GridPositionHandle>();
 
     public bool TryGetNextTile(out Vector2Int ret)
     {
         if(IsRemainPath)
         {
-            ret = currentPath.Dequeue();
+            ret = currentPath.Dequeue().WorldPosition;
             return true;
         }
 
@@ -43,7 +42,7 @@ public class PathFinder
         var newPath = AStar.Find(current, next);
         while (newPath.Count > 0)
         {
-            currentPath.Enqueue(newPath.Pop());
+            currentPath.Enqueue(new GridPositionHandle(newPath.Pop()));
         }
     }
 
