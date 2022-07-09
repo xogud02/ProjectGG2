@@ -201,7 +201,7 @@ public class Unit : MonoBehaviour
     {
         if (_pathFinder.TryGetNextTile(out var next))
         {
-            Move(next);
+            Move(next.WorldPosition);//todo
         }
     }
 

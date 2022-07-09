@@ -5,15 +5,15 @@ public class PathFinder
 {
     private Queue<GridPositionHandle> currentPath = new Queue<GridPositionHandle>();
 
-    public bool TryGetNextTile(out Vector2Int ret)
+    public bool TryGetNextTile(out GridPositionHandle ret)
     {
         if(IsRemainPath)
         {
-            ret = currentPath.Dequeue().WorldPosition;
+            ret = currentPath.Dequeue();
             return true;
         }
 
-        ret = Vector2Int.zero;
+        ret = null;
         return false;
     }
 
