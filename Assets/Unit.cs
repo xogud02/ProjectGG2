@@ -172,8 +172,9 @@ public class Unit : MonoBehaviour
         CurrentPosition = v;
     }
 
-    public void Move(Vector2Int v)
+    public void Move(GridPositionHandle handle)
     {
+        var v = handle.WorldPosition;//todo
         CurrentTargetPosition.LocalPosition = v;
         var result = GridField.UnOccupy(CurrentPosition);
         if (result != null && result != this)//todo cleanup Logic
@@ -201,7 +202,7 @@ public class Unit : MonoBehaviour
     {
         if (_pathFinder.TryGetNextTile(out var next))
         {
-            Move(next.WorldPosition);//todo
+            Move(next);
         }
     }
 
