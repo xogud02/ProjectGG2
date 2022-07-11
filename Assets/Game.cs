@@ -27,7 +27,7 @@ public class Game : MonoBehaviour {
         GridField.Init(tmp, tmp);
         ClickManager.Instance.OnClick -= OnClick;
         ClickManager.Instance.OnClick += OnClick;
-        unit.MoveImmidiately(new Vector2Int(tmp / 2, tmp / 2));
+        unit.MoveImmidiately(new GridPositionHandle(new Vector2Int(tmp / 2, tmp / 2)));
         unit.AttackTarget().Forget();
     }
 

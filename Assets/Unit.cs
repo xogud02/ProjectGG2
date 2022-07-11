@@ -166,10 +166,10 @@ public class Unit : MonoBehaviour
         return (unit.CurrentPosition - CurrentPosition).magnitude <= AttackRange;
     }
 
-    public void MoveImmidiately(Vector2Int v)
+    public void MoveImmidiately(GridPositionHandle handle)
     {
         Stop();
-        CurrentPosition = v;
+        CurrentPosition = handle.WorldPosition;
     }
 
     public void Move(GridPositionHandle handle)
