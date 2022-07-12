@@ -15,9 +15,10 @@ public class UnitMovementController
 
     public Vector2Int CurrentPosition
     {
-        get => currentPosition; set
+        get => _handle.WorldPosition;
+        set
         {
-            currentPosition = value;
+            _handle.LocalPosition = value;
             _transform.position = GridField.Convert(value);
         }
     }
@@ -26,7 +27,6 @@ public class UnitMovementController
     public GridPositionHandle CurrentTargetPosition { get; set; } = new GridPositionHandle();
     public float Speed { get; set; } = 5;
     private Tween moving;
-    private Vector2Int currentPosition;
 
     public bool IsMoving => (moving?.active ?? false);
 
@@ -39,7 +39,7 @@ public class UnitMovementController
         moving = DOTween.To(() => (Vector2)_transform.position, vec => _transform.position = vec, dest, time).SetEase(Ease.Linear);
 
         await moving.AsyncWaitForCompletion();
-        
+
         moving = null;
         CurrentPosition = CurrentTargetPosition.WorldPosition;
     }
