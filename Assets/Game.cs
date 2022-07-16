@@ -31,18 +31,18 @@ public class Game : MonoBehaviour {
         unit.AttackTarget().Forget();
     }
 
-    private void OnClick(GridPositionHandle v2i)
+    private void OnClick(GridPositionHandle position)
     {
         if (LastClicked == null)
         {
-            LastClicked = GridField.GetOccupied(v2i.WorldPosition);
+            LastClicked = GridField.GetOccupied(position);
         }
 
         if (LastClicked)
         {
             unit.Target = LastClicked;
         }
-        unit.SetPath(v2i.WorldPosition);
+        unit.SetPath(position.WorldPosition);
     }
 
     private void Update() {

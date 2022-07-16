@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class GridField {
+public static class GridField
+{
 
     private static readonly HashSet<GridObject> objects = new HashSet<GridObject>();
     private static readonly Dictionary<Vector2Int, Unit> occupied = new Dictionary<Vector2Int, Unit>();
@@ -12,10 +13,13 @@ public static class GridField {
     public static bool IsMovable(GridPositionHandle _, bool allowOccupied = false) => IsMovable(_.WorldPosition, allowOccupied);
     public static int Width { get; private set; }
     public static int Height { get; private set; }
-    public static TileType GetTileType(Vector2Int _) {
-        foreach (var obj in objects) {
+    public static TileType GetTileType(Vector2Int _)
+    {
+        foreach (var obj in objects)
+        {
             var tileType = obj.GetTile(_);
-            if (tileType != TileType.None) {
+            if (tileType != TileType.None)
+            {
                 return tileType;
             }
         }
@@ -27,12 +31,15 @@ public static class GridField {
 
     public static float SingleTileSize => Floor.Size * GridObject.ScaleFactor;
 
-    public static void AddObject(GridObject gridObject) {
+    public static void AddObject(GridObject gridObject)
+    {
         objects.Add(gridObject);
     }
 
-    public static bool Occupy(this Unit unit, Vector2Int position) {
-        if (occupied.ContainsKey(position)) {
+    public static bool Occupy(this Unit unit, Vector2Int position)
+    {
+        if (occupied.ContainsKey(position))
+        {
             return false;
         }
 
@@ -40,16 +47,12 @@ public static class GridField {
         return true;
     }
 
-    public static Unit GetOccupied(Vector2Int position) {
-        if (occupied.ContainsKey(position) == false) {
-            return null;
-        }
+    public static Unit GetOccupied(GridPositionHandle position) => occupied.TryGetValue(position.WorldPosition, out var ret) ? ret : null;
 
-        return occupied[position];
-    }
-
-    public static Unit UnOccupy(Vector2Int position) {
-        if (occupied.ContainsKey(position) == false) {
+    public static Unit UnOccupy(Vector2Int position)
+    {
+        if (occupied.ContainsKey(position) == false)
+        {
             return null;
         }
 
@@ -62,7 +65,8 @@ public static class GridField {
         occupied.Where(kvp => (kvp.Key - position).magnitude <= range).Select(kvp => kvp.Value).Distinct();
 
 
-    public static void Init(int width, int height) {
+    public static void Init(int width, int height)
+    {
         Width = width;
         Height = height;
     }
