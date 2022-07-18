@@ -313,6 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DrawTileGizmo: 0
   unit: {fileID: 1517568093}
+  sample: {fileID: 0}
 --- !u!4 &1357988336
 Transform:
   m_ObjectHideFlags: 0
