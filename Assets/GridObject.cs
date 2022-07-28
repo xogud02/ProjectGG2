@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 public class GridObject : MonoBehaviour
@@ -27,6 +28,8 @@ public class GridObject : MonoBehaviour
             _onInit -= value;
         }
     }
+
+    private Tilemap tileMap;
 
     private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
 
