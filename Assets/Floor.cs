@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class Floor {
+public static class Floor {
     public static readonly string AddressPrefix = "Floor";
 
     public static async Task Init() {
