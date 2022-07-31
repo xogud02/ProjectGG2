@@ -9,6 +9,7 @@ public class Game : MonoBehaviour {
     public PlayableCharacter unit;
     public static Unit LastClicked;
     public Monster sample;
+    public Grid grid;
 
     void Start() {
         if (GridObject.Initialized) {
