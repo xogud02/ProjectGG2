@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Tilemaps;
 
 public class Game : MonoBehaviour {
     public bool DrawTileGizmo;
@@ -10,6 +11,14 @@ public class Game : MonoBehaviour {
     public static Unit LastClicked;
     public Monster sample;
     public Grid grid;
+
+    private void Awake()
+    {
+        if(gameObject.TryGetComponent(out grid) == false)
+        {
+            grid = gameObject.AddComponent<Grid>();
+        }
+    }
 
     void Start() {
         if (GridObject.Initialized) {
@@ -23,6 +32,8 @@ public class Game : MonoBehaviour {
 
     private void Init() {
         var field = GridObject.GrassField(tmp, tmp);
+        field.transform.parent = transform;
+        field.gameObject.AddComponent<Tilemap>();
         GridField.Init(tmp, tmp);
         ClickManager.Instance.OnClick -= OnClick;
         ClickManager.Instance.OnClick += OnClick;
