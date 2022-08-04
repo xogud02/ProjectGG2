@@ -12,6 +12,7 @@ public enum TileType {
 }
 
 public class Tile : MonoBehaviour {
+    public RuleTile ruleTile;
     public TileType tileType;
     public GridPositionHandle Position;
     public Action<Tile> OnClick;
