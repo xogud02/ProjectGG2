@@ -11,6 +11,7 @@ public class Game : MonoBehaviour {
     public static Unit LastClicked;
     public Monster sample;
     public Grid grid;
+    public RuleTile testTile;
 
     private void Awake()
     {
