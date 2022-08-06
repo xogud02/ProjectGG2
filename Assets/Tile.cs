@@ -34,6 +34,7 @@ public class Tile : MonoBehaviour {
                 ret.tileType = tileType;
             }
         };
+
         return ret;
     }
 

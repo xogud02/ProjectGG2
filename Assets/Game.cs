@@ -34,7 +34,6 @@ public class Game : MonoBehaviour {
     private void Init() {
         var field = GridObject.GrassField(tmp, tmp);//todo
         field.transform.parent = transform;
-        field.gameObject.AddComponent<Tilemap>();
         field.gameObject.AddComponent<TilemapRenderer>();
         GridField.Init(tmp, tmp);
         ClickManager.Instance.OnClick -= OnClick;
