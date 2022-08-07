@@ -23,17 +23,17 @@ public class Tile : MonoBehaviour {
         tile.transform.parent = parent;
         var ret = tile.AddComponent<Tile>();
         var sr = tile.AddComponent<SpriteRenderer>();
-        var path = Floor.GetFloorPath(shape, bright, material);
-        Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
-            if (handle.Status == AsyncOperationStatus.Succeeded) {
-                sr.sprite = handle.Result;
-                sr.sortingOrder = -1;
-                ret.boxCollider = tile.AddComponent<BoxCollider2D>();
-                ret.Position = position;
-                tile.transform.position = GridField.Convert(position.LocalPosition);
-                ret.tileType = tileType;
-            }
-        };
+        //var path = Floor.GetFloorPath(shape, bright, material);
+        //Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
+        //    if (handle.Status == AsyncOperationStatus.Succeeded) {
+        //        sr.sprite = handle.Result;
+        //        sr.sortingOrder = -1;
+        //        ret.boxCollider = tile.AddComponent<BoxCollider2D>();
+        //        ret.Position = position;
+        //        tile.transform.position = GridField.Convert(position.LocalPosition);
+        //        ret.tileType = tileType;
+        //    }
+        //};
 
         return ret;
     }
