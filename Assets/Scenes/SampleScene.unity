@@ -314,6 +314,8 @@ MonoBehaviour:
   DrawTileGizmo: 0
   unit: {fileID: 1517568093}
   sample: {fileID: 0}
+  grid: {fileID: 0}
+  testTile: {fileID: 11400000, guid: e46d5b50fa1ac6b48b3b33f832824f42, type: 2}
 --- !u!4 &1357988336
 Transform:
   m_ObjectHideFlags: 0
