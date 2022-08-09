@@ -32,7 +32,7 @@ public class Game : MonoBehaviour {
     public static int tmp = 30;
 
     private void Init() {
-        var field = GridObject.GrassField(tmp, tmp);//todo
+        var field = GridObject.GrassField(tmp, tmp, testTile);//todo
         field.transform.parent = transform;
         field.gameObject.AddComponent<TilemapRenderer>();
         GridField.Init(tmp, tmp);

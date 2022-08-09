@@ -91,7 +91,7 @@ public class GridObject : MonoBehaviour
         tileMap.SetTile(new Vector3Int(pos.x, pos.y, 0), tile.ruleTile);
     }
 
-    public static GridObject GrassField(int width, int height, float ratio = 0.3f)
+    public static GridObject GrassField(int width, int height, RuleTile tile, float ratio = 0.3f)
     {
         var grass = new HashSet<Vector2Int>();
         for (int x = 0; x < width; ++x)
@@ -139,11 +139,13 @@ public class GridObject : MonoBehaviour
                 {
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                     dirt.OnClick = ret.OnTileClicked;
+                    dirt.ruleTile = tile;//TODO
                     ret.AddTile(dirt, current);
                     continue;
                 }
 
                 var grassTile = Tile.Create(FloorShapeTypes[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
+                grassTile.ruleTile = tile;//TODO
                 ret.AddTile(grassTile, current);
 
                 grassTile.OnClick = ret.OnTileClicked;
