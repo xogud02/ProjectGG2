@@ -140,13 +140,13 @@ public class GridObject : MonoBehaviour
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                     dirt.OnClick = ret.OnTileClicked;
                     dirt.ruleTile = tile;//TODO
-                    ret.AddTile(dirt, current);
+                    ret.AddTile(dirt, ret.GridPosition);
                     continue;
                 }
 
                 var grassTile = Tile.Create(FloorShapeTypes[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                 grassTile.ruleTile = tile;//TODO
-                ret.AddTile(grassTile, current);
+                ret.AddTile(grassTile, ret.GridPosition);
 
                 grassTile.OnClick = ret.OnTileClicked;
             }

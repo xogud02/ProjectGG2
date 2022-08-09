@@ -22,7 +22,7 @@ public class Tile : MonoBehaviour {
         var tile = new GameObject("tile");
         tile.transform.parent = parent;
         var ret = tile.AddComponent<Tile>();
-        var sr = tile.AddComponent<SpriteRenderer>();
+        //var sr = tile.AddComponent<SpriteRenderer>();
         //var path = Floor.GetFloorPath(shape, bright, material);
         //Addressables.LoadAssetAsync<Sprite>(path).Completed += handle => {
         //    if (handle.Status == AsyncOperationStatus.Succeeded) {
