@@ -127,6 +127,8 @@ public class GridObject : MonoBehaviour
         {
             for (int y = 0; y < height; ++y)
             {
+                Debug.Log($"{x} , {y}");
+
                 var current = new Vector2Int(x, y);
                 AdjType adj = AdjType.None;
                 foreach (var kvp in dic)
