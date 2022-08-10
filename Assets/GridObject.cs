@@ -89,6 +89,7 @@ public class GridObject : MonoBehaviour
     {
         tiles[pos] = tile;
         tileMap.SetTile(new Vector3Int(pos.x, pos.y, 0), tile.ruleTile);
+        Debug.Log(pos);
     }
 
     public static GridObject GrassField(int width, int height, RuleTile tile, float ratio = 0.3f)
@@ -120,6 +121,7 @@ public class GridObject : MonoBehaviour
         };
 
 
+        Debug.Log($"{width} , {height}");
 
         for (int x = 0; x < width; ++x)
         {
@@ -140,13 +142,13 @@ public class GridObject : MonoBehaviour
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                     dirt.OnClick = ret.OnTileClicked;
                     dirt.ruleTile = tile;//TODO
-                    ret.AddTile(dirt, ret.GridPosition);
+                    ret.AddTile(dirt, current);
                     continue;
                 }
 
                 var grassTile = Tile.Create(FloorShapeTypes[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                 grassTile.ruleTile = tile;//TODO
-                ret.AddTile(grassTile, ret.GridPosition);
+                ret.AddTile(grassTile, current);
 
                 grassTile.OnClick = ret.OnTileClicked;
             }
