@@ -108,7 +108,7 @@ public class GridObject : MonoBehaviour
 
         var gameObject = new GameObject("grassField");
         var ret = gameObject.AddComponent<GridObject>();
-        var tileMap = gameObject.AddComponent<Tilemap>();
+        ret.tileMap = gameObject.AddComponent<Tilemap>();
 
         var dx = -width / 2f;
         var dy = -height / 2f;
@@ -127,7 +127,7 @@ public class GridObject : MonoBehaviour
         {
             for (int y = 0; y < height; ++y)
             {
-                Debug.Log($"{x} , {y}");
+                Debug.Log($"{x} , {y} 1");
 
                 var current = new Vector2Int(x, y);
                 AdjType adj = AdjType.None;
@@ -138,6 +138,7 @@ public class GridObject : MonoBehaviour
                         adj |= kvp.Value;
                     }
                 }
+                Debug.Log($"{x} , {y} 2");
 
                 if (grass.Contains(current) == false)
                 {
@@ -154,6 +155,7 @@ public class GridObject : MonoBehaviour
 
                 grassTile.OnClick = ret.OnTileClicked;
             }
+
         }
         gameObject.transform.localScale *= ScaleFactor;
         return ret;
