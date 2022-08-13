@@ -89,7 +89,6 @@ public class GridObject : MonoBehaviour
     {
         tiles[pos] = tile;
         tileMap.SetTile(new Vector3Int(pos.x, pos.y, 0), tile.ruleTile);
-        Debug.Log(pos);
     }
 
     public static GridObject GrassField(int width, int height, RuleTile tile, float ratio = 0.3f)
@@ -109,6 +108,7 @@ public class GridObject : MonoBehaviour
         var gameObject = new GameObject("grassField");
         var ret = gameObject.AddComponent<GridObject>();
         ret.tileMap = gameObject.AddComponent<Tilemap>();
+        gameObject.AddComponent<TilemapCollider2D>();
 
         var dx = -width / 2f;
         var dy = -height / 2f;
