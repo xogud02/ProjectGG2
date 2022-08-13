@@ -121,13 +121,10 @@ public class GridObject : MonoBehaviour
         };
 
 
-        Debug.Log($"{width} , {height}");
-
         for (int x = 0; x < width; ++x)
         {
             for (int y = 0; y < height; ++y)
             {
-                Debug.Log($"{x} , {y} 1");
 
                 var current = new Vector2Int(x, y);
                 AdjType adj = AdjType.None;
@@ -138,7 +135,6 @@ public class GridObject : MonoBehaviour
                         adj |= kvp.Value;
                     }
                 }
-                Debug.Log($"{x} , {y} 2");
 
                 if (grass.Contains(current) == false)
                 {
