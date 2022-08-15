@@ -108,7 +108,8 @@ public class GridObject : MonoBehaviour
         var gameObject = new GameObject("grassField");
         var ret = gameObject.AddComponent<GridObject>();
         ret.tileMap = gameObject.AddComponent<Tilemap>();
-        gameObject.AddComponent<TilemapCollider2D>();
+        var col =  gameObject.AddComponent<TilemapCollider2D>();
+        col.isTrigger = true;
 
         var dx = -width / 2f;
         var dy = -height / 2f;
@@ -155,6 +156,11 @@ public class GridObject : MonoBehaviour
         }
         gameObject.transform.localScale *= ScaleFactor;
         return ret;
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("foo");
     }
 
     public void OnTileClicked(Tile tile) => ClickManager.Instance.Click(tile.Position);
