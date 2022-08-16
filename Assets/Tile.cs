@@ -15,7 +15,6 @@ public class Tile : MonoBehaviour {
     public RuleTile ruleTile;
     public TileType tileType;
     public GridPositionHandle Position;
-    public Action<Tile> OnClick;
     private BoxCollider2D boxCollider;
 
     public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, GridPositionHandle position, Transform parent, TileType tileType = TileType.None) {
@@ -36,10 +35,6 @@ public class Tile : MonoBehaviour {
         //};
 
         return ret;
-    }
-
-    private void OnMouseDown() {
-        OnClick?.Invoke(this);
     }
 
     public static bool DrawTileGizmos = true;

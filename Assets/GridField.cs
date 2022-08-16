@@ -28,6 +28,11 @@ public static class GridField
 
     public static Vector2 Convert(GridPositionHandle handle) => Convert(handle.WorldPosition);
     public static Vector2 Convert(Vector2Int gridPosition) => new Vector2(gridPosition.x, gridPosition.y) * SingleTileSize;
+    public static Vector2Int Convert(Vector2 worldPosition)
+    {
+        var ret = worldPosition / SingleTileSize;
+        return new Vector2Int((int)ret.x, (int)ret.y);//TODO
+    }
 
     public static float SingleTileSize => Floor.Size * GridObject.ScaleFactor;
 

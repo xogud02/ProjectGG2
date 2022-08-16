@@ -140,7 +140,6 @@ public class GridObject : MonoBehaviour
                 if (grass.Contains(current) == false)
                 {
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
-                    dirt.OnClick = ret.OnTileClicked;
                     dirt.ruleTile = tile;//TODO
                     ret.AddTile(dirt, current);
                     continue;
@@ -150,7 +149,6 @@ public class GridObject : MonoBehaviour
                 grassTile.ruleTile = tile;//TODO
                 ret.AddTile(grassTile, current);
 
-                grassTile.OnClick = ret.OnTileClicked;
             }
 
         }
@@ -160,7 +158,8 @@ public class GridObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("foo");
+        var pos = Input.mousePosition.STW().Convert();
+        ClickManager.Instance.Click(new GridPositionHandle(GridField.Convert(pos)));
     }
 
     public void OnTileClicked(Tile tile) => ClickManager.Instance.Click(tile.Position);
