@@ -161,6 +161,4 @@ public class GridObject : MonoBehaviour
         var pos = Input.mousePosition.STW().Convert();
         ClickManager.Instance.Click(new GridPositionHandle(GridField.Convert(pos)));
     }
-
-    public void OnTileClicked(Tile tile) => ClickManager.Instance.Click(tile.Position);
 }
