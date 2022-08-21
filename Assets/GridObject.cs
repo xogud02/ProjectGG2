@@ -111,9 +111,6 @@ public class GridObject : MonoBehaviour
         var col =  gameObject.AddComponent<TilemapCollider2D>();
         col.isTrigger = true;
 
-        var dx = -width / 2f;
-        var dy = -height / 2f;
-
         var dic = new Dictionary<Vector2Int, AdjType> {
             {Vector2Int.up, AdjType.Up },
             {Vector2Int.down, AdjType.Down},
@@ -141,7 +138,7 @@ public class GridObject : MonoBehaviour
                 {
                     var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                     dirt.ruleTile = tile;//TODO
-                    ret.AddTile(dirt, current);
+                    //ret.AddTile(dirt, current);
                     continue;
                 }
 
