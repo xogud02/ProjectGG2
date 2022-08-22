@@ -45,35 +45,7 @@ public class GridObject : MonoBehaviour
         Initialized = true;
     }
 
-    public enum AdjType
-    {
-        None = 0,
-        Up = 1 << 0,
-        Down = 1 << 1,
-        Left = 1 << 2,
-        Right = 1 << 3
-    }
-
     public Vector2Int GridPosition;
-
-    public static Floor.ShapeType[] FloorShapeTypes = {              //rldu
-        Floor.ShapeType.Single,            //0000
-        Floor.ShapeType.VirticalBottom,    //0001
-        Floor.ShapeType.VirticalTop,       //0010
-        Floor.ShapeType.VirticalCenter,    //0011
-        Floor.ShapeType.HorizontalRight,   //0100
-        Floor.ShapeType.BottomRight,       //0101
-        Floor.ShapeType.TopRight,          //0110
-        Floor.ShapeType.Right,             //0111
-        Floor.ShapeType.HorizontalLeft,    //1000
-        Floor.ShapeType.BottomLeft,        //1001
-        Floor.ShapeType.TopLeft,           //1010
-        Floor.ShapeType.Left,              //1011
-        Floor.ShapeType.HorizontalCenter,  //1100
-        Floor.ShapeType.Bottom,            //1101
-        Floor.ShapeType.Top,               //1110
-        Floor.ShapeType.Center,            //1111
-    };
 
     public TileType GetTile(Vector2Int pos)
     {
@@ -111,38 +83,22 @@ public class GridObject : MonoBehaviour
         var col =  gameObject.AddComponent<TilemapCollider2D>();
         col.isTrigger = true;
 
-        var dic = new Dictionary<Vector2Int, AdjType> {
-            {Vector2Int.up, AdjType.Up },
-            {Vector2Int.down, AdjType.Down},
-            {Vector2Int.left, AdjType.Left},
-            {Vector2Int.right, AdjType.Right}
-        };
-
-
         for (int x = 0; x < width; ++x)
         {
             for (int y = 0; y < height; ++y)
             {
 
                 var current = new Vector2Int(x, y);
-                AdjType adj = AdjType.None;
-                foreach (var kvp in dic)
-                {
-                    if (grass.Contains(kvp.Key + current))
-                    {
-                        adj |= kvp.Value;
-                    }
-                }
 
                 if (grass.Contains(current) == false)
                 {
-                    var dirt = Tile.Create(Floor.ShapeType.Center, Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
+                    var dirt = Tile.Create(Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                     dirt.ruleTile = tile;//TODO
                     //ret.AddTile(dirt, current);
                     continue;
                 }
 
-                var grassTile = Tile.Create(FloorShapeTypes[(int)adj], Floor.Brightness.Bright, Floor.MaterialType.Grass, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
+                var grassTile = Tile.Create(Floor.Brightness.Bright, Floor.MaterialType.Grass, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
                 grassTile.ruleTile = tile;//TODO
                 ret.AddTile(grassTile, current);
 

@@ -17,7 +17,7 @@ public class Tile : MonoBehaviour {
     public GridPositionHandle Position;
     private BoxCollider2D boxCollider;
 
-    public static Tile Create(Floor.ShapeType shape, Floor.Brightness bright, Floor.MaterialType material, GridPositionHandle position, Transform parent, TileType tileType = TileType.None) {
+    public static Tile Create(Floor.Brightness bright, Floor.MaterialType material, GridPositionHandle position, Transform parent, TileType tileType = TileType.None) {
         var tile = new GameObject("tile");
         tile.transform.parent = parent;
         var ret = tile.AddComponent<Tile>();
