@@ -80,6 +80,7 @@ public class GridObject : MonoBehaviour
         var gameObject = new GameObject("grassField");
         var ret = gameObject.AddComponent<GridObject>();
         ret.tileMap = gameObject.AddComponent<Tilemap>();
+        ret.tileMap.tileAnchor = Vector3.zero;
         var col =  gameObject.AddComponent<TilemapCollider2D>();
         col.isTrigger = true;
 
