@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class GridObject : MonoBehaviour
 {
     public static float ScaleFactor { get; private set; }
+    public static float TargetTileSize { get; set; }
     public static bool Initialized { get; private set; }
     public delegate void InitializeCallback();
     private static InitializeCallback _onInit;
