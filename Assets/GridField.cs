@@ -34,7 +34,7 @@ public static class GridField
         return new Vector2Int((int)ret.x, (int)ret.y);//TODO
     }
 
-    public static float SingleTileSize => Floor.Size * GridObject.ScaleFactor;
+    public static float SingleTileSize => GridObject.TargetTileSize;
 
     public static void AddObject(GridObject gridObject)
     {
