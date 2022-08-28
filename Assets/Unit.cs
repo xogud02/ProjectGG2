@@ -76,10 +76,11 @@ public class Unit : MonoBehaviour
              }
          });
         unitAnimationController = new UnitAnimationController(GetComponent<Animator>());
-        GridObject.OnInit += () => transform.localScale *= GridObject.ScaleFactor;
 
         var sr = GetComponent<SpriteRenderer>();
         sr.sprite.texture.filterMode = FilterMode.Point;//TODO inspector settings not working!!!!
+
+        GridObject.OnInit += () => transform.localScale *= GridObject.TargetTileSize / sr.size.x; ;
         Addressables.LoadAssetAsync<GameObject>("GUIBar").Completed += task =>
         {
             var barObject = Instantiate(task.Result);
