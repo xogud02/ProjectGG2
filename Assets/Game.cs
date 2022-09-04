@@ -13,6 +13,7 @@ public class Game : MonoBehaviour {
     public Monster sample;
     public Grid grid;
     public RuleTile testTile;
+    public Sprite emptyTestTile;
 
     private void Awake()
     {
