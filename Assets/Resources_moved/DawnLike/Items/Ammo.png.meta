@@ -87,7 +87,7 @@ TextureImporter:
       213: 883631113482998113
     second: Ammo_27
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -108,6 +108,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -146,6 +147,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -185,6 +187,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -796,6 +810,35 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Ammo_21: -940849871352718164
+      Ammo_20: 2478199618328378209
+      Ammo_7: 6578509656888376115
+      Ammo_12: 4021281588819941223
+      Ammo_22: -1255667067851701434
+      Ammo_4: -6164190078227375181
+      Ammo_18: -4966746807143359305
+      Ammo_10: -7705965997169741623
+      Ammo_13: 7458314094026175777
+      Ammo_14: 6138088504034608586
+      Ammo_23: 1993426561099858713
+      Ammo_1: -4368350823672335880
+      Ammo_26: 7024474696300245538
+      Ammo_9: 8909559408998858838
+      Ammo_19: 407876104593023498
+      Ammo_16: 2613358401827567909
+      Ammo_24: -5137309805579187338
+      Ammo_8: -8744202859135705330
+      Ammo_25: -659446194487797967
+      Ammo_2: -6879258425654029234
+      Ammo_6: 2443876939811873143
+      Ammo_27: 883631113482998113
+      Ammo_3: 5350311513231917695
+      Ammo_0: 3921441551649640537
+      Ammo_5: 1214687634553350315
+      Ammo_11: 5904535029806029759
+      Ammo_15: 3483438551839090165
+      Ammo_17: -4364592516061554033
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

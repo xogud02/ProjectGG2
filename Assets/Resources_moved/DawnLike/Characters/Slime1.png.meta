@@ -54,7 +54,7 @@ TextureImporter:
       213: 4024300714668649257
     second: Slime1_16
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -75,6 +75,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -113,6 +114,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -152,6 +154,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -532,6 +546,24 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Slime1_1: 6337278258928162847
+      Slime1_3: 6745292331521010470
+      Slime1_5: 8808429162561797372
+      Slime1_9: 1329106986927258170
+      Slime1_11: 6861711430239975783
+      Slime1_0: -3635838840894485798
+      Slime1_4: 4971352657356816841
+      Slime1_12: 4324492280849693831
+      Slime1_8: -5754024316055208024
+      Slime1_2: 8037495482719711593
+      Slime1_10: -1539761834738221959
+      Slime1_15: -84013300647941188
+      Slime1_6: 3500566467766237922
+      Slime1_14: -8802944082158653723
+      Slime1_16: 4024300714668649257
+      Slime1_7: -2991244640990833817
+      Slime1_13: -3447712428548212806
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

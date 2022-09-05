@@ -102,7 +102,7 @@ TextureImporter:
       213: 1886507847381639181
     second: LongWep_32
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -123,6 +123,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -161,6 +162,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -200,6 +202,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -916,6 +930,40 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      LongWep_30: 2817991638529936217
+      LongWep_16: 1804119736861857261
+      LongWep_31: 1553243126923402817
+      LongWep_7: 1775556425599117516
+      LongWep_2: 8029278032895324192
+      LongWep_14: -3024309140754871914
+      LongWep_19: -5530836850440130617
+      LongWep_6: 8489008546353363541
+      LongWep_12: 2822240432786429632
+      LongWep_15: 2329234687456255839
+      LongWep_29: 7106226653102291686
+      LongWep_11: 8769946924495491758
+      LongWep_1: -9009402412380063597
+      LongWep_13: -7923488584871937763
+      LongWep_8: 740832448434680447
+      LongWep_10: -882234837188533811
+      LongWep_27: -548760051451049216
+      LongWep_5: 6732182786221097484
+      LongWep_22: -2881872370907315179
+      LongWep_25: -6179287388315034395
+      LongWep_18: -7305783110212341472
+      LongWep_28: 5276249492558295148
+      LongWep_24: -3519202879223205656
+      LongWep_0: 931936708188354069
+      LongWep_3: -3987208461931643610
+      LongWep_9: 6722997735812807100
+      LongWep_17: 5931231958996724847
+      LongWep_4: -7349592414556328518
+      LongWep_26: 2029967985284118479
+      LongWep_21: -4295001492598601895
+      LongWep_20: -7510609965978035914
+      LongWep_32: 1886507847381639181
+      LongWep_23: -8320767657320215886
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
