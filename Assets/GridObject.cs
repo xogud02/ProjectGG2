@@ -95,7 +95,7 @@ public class GridObject : MonoBehaviour
                 if (grass.Contains(current) == false)
                 {
                     var dirt = Tile.Create(Floor.Brightness.Bright, Floor.MaterialType.Dirt, new GridPositionHandle(current, ret.GridPosition), gameObject.transform);
-                    dirt.ruleTile = tile;//TODO
+                    dirt.ruleTile = new RuleTile();
                     //ret.AddTile(dirt, current);
                     continue;
                 }

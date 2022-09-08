@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.Tilemaps;
 
 public enum TileType {
     None,
@@ -12,7 +13,7 @@ public enum TileType {
 }
 
 public class Tile : MonoBehaviour {
-    public RuleTile ruleTile;
+    public TileBase ruleTile;
     public TileType tileType;
     public GridPositionHandle Position;
     private BoxCollider2D boxCollider;
